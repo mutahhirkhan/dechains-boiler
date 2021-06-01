@@ -1,0 +1,23 @@
+
+// modules 
+
+@import "./mixins";
+@import "./variable";
+
+// globle saas
+
+@import "./global";
+@import "./home";
+
+// font saas
+
+@import "./fonts";
+
+
+// app-ui componetns
+
+@import "../../app-ui/index";
+@import "../../shared-ui/index";
+
+
+

@@ -1,10 +1,10 @@
 import logo from './logo.svg';
-import './App.css';
+import './assets/scss/index.scss';
 
-function App() {
+const App = ()=> {
   return (
     <>
-    Hello World
+      Hello World
     </>
   );
 }
