@@ -1,0 +1,13 @@
+.user-status-card {
+  margin: 20px;
+  height: 150px;
+  border-radius: 10px;
+  box-shadow: $theme-shadow;
+  overflow: hidden;
+  border: $theme-border;
+  .user-status-header {
+    padding: 10px 40px;
+    border-bottom: $theme-border;
+    font-size: $font-size-18;
+  }
+}

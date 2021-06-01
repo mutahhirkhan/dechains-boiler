@@ -1,12 +1,12 @@
-import logo from './logo.svg';
-import './assets/scss/index.scss';
+import "./assets/scss/index.scss";
+import UserStatus from "./app-ui/userStatus/UserStatus";
 
-const App = ()=> {
+const App = () => {
   return (
     <>
-      Hello World
+      <UserStatus header={"Regester"} />
     </>
   );
-}
+};
 
 export default App;
