@@ -1,0 +1,14 @@
+.sidebar {
+  width: 90px;
+  background: #06042deb;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  position: fixed;
+  z-index: 101;
+  height: 100vh;
+  .inner-sidebar {
+    padding: 10px;
+    text-align: center;
+  }
+}

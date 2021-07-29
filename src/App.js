@@ -1,10 +1,14 @@
 import "./assets/scss/index.scss";
-import UserStatus from "./app-ui/userStatus/UserStatus";
+
+import Layout from "./layout/Layout";
+import { BrowserRouter } from "react-router-dom";
 
 const App = () => {
   return (
     <>
-      <UserStatus header={"Regester"} />
+      <BrowserRouter>
+        <Layout></Layout>
+      </BrowserRouter>
     </>
   );
 };
