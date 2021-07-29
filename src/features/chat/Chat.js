@@ -1,11 +1,7 @@
 import React from "react";
 
 const Chat = () => {
-  return (
-    <>
-      <div>Chat Page</div>
-    </>
-  );
+  return <>chat component</>;
 };
 
 export default Chat;

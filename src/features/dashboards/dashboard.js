@@ -39,6 +39,24 @@ const Dashboard = () => {
         tital2="Employer signed"
         tital3="Agencies signed"
       />
+      <UserStatus
+        header={"Data"}
+        tital1="Job seekers signed"
+        tital2="Employer signed"
+        tital3="Agencies signed"
+      />
+      <UserStatus
+        header={"Data"}
+        tital1="Job seekers signed"
+        tital2="Employer signed"
+        tital3="Agencies signed"
+      />
+      <UserStatus
+        header={"Data"}
+        tital1="Job seekers signed"
+        tital2="Employer signed"
+        tital3="Agencies signed"
+      />
     </>
   );
 };

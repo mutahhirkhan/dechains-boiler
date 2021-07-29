@@ -10,5 +10,15 @@
   .inner-sidebar {
     padding: 10px;
     text-align: center;
+    .box {
+      height: 77px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      div {
+        font-size: 12px;
+        color: white;
+      }
+    }
   }
 }

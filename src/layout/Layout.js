@@ -9,7 +9,7 @@ import Sidebar from "../app-ui/Sidebar/Sidebar";
 const Layout = () => {
   return (
     <>
-      <div>
+      <div className="main-layout">
         <Header />
         <div className="main-content">
           <Sidebar />
