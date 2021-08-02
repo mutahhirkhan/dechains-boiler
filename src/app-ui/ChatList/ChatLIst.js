@@ -1,5 +1,5 @@
 import React from "react";
-import { Input, Form, Dropdown, Menu, Divider, Spin } from "antd";
+import { Input, Form, Dropdown, Menu, Divider } from "antd";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import ChatListItem from "../../shared-ui/ChatListItem/ChatListItem";
 

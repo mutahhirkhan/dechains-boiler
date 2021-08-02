@@ -234,16 +234,7 @@
   }
 }
 
-// .ant-input-affix-wrapper:focus,
-// .ant-input-affix-wrapper-focused {
-//   border-color: #40a9ff;
-//   border-right-width: 1px !important;
-//   outline: 0;
-//   // box-shadow: 0 0 0 2px rgb(24 144 255 / 20%);
-//   font-size: 12px;
-//   border: none !important;
-//   border-radius: 100px !important;
-//   height: 36px !important;
-//   padding: 0 14px !important;
-//   background: #fff !important;
-// }
+span.ant-input-affix-wrapper.xs.w-100 {
+  border-radius: 16px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2) !important;
+}

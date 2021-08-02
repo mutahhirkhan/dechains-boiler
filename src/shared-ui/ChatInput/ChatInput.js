@@ -1,5 +1,5 @@
-import React, { useRef, useState } from "react";
-import { Upload, Input, Form, Select } from "antd";
+import React, { useState } from "react";
+import { Upload, Form } from "antd";
 import TextArea from "antd/lib/input/TextArea";
 import Button from "../Button/Buttons";
 
@@ -10,13 +10,6 @@ const ChatInput = () => {
 
   return (
     <>
-      {/* {showEmojiPicker ? (
-        <Picker
-          set="facebook"
-          onSelect={addEmoji}
-          style={{ position: "absolute", bottom: "50px", width: "345px" }}
-        />
-      ) : null} */}
       <div className="text-field-container">
         <div className="text-field">
           <Form

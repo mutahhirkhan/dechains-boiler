@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import { BsTrash } from "react-icons/bs";
 import { Button, Checkbox, Divider, Tooltip } from "antd";
@@ -17,8 +17,6 @@ const ChatListItem = ({
   userStatus = "user-status-active",
   onClick,
   onChatDelete,
-  name,
-  jobTitle,
   userImage,
   lastMessage,
   lastMessageDate,

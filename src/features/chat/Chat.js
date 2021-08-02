@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { useWindowSize } from "../../utils/helper";
+import React from "react";
+// import { useWindowSize } from "../../utils/helper";
 import ChatList from "../../app-ui/ChatList/ChatLIst";
-import { Empty } from "antd";
+// import { Empty } from "antd";
 import ChatBubble from "../../shared-ui/ChatBubble/ChatBubble";
 // import { useAppSelector, useAppDispatch } from "../../store/hooks";
 import ChatInput from "../../shared-ui/ChatInput/ChatInput";
@@ -21,9 +21,9 @@ const Chat = () => {
   // const [showChat, setShowChat] = useState(false);
   // const [selectedChat, setSelectChat] = useState(null);
   // const dispatch = useAppDispatch();
-  const onChatSearch = (values) => {
-    // dispatch(getConversation({ qs: values }));
-  };
+  // const onChatSearch = (values) => {
+  //   dispatch(getConversation({ qs: values }));
+  // };
 
   // useEffect(() => {
   //   if (width < 540) {

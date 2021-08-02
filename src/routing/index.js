@@ -1,4 +1,3 @@
-import React from "react";
 import { Chat } from "../features/index";
 import Dashboard from "../features/dashboards/dashboard";
 export const DashboardRoutes = [
