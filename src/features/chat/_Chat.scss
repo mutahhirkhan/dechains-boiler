@@ -1,4 +1,4 @@
-// @import "../../assets/scss/variables";
+@import "../../assets/scss/variable";
 
 .height-fix {
   display: flex;
@@ -11,7 +11,7 @@
     height: 100%;
     .user-profile {
       .chat-header {
-        display: none;
+        // display: none;
       }
     }
 
