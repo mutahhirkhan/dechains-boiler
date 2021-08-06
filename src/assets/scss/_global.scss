@@ -1,0 +1,69 @@
+body {
+  margin: 0;
+  color: $text-color;
+}
+
+html * {
+  font-family: $font-medium;
+  scroll-behavior: smooth;
+}
+
+.b-text {
+  font-family: $font-bold;
+}
+
+button {
+  border: none;
+  background: transparent;
+  outline: none;
+}
+
+p,
+a,
+span,
+li,
+h1 {
+  font-size: $font-size-md;
+  color: $text-color;
+  font-family: $font-medium;
+}
+
+.color-text {
+  color: $text-color;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: $secondary;
+}
+
+mark {
+  background: transparent;
+  font-family: $font-bold;
+  color: $primary;
+  padding: 0px;
+  &.blue {
+    color: $blue;
+  }
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  cursor: pointer;
+}
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background: #2a8fff;
+}
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+}

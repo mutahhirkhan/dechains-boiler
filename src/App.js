@@ -1,12 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
+import "./assets/scss/index.scss";
 
-function App() {
+import Layout from "./layout/Layout";
+import { BrowserRouter } from "react-router-dom";
+
+const App = () => {
   return (
     <>
-    Hello World
+      <BrowserRouter>
+        <Layout></Layout>
+      </BrowserRouter>
     </>
   );
-}
+};
 
 export default App;
