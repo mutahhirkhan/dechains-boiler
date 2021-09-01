@@ -14,7 +14,7 @@ const Avatar = ({ size, userStatus, image, onClick }) => {
       <i
         className={`${size === "small" && "small"} ${
           userStatus && userStatus
-        }`}></i>
+        }`}/>
     </div>
   );
 };

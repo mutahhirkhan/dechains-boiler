@@ -23,9 +23,9 @@ const Header = () => {
               alt=""
             />
             <div className="">
-              <div className="links-wrapper"></div>
+              <div className="links-wrapper"/>
             </div>
-            <nav className="align-items-center"></nav>
+            <nav className="align-items-center"/>
             <div className="profile-logout">
               <span>Paz Tafrishi</span>
               <span>

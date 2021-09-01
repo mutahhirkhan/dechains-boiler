@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import ProfileAvatar from "../../shared-ui/Avatar/Avatar";
-import CButton from "../../shared-ui/Button/Buttons";
-import CModal from "../../shared-ui/Modal/Modal";
+import ProfileAvatar from "../../Components/Avatar/Avatar";
+import CButton from "../../Components/Button/Buttons";
+import CModal from "../../Components/Modal/Modal";
 import { Input, Form, Select } from "antd";
 
 const { Option } = Select;

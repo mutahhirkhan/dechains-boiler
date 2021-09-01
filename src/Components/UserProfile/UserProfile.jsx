@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Dropdown, Menu, Popover } from "antd";
-import Button from "../../shared-ui/Button/Buttons";
+import Button from "../Button/Buttons";
 import { PlusOutlined } from "@ant-design/icons";
-import Modal from "../../shared-ui/Modal/Modal";
+import Modal from "../Modal/Modal";
 
 const UserProfile = () => {
   const [visible, setVisible] = useState(false);
@@ -223,7 +223,7 @@ const UserProfile = () => {
               {/* {!jobseekerProfileById?.user?.experience} */}
               {/* {jobseekerProfileById?.mobile &&
                 jobseekerProfileById?.user?.experience?.map((exp, i) => (
-                  
+
                 ))} */}
               <div
                 //   key={i}
@@ -260,7 +260,7 @@ const UserProfile = () => {
               {/* If mobile doesn't exits means jobseeker is not connected */}
               {/* {jobseekerProfileById?.mobile &&
                 jobseekerProfileById?.user?.education?.map((edu, i) => (
-                  
+
                 ))} */}
               <div
                 // key={i}
@@ -286,7 +286,7 @@ const UserProfile = () => {
               {/* {!jobseekerProfileById?.user?.skill}
               {jobseekerProfileById?.mobile &&
                 jobseekerProfileById?.user?.skill?.map((skill, i) => (
-                  
+
                 ))} */}
               <div
                 // key={i}

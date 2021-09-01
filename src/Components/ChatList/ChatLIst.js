@@ -1,7 +1,7 @@
 import React from "react";
 import { Input, Form, Dropdown, Menu, Divider } from "antd";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import ChatListItem from "../../shared-ui/ChatListItem/ChatListItem";
+import ChatListItem from "../../Components/ChatListItem/ChatListItem";
 
 const menuFilter = (
   <Menu>
