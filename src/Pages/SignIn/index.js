@@ -2,6 +2,9 @@ import React, {Component} from "react";
 import {setToken} from "../../utils/Auth";
 import Auth from '../../services/Auth';
 import { Form, Input, Button, Checkbox } from 'antd';
+import {connect} from 'react-redux';
+import { signIn } from "../../redux/slice/userSlice";
+
 class  SignIn extends Component{
     constructor(props) {
         super(props);
@@ -12,28 +15,19 @@ class  SignIn extends Component{
         }
     }
 
-
-    onFinish(values){
-        console.log('Success:', values);
-    };
-
-
     signIn({email, password}){
-        let payload = {email , password};
-        Auth.signIn(payload).
-        then((res)=>{
-            let {data} = res.data;
-            console.log('res=>', data);
-            setToken(data.token);
-            this.props.history.push('/');
-        }).
-        catch((err)=>{
-            console.log('err=>', err)
-        })
+        let {signIn, history} = this.props
+        let payload = {
+            email,
+            password,
+            navigate:()=> history.push('/')
+        };
+        signIn(payload)
     }
 
     render() {
         let {email, password} = this.state;
+        console.log('Props=>', this.props)
         return (
             <Form
                 name="basic"
@@ -73,4 +67,17 @@ class  SignIn extends Component{
     }
 
 }
-export default SignIn
+
+const mapStateToProps = state => ({
+    ...state.users
+});
+
+const mapDispatchToProps = () => ({
+    signIn,
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps()
+)(SignIn);
+
