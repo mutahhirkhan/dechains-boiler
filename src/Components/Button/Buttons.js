@@ -1,10 +1,10 @@
 import React from "react";
 import { Button } from "antd";
 
-const Buttons = () => {
+const Buttons = ({onClick}) => {
   return (
     <>
-      <Button type="primary">Apply</Button>
+      <Button onClick={onClick} type="primary">Apply</Button>
       {/* <AntdButton
       {...props}
       className={`c-button ${

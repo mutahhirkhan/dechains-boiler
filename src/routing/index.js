@@ -14,10 +14,10 @@ export const DashboardRoutes = [
     exact: true,
     visible: true,
   },
-  {
-    path: "/chat",
-    component: Chat,
-    exact: true,
-    visible: true,
-  },
+  // {
+  //   path: "/chat",
+  //   component: Chat,
+  //   exact: true,
+  //   visible: false,
+  // },
 ];

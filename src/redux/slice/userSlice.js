@@ -17,12 +17,14 @@ export const signIn = createAsyncThunk(
     }
 );
 
+const initialState = {
+    user: {},
+    status: null,
+}
+
 const usersSlice = createSlice({
     name: "user",
-    initialState: {
-        user: {},
-        status: null,
-    },
+    initialState,
     extraReducers: {
         [signIn.pending]: (state, action) => {
             console.log('pending')

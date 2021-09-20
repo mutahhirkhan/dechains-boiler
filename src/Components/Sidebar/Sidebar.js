@@ -13,7 +13,7 @@ const Sidebar = () => {
               <div>Dashboard</div>
             </Link>
           </div>
-          <div className="box">
+          {/* <div className="box">
             <Link to={"/chat"}>
               <InboxOutlined style={{ fontSize: "35px", color: "white" }} />
               <div>Chat</div>
@@ -48,7 +48,7 @@ const Sidebar = () => {
               <AppstoreOutlined style={{ fontSize: "35px", color: "white" }} />
               <div>Sales Stats</div>
             </Link>
-          </div>
+          </div> */}
         </div>
       </div>
     </>

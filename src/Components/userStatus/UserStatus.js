@@ -2,7 +2,11 @@ import React from "react";
 import { Row, Col } from "antd";
 
 const UserStatus = (props) => {
-  const { header, tital1, tital2, tital3 } = props;
+  const { header, title1, title2, title3 } = props;
+  const totalCount = (array) => {
+    return array.reduce((a, b) => a + b, 0);
+  };
+  console.log(totalCount([1,2,3,4,5]))
   return (
     <>
       <Row className="user-status-card">
@@ -13,19 +17,19 @@ const UserStatus = (props) => {
           <Row wrap={true} gutter={16}>
             <Col className="cell" span={6}>
               <div className="col-div">
-                <span className="first-span padding-left">{tital1}</span>
+                <span className="first-span padding-left">{title1}</span>
                 <span className="second-span">220</span>
               </div>
             </Col>
             <Col className="cell" span={6}>
               <div className="col-div">
-                <span className="first-span">{tital2}</span>
+                <span className="first-span">{title2}</span>
                 <span className="second-span">15</span>
               </div>
             </Col>
             <Col className="cell" span={6}>
               <div className="col-div">
-                <span className="first-span">{tital3}</span>
+                <span className="first-span">{title3}</span>
                 <span className="second-span">12</span>
               </div>
             </Col>
