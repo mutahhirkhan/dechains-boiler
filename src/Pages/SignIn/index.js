@@ -16,7 +16,7 @@ class SignIn extends Component {
     };
   }
 
-  signIn({ email, password }) {
+  signInHandler({ email, password }) {
     let { signIn, history } = this.props;
     let payload = {
       email,
@@ -48,7 +48,7 @@ class SignIn extends Component {
             labelCol={{ span: 8 }}
             wrapperCol={{ span: 16 }}
             initialValues={{ remember: true }}
-            onFinish={(e) => this.signIn(e)}
+            onFinish={(e) => this.signInHandler(e)}
             autoComplete="off">
             <Row className="c-row">
               <Col className="s-col" lg={14} md={16} sm={24} xs={24}>

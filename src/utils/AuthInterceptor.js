@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { getToken, logout } from '../utils/Auth';
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
 
 
 const BASE_URL = 'https://develop-backend.jobsmideast.com/';
@@ -11,11 +13,14 @@ let axiosInstance = axios.create({
 
 // Add a request interceptor
 axiosInstance.interceptors.request.use(function (config) {
-    let token = getToken();
+    console.log("CURRENT COOKIES",cookies)
+    let token = cookies.get('TOKEN');
+    console.log("BAREER BEFORE TOKEN" ,token)
     if (token) {
-        if (config.method !== 'OPTIONS') {
-            config.headers.authorization = "Bearer " + token;
-        }
+        config.headers.Authorization = "Bearer " + token;
+        console.log("BAREER")
+        // if (config.method !== 'OPTIONS') {
+        // }
     }
     return config;
 }, function (error) {

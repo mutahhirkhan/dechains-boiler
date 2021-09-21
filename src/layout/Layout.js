@@ -19,7 +19,10 @@ let Layout = (ComposedComponent) =>
     navigateToLogIn() {
       let token = getToken();
       console.log("token===>", token);
-      !token && this.props.history.push("/signIn");
+      if(!token) {
+        console.log("AVAILABLE",typeof token);
+        this.props.history.push("/signIn");
+      }
     }
 
     render() {

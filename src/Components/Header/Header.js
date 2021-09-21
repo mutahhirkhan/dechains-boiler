@@ -1,12 +1,17 @@
 import React from "react";
 import { Menu, Dropdown } from "antd";
 import { DownOutlined } from "@ant-design/icons";
+import { logout } from "../../utils/Auth";
 
 const Header = () => {
+  const handleClick = () => {
+    console.log("HANDLE CLICKED")
+    logout()
+  }
   const menu = (
     <Menu>
       <Menu.Item key="0">
-        <a target="" rel="noopener noreferrer" href="">
+        <a onClick={handleClick}>
           Logout
         </a>
       </Menu.Item>

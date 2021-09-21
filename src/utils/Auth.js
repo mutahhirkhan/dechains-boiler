@@ -1,4 +1,5 @@
 import Cookies from 'universal-cookie';
+import history from "./../History/history"
 const cookies = new Cookies();
 
 export function setCurrentUser() {
@@ -33,6 +34,7 @@ export function setCookie(name, data, expire) {
 }
 
 export function setToken(token) {
+    console.log("COOKIES TOKEN",token)
     return cookies.set('TOKEN', token);
 }
 
@@ -43,4 +45,5 @@ export function getToken() {
 export function logout() {
     cookies.remove('TOKEN');
     cookies.remove('USER');
+    window.location.assign("/signIn");
 }

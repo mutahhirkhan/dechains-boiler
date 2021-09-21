@@ -2,11 +2,8 @@ import React from "react";
 import { Row, Col } from "antd";
 
 const UserStatus = (props) => {
-  const { header, title1, title2, title3 } = props;
-  const totalCount = (array) => {
-    return array.reduce((a, b) => a + b, 0);
-  };
-  console.log(totalCount([1,2,3,4,5]))
+  const { header, heading1, heading2, heading3, heading4, total } = props;
+
   return (
     <>
       <Row className="user-status-card">
@@ -15,28 +12,38 @@ const UserStatus = (props) => {
         </Col>
         <Col className="user-status-items" span={24}>
           <Row wrap={true} gutter={16}>
-            <Col className="cell" span={6}>
+            <Col className="cell" span={4}>
               <div className="col-div">
-                <span className="first-span padding-left">{title1}</span>
-                <span className="second-span">220</span>
+                <span className="first-span padding-left">
+                  {heading1?.name}
+                </span>
+                <span className="second-span">{heading1.value}</span>
               </div>
             </Col>
-            <Col className="cell" span={6}>
+            <Col className="cell" span={4}>
               <div className="col-div">
-                <span className="first-span">{title2}</span>
-                <span className="second-span">15</span>
+                <span className="first-span">{heading2?.name}</span>
+                <span className="second-span">{heading2?.value}</span>
               </div>
             </Col>
-            <Col className="cell" span={6}>
+            <Col className="cell" span={4}>
               <div className="col-div">
-                <span className="first-span">{title3}</span>
-                <span className="second-span">12</span>
+                <span className="first-span">{heading3?.name}</span>
+                <span className="second-span">{heading3?.value}</span>
               </div>
             </Col>
-            <Col className="cell" span={6}>
+            {heading4 && (
+              <Col className="cell" span={4}>
+                <div className="col-div">
+                  <span className="first-span">{heading4?.name}</span>
+                  <span className="second-span">{heading4?.value}</span>
+                </div>
+              </Col>
+            )}
+            <Col className="cell" span={4}>
               <div className="col-div">
                 <span className="first-span">Total</span>
-                <span className="second-span border-none">259</span>
+                <span className="second-span border-none">{total}</span>
               </div>
             </Col>
           </Row>

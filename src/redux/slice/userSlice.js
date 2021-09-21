@@ -5,8 +5,10 @@ import {setToken} from "../../utils/Auth";
 export const signIn = createAsyncThunk(
     "user/signIn",
     async ({email, password, navigate}) => {
+        console.log("USER SIGN IN ASYNC FUNC CALL")
         try {
-            let {data} = await Auth.signIn({email, password});
+            let { data : { data }} = await Auth.signIn({email, password});
+            console.log("data.token",data);
             setToken(data.token);
             navigate();
             return data.data
@@ -31,7 +33,7 @@ const usersSlice = createSlice({
             state.status = "loading";
         },
         [signIn.fulfilled]: (state, action) => {
-            console.log('fulfilled')
+            console.log('fulfilled', action.payload)
             state.status = "success";
             state.user = action.payload;
         },
