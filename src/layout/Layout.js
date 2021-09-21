@@ -1,36 +1,44 @@
 import React, { Component } from "react";
-import { Redirect, Route, Switch } from "react-router-dom";
-import { DashboardRoutes as Routes } from "../routing";
-import UserStatus from "../app-ui/userStatus/UserStatus";
+import Sidebar from "../Components/Sidebar/Sidebar";
+import { getToken, setToken } from "../utils/Auth";
+import Header from "../Components/Header/Header";
 
-import Header from "../app-ui/Header/Header";
-import Sidebar from "../app-ui/Sidebar/Sidebar";
+let Layout = (ComposedComponent) =>
+  class extends Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+        token: getToken(),
+      };
+    }
 
-const Layout = () => {
-  return (
-    <>
-      <div className="main-layout">
-        <Header />
-        <div className="main-content">
-          <Sidebar />
-          <div className="content">
-            <Switch>
-              {Routes.map((route, index) => (
-                <Route
-                  Key={index}
-                  exact={route.exact}
-                  path={route.path}
-                  component={route.component}
-                />
-              ))}
+    componentWillMount() {
+      this.navigateToLogIn();
+    }
 
-              <Redirect from="*" to="/" />
-            </Switch>
+    navigateToLogIn() {
+      let token = getToken();
+      console.log("token===>", token);
+      if(!token) {
+        console.log("AVAILABLE",typeof token);
+        this.props.history.push("/signIn");
+      }
+    }
+
+    render() {
+      let { token } = this.state;
+      return (
+        <div className="main-layout">
+          {token ? <Header /> : null}
+          <div className="main-content">
+            {token ? <Sidebar /> : null}
+            <div className="content">
+              <ComposedComponent {...this.props} {...this.state} />
+            </div>
           </div>
         </div>
-      </div>
-    </>
-  );
-};
+      );
+    }
+  };
 
 export default Layout;
