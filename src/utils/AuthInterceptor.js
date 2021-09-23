@@ -4,7 +4,7 @@ import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 
 
-const BASE_URL = 'https://develop-backend.jobsmideast.com/';
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 // Add a request interceptor
 let axiosInstance = axios.create({
