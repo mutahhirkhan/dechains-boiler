@@ -1,6 +1,6 @@
-import Dashboard from "../Pages/Dashboards/Dashboard";
-import Chat from "../Pages/Chat/Chat";
-import SignIn from "../Pages/SignIn";
+import { Chat } from "../features/index";
+import Dashboard from "../features/dashboards/dashboard";
+import SignIn from '../features/SignIn/SignIn';
 export const DashboardRoutes = [
   {
     path: "/",
@@ -9,15 +9,15 @@ export const DashboardRoutes = [
     visible: true,
   },
   {
-    path: "/signIn",
+    path: "/chat",
+    component: Chat,
+    exact: true,
+    visible: true,
+  },
+  {
+    path: "/sign-in",
     component: SignIn,
     exact: true,
     visible: true,
   },
-  // {
-  //   path: "/chat",
-  //   component: Chat,
-  //   exact: true,
-  //   visible: false,
-  // },
 ];

@@ -1,0 +1,15 @@
+.header-div {
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
+  padding: 0px 20px;
+  div {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    #basic{
+      width: 100%;
+
+    }
+  }
+}

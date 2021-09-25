@@ -141,4 +141,52 @@ img {
   }
 }
 
+// custom date picker
+.c-date-picker {
+  .ant-picker {
+    font-size: $font-size-sm;
+    border: none !important;
+    border-radius: 100px !important;
+    // box-shadow: $theme-shadow !important;
+    background: #ffffff !important;
+    // box-shadow: 0 0 10px $shadow !important;
+    box-shadow: $shadow;
+    width: 300px;
+    height: 36px !important;
+    margin: 0;
+    input {
+      font-size: $font-size-sm;
+      font-family: $font-medium;
+      // box-shadow: none !important;
+      border: none !important;
+      height: 35px;
+    }
+  }
+  .ant-picker-lg {
+    width: 300px;
+  }
+  .ant-picker-md {
+    width: 200px;
+  }
+  .ant-picker-sm {
+    width: 140px;
+  }
+  .ant-picker-xs {
+    width: 100px;
+  }
+}
+.ant-picker-header {
+  button {
+    padding: 0 12px !important;
+    span {
+      color: $grey !important;
+    }
+  }
+  .ant-picker-header-view {
+    button {
+      color: $grey !important;
+    }
+  }
+}
+
 // ___________________________________________________________________FORM FEILDS ENDS  HERE _______________________________________________________________ \\
