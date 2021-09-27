@@ -49,7 +49,7 @@ const DateApplyForm = () => {
                             <DatePicker
                                 // defaultValue={moment()}
                                 format={"DD/MM/YYYY"}
-                                disabledDate={(current)=>{
+                                disabledDate={(current) => { //disable date after today
                                     return current > moment()
                                 }}
                                 onChange={(e) => {
@@ -71,8 +71,8 @@ const DateApplyForm = () => {
                                 // defaultValue={startDate}
                                 format={"DD/MM/YYYY"}
                                 disabled={!startDate}
-                                disabledDate={(current) => {
-                                    return current && current < startDate;
+                                disabledDate={(current) => { //disable date after today and before start-date
+                                    return current > moment() || current < startDate 
                                 }}
                             />
                         </Form.Item>
