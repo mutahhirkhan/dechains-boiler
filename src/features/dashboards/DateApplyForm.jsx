@@ -3,9 +3,10 @@ import { Form, Button, Row, Col, DatePicker } from "antd";
 import { useState } from 'react';
 import { checkDisabledDate, jsonToQueryString, startAndEndDate } from '../../utils/helper';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { getDashboardCountAdmin } from './thunk';
+import { getDashboardCountAdmin, getDashboardFinanceFiguresAdmin } from './thunk';
 import "query-string";
 import { selectStatus } from './slice';
+import moment from 'moment';
 
 const DateApplyForm = () => {
     const [startDate, setStartDate] = useState(null);
@@ -21,6 +22,7 @@ const DateApplyForm = () => {
         console.log("AFTER TO ISO", queryString.stringify(payload))
         console.log("JSON TO QUERY", jsonToQueryString(payload))
         dispatch(getDashboardCountAdmin(jsonToQueryString(payload)))
+        dispatch(getDashboardFinanceFiguresAdmin(jsonToQueryString(payload)))
     }
     return (
         <div>
@@ -47,6 +49,9 @@ const DateApplyForm = () => {
                             <DatePicker
                                 // defaultValue={moment()}
                                 format={"DD/MM/YYYY"}
+                                disabledDate={(current) => { //disable date after today
+                                    return current > moment()
+                                }}
                                 onChange={(e) => {
                                     setStartDate(e);
                                 }}
@@ -66,8 +71,8 @@ const DateApplyForm = () => {
                                 // defaultValue={startDate}
                                 format={"DD/MM/YYYY"}
                                 disabled={!startDate}
-                                disabledDate={(current) => {
-                                    return current && current < startDate;
+                                disabledDate={(current) => { //disable date after today and before start-date
+                                    return current > moment() || current < startDate 
                                 }}
                             />
                         </Form.Item>

@@ -14,8 +14,8 @@ export const getDashboardCountAdmin = createAsyncThunk(
 );
 export const getDashboardFinanceFiguresAdmin = createAsyncThunk(
   "dashboard-finance-count/get",
-  async () => {
-    const response = await getDashboardFinanceFiguresAPI();
+  async (qs) => {
+    const response = await getDashboardFinanceFiguresAPI(qs);
     console.log("RESPONSE", response);
     return response.data;
   }
