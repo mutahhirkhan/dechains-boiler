@@ -1,6 +1,6 @@
-import { Chat } from "../features/index";
 import Dashboard from "../features/dashboards/dashboard";
 import SignIn from '../features/SignIn/SignIn';
+import Blogs from '../features/blogs/Blogs.jsx';
 export const DashboardRoutes = [
   {
     path: "/",
@@ -9,8 +9,8 @@ export const DashboardRoutes = [
     visible: true,
   },
   {
-    path: "/chat",
-    component: Chat,
+    path: "/blogs",
+    component: Blogs,
     exact: true,
     visible: true,
   },

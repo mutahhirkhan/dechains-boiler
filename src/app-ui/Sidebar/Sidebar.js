@@ -8,9 +8,15 @@ const Sidebar = () => {
       <div className="sidebar">
         <div className="inner-sidebar">
           <div className="box">
-            <Link >
+            <Link to="/">
               <AppstoreOutlined style={{ fontSize: "35px", color: "white" }} />
               <div>Dashboard</div>
+            </Link>
+          </div>
+          <div className="box">
+            <Link to="/blogs">
+              <AppstoreOutlined style={{ fontSize: "35px", color: "white" }} />
+              <div>Blogs</div>
             </Link>
           </div>
           {/* <div className="box">
