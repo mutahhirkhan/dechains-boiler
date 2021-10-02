@@ -29,7 +29,7 @@ const Layout = () => {
   };
 
   const loginToHomePage = () => {
-    history.push("/");
+    // history.push("/");
     setIsLoggedIn(true);
   };
 

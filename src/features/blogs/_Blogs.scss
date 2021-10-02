@@ -3,6 +3,7 @@
 .list-table-main {
   box-shadow: 0 0 3px #c7c7c7;
   .ant-table-thead > tr > th {
+    font-family: $font-subtitle;
     color: $primary;
     background: #fafbfc 0 0 no-repeat padding-box;
   }
@@ -60,6 +61,15 @@
 
   .search-item-field-main {
     margin-top: 10px;
+    .ant-col .ant-form-item-control-input .ant-form-item-control-input-content {
+      display: flex;
+      .selected-user-length {
+        font-family: $font-medium;
+        font-size: $font-size-sm;
+        margin-right: 10px;
+        color: #545454;
+      }
+    }
   }
 
   .action-btn-main {
