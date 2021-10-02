@@ -21,10 +21,8 @@ export const slice = createSlice({
       .addCase(getDashboardCountAdmin.fulfilled, (state, action) => {
         state.status = "idle";
         if(action.meta.requestStatus === "fulfilled") {
-            console.log("GET_COUNT FULFILLED AUTH ||| T R U E |||");
             state.isAuthorized = true;
         }
-        console.log("GET COUNT FULFILLED", action.meta.requestStatus);
         state.dashboardCount = action.payload;
       })
       .addCase(getDashboardCountAdmin.rejected, (state, action) => {
@@ -32,7 +30,6 @@ export const slice = createSlice({
         if (action.error.message === "Unauthorized") {
           state.isAuthorized = false;
         }
-        console.log("GET COUNT REJECTED", action);
       })
       
 
@@ -40,16 +37,13 @@ export const slice = createSlice({
   
       .addCase(getDashboardFinanceFiguresAdmin.pending, (state) => {
         state.status = "loading";
-        console.log("GET FINANCE PENDING");
       })
       .addCase(getDashboardFinanceFiguresAdmin.fulfilled, (state, action) => {
         state.status = "idle";
-        console.log("GET FINANCE FULFILLED", action);
         state.dashboardFinanceFiguresCount = action.payload;
       })
       .addCase(getDashboardFinanceFiguresAdmin.rejected, (state, action) => {
         state.status = "failed";
-        console.log("GET COUNT REJECTED", action);
       })
 
       // ________________________________________________

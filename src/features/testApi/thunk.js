@@ -5,6 +5,5 @@ import { getTasks as getTasksAPI } from "./service";
 
 export const getTasks = createAsyncThunk("tasks/get", async () => {
   const response = await getTasksAPI();
-  console.log("======");
   return response.data;
 });

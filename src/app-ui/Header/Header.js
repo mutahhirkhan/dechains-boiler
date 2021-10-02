@@ -7,7 +7,6 @@ import { getFullName } from "../../utils/helper";
 
 const Header = ({ logoutHandler }) => {
   const userInfo = useAppSelector(selectSignInResponse);
-  console.log("userInfo", getFullName(userInfo));
   const menu = (
     <Menu>
       <Menu.Item key="0">

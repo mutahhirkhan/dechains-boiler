@@ -1,18 +1,18 @@
-@import "./../../assets/scss/variable"; 
+@import "./../../assets/scss/variable";
 
 .list-table-main {
+  box-shadow: 0 0 3px #c7c7c7;
   .ant-table-thead > tr > th {
     color: $primary;
     background: #fafbfc 0 0 no-repeat padding-box;
   }
-  .ant-table-thead >tr >th:nth-child(2) {
+  .ant-table-thead > tr > th:nth-child(2) {
     text-align: center;
   }
   .user-name-cell {
     display: flex;
     align-items: center;
     justify-content: space-between;
-
 
     .username {
       display: flex;
@@ -29,6 +29,58 @@
         overflow: hidden;
         width: 155px;
         text-overflow: ellipsis;
+      }
+    }
+  }
+}
+
+// ________________________ blog-header _____________________-
+.blog-header {
+  margin-top: 10px;
+  .edit-btn {
+    margin-left: 6px;
+    height: 16px;
+    width: 16px;
+    position: relative;
+    top: -1px;
+  }
+
+  .create-btn-main {
+    display: flex;
+    justify-content: center;
+    .create-btn {
+      margin-top: 10px;
+      .side-text {
+        font-family: $font-medium;
+        font-size: $font-size-lg;
+        margin-right: 10px;
+      }
+    }
+  }
+
+  .search-item-field-main {
+    margin-top: 10px;
+  }
+
+  .action-btn-main {
+    .action-buttons {
+      display: flex;
+      margin-top: 10px;
+      width: 100%;
+      .action-item {
+        gap: 10px;
+        width: 100%;
+        display: flex;
+        .icon {
+          width: 20px;
+          height: 20px;
+          display: flex;
+          cursor: pointer;
+        }
+        .edit-btn {
+          width: 20px;
+          height: 18px;
+        }
       }
     }
   }
