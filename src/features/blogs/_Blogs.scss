@@ -1,0 +1,35 @@
+@import "./../../assets/scss/variable"; 
+
+.list-table-main {
+  .ant-table-thead > tr > th {
+    color: $primary;
+    background: #fafbfc 0 0 no-repeat padding-box;
+  }
+  .ant-table-thead >tr >th:nth-child(2) {
+    text-align: center;
+  }
+  .user-name-cell {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+
+    .username {
+      display: flex;
+      align-items: center;
+      .user-image {
+        height: 40px;
+        width: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin: 0 0 0 10px;
+      }
+      p {
+        white-space: nowrap;
+        overflow: hidden;
+        width: 155px;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+}
