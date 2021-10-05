@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { Drawer, Button, Tabs, Space } from "antd";
-import Info from '../../app-ui/ProfileFeatures/Info/Info';
-import PersonalProfile from '../../app-ui/ProfileFeatures/PersonalProfile/PersonalProfile';
-import Notes from '../../app-ui/ProfileFeatures/Notes/Notes';
-import Flags from '../../app-ui/ProfileFeatures/Flags/Flags';
-import Stats from '../../app-ui/ProfileFeatures/Stats/Stats';
-import Settings from '../../app-ui/ProfileFeatures/Settings/Settings';
-import ActivityHistory from '../../app-ui/ProfileFeatures/ActivityHistory/ActivityHistory';
+import Info from "../../app-ui/ProfileFeatures/Info/Info";
+import PersonalProfile from "../../app-ui/ProfileFeatures/PersonalProfile/PersonalProfile";
+import Notes from "../../app-ui/ProfileFeatures/Notes/Notes";
+import Flags from "../../app-ui/ProfileFeatures/Flags/Flags";
+import Stats from "../../app-ui/ProfileFeatures/Stats/Stats";
+import Settings from "../../app-ui/ProfileFeatures/Settings/Settings";
+import ActivityHistory from "../../app-ui/ProfileFeatures/ActivityHistory/ActivityHistory";
+import ProfileHeaderDisplay from "../../app-ui/ProfileFeatures/ProfileHeaderDisplay/ProfileHeaderDisplay";
 
 function TestApi() {
     const [visible, setVisible] = useState(false);
@@ -28,36 +29,41 @@ function TestApi() {
                 </Button>
             </div>
             <Drawer
-                title={`${size} Drawer`}
+                title={<ProfileHeaderDisplay />}
                 placement="right"
                 size="large"
                 onClose={onClose}
                 visible={visible}
-                width={736}
+                width={836}
                 // footer={<div>xvbkdjbvksdfhbvksud</div>}
                 closeIcon={<p>X</p>}
             >
-                <Tabs defaultActiveKey="1" onChange={()=>{console.log("ON CHANGED ")}}>
+                <Tabs
+                    defaultActiveKey="1"
+                    onChange={() => {
+                        console.log("ON CHANGED ");
+                    }}
+                >
                     <TabPane tab="Info" key="1">
-                        <Info/>
+                        <Info />
                     </TabPane>
                     <TabPane tab="Personal profile" key="2">
-                      <PersonalProfile/>
+                        <PersonalProfile />
                     </TabPane>
                     <TabPane tab="Notes" key="3">
-                      <Notes/>
+                        <Notes />
                     </TabPane>
                     <TabPane tab="Flags" key="4">
-                        <Flags/>
+                        <Flags />
                     </TabPane>
                     <TabPane tab="Stats" key="5">
-                        <Stats/>
+                        <Stats />
                     </TabPane>
                     <TabPane tab="Settings" key="6">
-                        <Settings/>
+                        <Settings />
                     </TabPane>
                     <TabPane tab="Activity history" key="7">
-                        <ActivityHistory/>
+                        <ActivityHistory />
                     </TabPane>
                 </Tabs>
             </Drawer>
