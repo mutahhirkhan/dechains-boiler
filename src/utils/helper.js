@@ -61,3 +61,15 @@ export const jsonToQueryString = (data) => {
 
   return "?" + new URLSearchParams(params).toString();
 };
+
+
+export const showTempImgFromBaseURL = (file, className) => {
+  if (file) {
+      var reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onloadend = function () {
+          let blobUrl = reader.result;
+          document.querySelector(className).src = blobUrl;
+      };
+  }
+};

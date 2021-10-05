@@ -8,6 +8,7 @@ import {
 import tasksReducer from "./../features/testApi/slice";
 import signInReducer from "./../features/SignIn/slice";
 import dashboardReducer from "./../features/dashboards/slice";
+import createBlog from "./../features/createBlog/slice";
 import {
   persistStore,
   persistReducer,
@@ -30,6 +31,7 @@ const reducers = combineReducers({
   signIn : signInReducer,
   dashboard : dashboardReducer,
   tasks: tasksReducer,
+  createBlog:createBlog,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducers);

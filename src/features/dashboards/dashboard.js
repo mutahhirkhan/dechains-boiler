@@ -14,7 +14,6 @@ const Dashboard = () => {
   const dashboardFinanceCount = useAppSelector(selectDashboardFinanceCount);
 
   useEffect(() => {
-    console.log("CDM DASHBOARD")
     dispatch(getDashboardCountAdmin());
     dispatch(getDashboardFinanceFiguresAdmin());
   }, []);

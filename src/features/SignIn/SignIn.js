@@ -32,14 +32,11 @@ const SignIn = () => {
 
   // *******  COMPONENT DID UPDATES WITH (DEPENDENCIES) *******
   useEffect(() => {
-    console.log("sign in success", signInSuccess);
     if (signInSuccess === true) {
       const token = signInResponse.token;
-      console.log("sign in token", token);
       // if (rememberMe) {
       localStorage.setItem("token", token);
       if (localStorage.getItem("token")) {
-        console.log("NAVIGATE TO HM TOKEN IS SET");
         history.push("/");
       }
       // localStorage.setItem("role", JSON.stringify(role));
@@ -52,7 +49,6 @@ const SignIn = () => {
   }, [signInSuccess]);
 
   useEffect(() => {
-    console.log("SIGN IN RESPONSE", signInErrorMessage, "STATUS", status);
     if (status === "failed" && signInErrorMessage === "Invalid credential")
       showErrorMessage(signInErrorMessage);
   }, [signInErrorMessage, status]);

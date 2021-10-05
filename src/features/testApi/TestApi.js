@@ -6,7 +6,6 @@ import { getTasks } from "./thunk";
 function TestApi() {
   const dispatch = useAppDispatch();
   const tasks = useAppSelector(selectTasks);
-  console.log("Tasks", tasks?.[0]?.task);
 
   useEffect(() => {
     dispatch(getTasks());

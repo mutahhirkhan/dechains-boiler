@@ -1,6 +1,7 @@
 import Dashboard from "../features/dashboards/dashboard";
-import SignIn from '../features/SignIn/SignIn';
-import Blogs from '../features/blogs/Blogs.jsx';
+import SignIn from "../features/SignIn/SignIn";
+import Blogs from "../features/blogs/Blogs.jsx";
+import CreateBlog from "../features/createBlog/CreateBlog";
 export const DashboardRoutes = [
   {
     path: "/",
@@ -19,5 +20,11 @@ export const DashboardRoutes = [
     component: SignIn,
     exact: true,
     visible: true,
+  },
+  {
+    path: "/create-blog",
+    component: CreateBlog,
+    exact: true,
+    visible: false,
   },
 ];

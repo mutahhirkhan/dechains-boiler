@@ -20,11 +20,9 @@ const Layout = () => {
   const isAuthorized = useAppSelector(selectIsAuthorized);
   const signInSuccess = useAppSelector(selectSignIn);
   const [isLoggedIn, setIsLoggedIn] = useState(null);
-  console.log("LAYOUT RENDER");
 
   // *******COMPONENTS FUNCTIONS*******
   const handleLogoutToSignIn = () => {
-    console.log("TOKEN CLEAR CALLED");
     localStorage.clear();
     dispatch(signInSuccessDefault());
     setIsLoggedIn(false);
@@ -42,7 +40,6 @@ const Layout = () => {
   // ******** ******** ******** ******** ******** ******** ********
 
   useEffect(() => {
-    console.log("CDM LAYOUT");
     dispatch(getDashboardCountAdmin());
   }, []);
 
@@ -50,27 +47,16 @@ const Layout = () => {
 
   useEffect(() => {
     if (isLoggedIn === false) {
-      console.log("LOGGED OUT")
       dispatch(signInSuccessDefault());
       history.push("/sign-in");
     }
   }, [isLoggedIn]);
 
   useEffect(() => {
-    console.log("AUTH VALUE=== > ", isAuthorized);
     if (isAuthorized && checkTokenExist()) {
-      console.log(
-        `isAuthorized = ${isAuthorized}  token = ${checkTokenExist()}`
-      );
       loginToHomePage();
     }
     if (isAuthorized === false || !checkTokenExist()) {
-      console.log(
-        "AUTHORIZED IS ==>",
-        isAuthorized,
-        "TOKEN IS ===>",
-        checkTokenExist()
-      );
       // dispatch(signInSuccessDefault());
       setIsLoggedIn(false);
     }
