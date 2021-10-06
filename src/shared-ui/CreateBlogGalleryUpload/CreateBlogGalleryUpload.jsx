@@ -12,7 +12,7 @@ export function getBase64(file) {
     });
 }
 
-const UploadButton = (
+export const UploadButton = (
     <div>
         <PlusOutlined />
         <div style={{ marginTop: 8 }}>Upload</div>
@@ -25,9 +25,6 @@ const CreateBlogGalleryUpload = () => {
     const [previewTitle, setPreviewTitle] = useState("");
     const [fileList, setFileList] = useState([]);
 
-    useEffect(() => {
-        console.log(fileList);
-    }, [fileList]);
     const handleCancel = () => setPreviewVisible(false);
 
     const handlePreview = async (file) => {
@@ -35,8 +32,6 @@ const CreateBlogGalleryUpload = () => {
             file.preview = await getBase64(file.originFileObj);
         }
         setPreviewImage(file.url || file.preview);
-        // setPreviewTitle(file.name || file.url.substring(file.url.lastIndexOf("/") + 1));
-        // setPreviewVisible(file.url || file.preview);
     };
 
     const handleChange = (files) => {

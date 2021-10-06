@@ -11,6 +11,7 @@ const CreateBlogBanner = () => {
 
     const blogBannerBeforeUpload = (file, className) => {
         if (file) {
+            //send this file to redux
             showTempImgFromBaseURL(file, className);
         } 
     };

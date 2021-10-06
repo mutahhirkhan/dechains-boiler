@@ -19,9 +19,9 @@ export const slice = createSlice({
         addStatus: (state, action) => {
             const { visibility, publish, link, authors, value } = action.payload;
             if (visibility) state.visibility = value;
-            if (publish) state.publish = value;
-            if (link) state.link = value;
-            if (authors) state.authors = value;
+            else if (publish) state.publish = value;
+            else if (link) state.link = value;
+            else state.authors = value;
         },
         addCategory: (state, action) => {
             const { payload } = action;

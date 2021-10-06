@@ -1,8 +1,13 @@
-import React, { useState } from "react";
-import { Collapse, Select, Input } from "antd";
+import React, { useState, useEffect } from "react";
+import { Collapse, Select, Input, Button, Upload } from "antd";
 import { showSuccessMessage } from "./.././../utils/message";
 import { useAppDispatch } from "../../store/hooks";
 import { addStatus } from "../../features/createBlog/slice";
+import Modal from "../Modal/Modal";
+import { getBase64, UploadButton } from "../CreateBlogGalleryUpload/CreateBlogGalleryUpload";
+import { showTempImgFromBaseURL } from "../../utils/helper";
+import "./_StatusAccordian.scss";
+import { PlusOutlined } from "@ant-design/icons";
 
 function CopiedIcon({ link }) {
     return (
@@ -18,6 +23,8 @@ function CopiedIcon({ link }) {
 }
 
 const StatusAccordian = () => {
+    const [addAuthorModalShow, setAddAuthorModalShow] = useState(false);
+    const [authorPhoto, setAuthorPhoto] = useState("");
     const [link, setLink] = useState("");
     const { Panel } = Collapse;
     const { Option } = Select;
@@ -26,6 +33,14 @@ const StatusAccordian = () => {
     function handleChange(value) {
         dispatch(addStatus(value));
     }
+    const onPhotoChange = (file, className) => {
+        // const { file } = info;
+        // const { originFileObj } = file;
+        console.log(file, className);
+        //send this to redux
+        showTempImgFromBaseURL(file, className);
+        // getBase64(originFileObj, (imageUrl) => setAuthorPhoto(imageUrl));
+    };
 
     return (
         <Collapse defaultActiveKey={["1"]} expandIconPosition={"right"}>
@@ -74,7 +89,12 @@ const StatusAccordian = () => {
                 />
                 <br />
                 <br />
-                <label>Author</label>
+                <div style={{ display: "flex", justifyContent: "space-between" }}>
+                    <label>Author</label>
+                    <p onClick={() => setAddAuthorModalShow(true)} style={{ cursor: "pointer" }}>
+                        Add new +
+                    </p>
+                </div>
                 <br />
                 <Select
                     getPopupContainer={(trigger) => trigger.parentNode}
@@ -86,6 +106,39 @@ const StatusAccordian = () => {
                     <Option value="Paz Tafrishi">Paz Tafrishi</Option>
                 </Select>
             </Panel>
+            <Modal backdropClassName="connect-modal-backdrop" className="center connect-modal" show={addAuthorModalShow}>
+                <img className="author-img" src={require("./../../assets/img/user.png")} width={"100px"} height={"100px"} />
+                <Upload
+                    accept="image/*"
+                    listType="picture-card"
+                    // beforeUpload={beforeUploadImage}
+                    showUploadList={false}
+                    accept=".png, .jpg, .jpeg"
+                    maxCount={1}
+                    className="author-image-upload"
+                    beforeUpload={(file) => onPhotoChange(file, ".author-img")}
+                    // onChange={onPhotoChange}
+                    multiple={false}>
+                    <PlusOutlined />
+                </Upload>
+                <div className="btn-row">
+                    <Button
+                        onClick={() => setAddAuthorModalShow(false)}
+                        // className="grey"
+                        type="primary">
+                        {" "}
+                        Cancel
+                    </Button>
+                    <Button
+                        // onClick={handleConnectByEmployer}
+                        // loading={isLoading}
+                        // className="light"
+                        type="primary">
+                        {" "}
+                        Confirm
+                    </Button>
+                </div>
+            </Modal>
         </Collapse>
     );
 };
