@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Drawer, Button, Tabs, Space } from "antd";
 import Info from "../../app-ui/ProfileFeatures/Info/Info";
 import PersonalProfile from "../../app-ui/ProfileFeatures/PersonalProfile/PersonalProfile";
@@ -11,12 +11,14 @@ import ProfileHeaderDisplay from "../../app-ui/ProfileFeatures/ProfileHeaderDisp
 
 function TestApi() {
     const [visible, setVisible] = useState(false);
-    const [size, setSize] = useState();
     const { TabPane } = Tabs;
     const showLargeDrawer = () => {
         setVisible(true);
     };
-
+    
+    useEffect(() => {
+        console.log("visible", visible);
+    }, [visible]);
     const onClose = () => {
         setVisible(false);
     };

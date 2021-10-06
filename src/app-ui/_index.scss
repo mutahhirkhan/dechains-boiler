@@ -11,4 +11,8 @@
 @import "UserProfile/UserProfile";
 
 // COMMON COMPONENTS SCSS
-@import "./../app-ui/ProfileFeatures/ProfileHeaderDisplay/profileHeaderDisplay"
+@import "./../app-ui/ProfileFeatures/ProfileHeaderDisplay/profileHeaderDisplay";
+@import "./../app-ui/ProfileFeatures/Info/info";
+@import "./../app-ui/ProfileFeatures/Notes/notes";
+@import "./../app-ui/ProfileFeatures/Flags/flags";
+@import "./../app-ui/ProfileFeatures/Stats/stats";
