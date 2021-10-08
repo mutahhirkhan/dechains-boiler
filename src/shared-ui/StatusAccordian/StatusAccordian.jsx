@@ -144,7 +144,7 @@ const StatusAccordian = () => {
                             setNewAuthorName(value);
                         }}
                         placeholder="Author name"
-                        addonAfter={<CopiedIcon link={link} />}
+                        // addonAfter={<CopiedIcon link={link} />}
                     />
                     <label htmlFor="newAuthorBio">About me</label>
                     <br />
