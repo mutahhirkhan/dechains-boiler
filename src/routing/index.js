@@ -1,7 +1,7 @@
 import Dashboard from "../features/dashboards/dashboard";
 import SignIn from "../features/SignIn/SignIn";
 import Blogs from "../features/blogs/Blogs.jsx";
-import TestApi from "../features/testApi/TestApi";
+import Jobseeker from '../features/Jobseeker/Jobseeker';
 export const DashboardRoutes = [
     {
         path: "/",
@@ -23,7 +23,7 @@ export const DashboardRoutes = [
     },
     {
         path: "/test",
-        component: TestApi,
+        component: Jobseeker,
         exact: true,
         visible: true,
     },

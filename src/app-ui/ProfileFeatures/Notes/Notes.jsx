@@ -4,6 +4,9 @@ import React from 'react'
 import PersonNoteDetails from './PersonNoteDetails';
 
 const Notes = () => {
+    const handleAddNotes = () => {
+      console.log("handleAddNotes")
+    }
     const dummyProfileNotes = [
         {
             userName: "Name",
@@ -26,11 +29,11 @@ const Notes = () => {
     ]
     return (
         <div>
-            <Row>
-                <Col className="profile-search-tile" span={8}>
+            <Row className="profile-notes-wrapper">
+                <Col className="profile-search-details" span={8}>
                     <Input size="large" placeholder="large size" prefix={<SearchOutlined />} />
                 </Col>
-                <Col className="profile-search-tile" span={8}>
+                <Col onClick={handleAddNotes} className="profile-search-tile" span={8}>
                     Add a new notes +
                 </Col>
             </Row>

@@ -22,7 +22,7 @@ const Sidebar = () => {
           <div className="box">
             <Link to="/test">
               <AppstoreOutlined style={{ fontSize: "35px", color: "white" }} />
-              <div>Test</div>
+              <div>Jobseeker</div>
             </Link>
           </div>
           {/* <div className="box">

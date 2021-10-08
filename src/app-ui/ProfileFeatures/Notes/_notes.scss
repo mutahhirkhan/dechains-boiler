@@ -1,4 +1,14 @@
 @import "./../../../assets/scss/variable";
+.profile-notes-wrapper {
+    display: flex;
+    justify-content: space-between;
+    .profile-search-tile {
+        text-align: end;
+        cursor: pointer;
+        font-family: $font-medium;
+        font-size: $font-size-sm;
+    }
+}
 .profile-note-tile {
     margin-top: 12px;
     border-bottom: 1px solid rgba($color: grey, $alpha: 0.3);

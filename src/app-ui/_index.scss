@@ -7,7 +7,7 @@
 // @import "../features/chat/Chat";
 @import "./ChatList/ChatList";
 @import "./../features/blogs/Blogs";
-@import "./../features/testApi/test";
+@import "./../features/Jobseeker/jobseeker";
 @import "UserProfile/UserProfile";
 
 // COMMON COMPONENTS SCSS
@@ -16,3 +16,6 @@
 @import "./../app-ui/ProfileFeatures/Notes/notes";
 @import "./../app-ui/ProfileFeatures/Flags/flags";
 @import "./../app-ui/ProfileFeatures/Stats/stats";
+@import "./../app-ui/ProfileFeatures/Settings/setting";
+@import "./../app-ui/ProfileFeatures/Files/files";
+@import "./../app-ui/ProfileFeatures/ActivityHistory/activityHistory";

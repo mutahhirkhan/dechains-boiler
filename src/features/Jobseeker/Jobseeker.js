@@ -8,8 +8,9 @@ import Stats from "../../app-ui/ProfileFeatures/Stats/Stats";
 import Settings from "../../app-ui/ProfileFeatures/Settings/Settings";
 import ActivityHistory from "../../app-ui/ProfileFeatures/ActivityHistory/ActivityHistory";
 import ProfileHeaderDisplay from "../../app-ui/ProfileFeatures/ProfileHeaderDisplay/ProfileHeaderDisplay";
+import Files from "../../app-ui/ProfileFeatures/Files/Files";
 
-function TestApi() {
+function Jobseeker() {
     const [visible, setVisible] = useState(false);
     const { TabPane } = Tabs;
     const showLargeDrawer = () => {
@@ -64,7 +65,10 @@ function TestApi() {
                     <TabPane tab="Settings" key="6">
                         <Settings />
                     </TabPane>
-                    <TabPane tab="Activity history" key="7">
+                    <TabPane tab="Files" key="7">
+                        <Files />
+                    </TabPane>
+                    <TabPane tab="Activity history" key="8">
                         <ActivityHistory />
                     </TabPane>
                 </Tabs>
@@ -72,4 +76,4 @@ function TestApi() {
         </>
     );
 }
-export default TestApi;
+export default Jobseeker;
