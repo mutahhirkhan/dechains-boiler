@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Collapse, Select, Input } from "antd";
+import { BlogContext } from '../../BlogContext/BlogContext';
 
 const CategoryAccordian = () => {
+    const { blogState, blogActions } = useContext(BlogContext); //ye as a connect function kaam krrha he
     const [addCategory, setCategory] = useState(false);
     const [categoryName, setCategoryName] = useState("");
     const [subCategoryName, setSubCategoryName] = useState("");
-
     const { Panel } = Collapse;
     const { Option } = Select;
 
@@ -13,7 +14,8 @@ const CategoryAccordian = () => {
         console.log(key);
     };
     function handleChange(value) {
-        console.log(`selected ${value}`);
+        console.log(value);
+        blogActions.updateBlogDetails(value);
     }
     return (
         <Collapse onChange={callback} expandIconPosition={"right"}>
@@ -21,11 +23,12 @@ const CategoryAccordian = () => {
                 <label htmlFor="defaultCategory">Existing Category</label>
                 <br />
                 <Select
+                    showSearch
                     getPopupContainer={(trigger) => trigger.parentNode}
                     name="defaultCategory"
                     className="defaultCategory"
                     placeholder="Select"
-                    onChange={(value) => handleChange({ defaultCategory: "defaultCategory", value: value })}>
+                    onChange={(value) => handleChange({ defaultCategory:  value })}>
                     <Option value="Jobsmideast">Jobsmideast</Option>
                 </Select>
                 <br />
@@ -34,11 +37,12 @@ const CategoryAccordian = () => {
                 <label htmlFor="existing-sub-category">Sub Category</label>
                 <br />
                 <Select
+                    showSearch
                     getPopupContainer={(trigger) => trigger.parentNode}
                     name="defaultSubCategory"
                     className="defaultSubCategory"
                     placeholder="Select"
-                    onChange={(value) => handleChange({ defaultSubCategory: "defaultSubCategory", value: value })}>
+                    onChange={(value) => handleChange({ defaultSubCategory:value })}>
                     <Option value="Jobsmideast">Jobsmideast</Option>
                     <Option value="Paz Tafrishi">Paz Tafrishi</Option>
                 </Select>
@@ -57,7 +61,7 @@ const CategoryAccordian = () => {
                             name="newCategory"
                             value={categoryName}
                             onChange={({ target: { value } }) => {
-                                handleChange({ newCategory: "newCategory", value: value });
+                                handleChange({ newCategory: value });
                                 setCategoryName(value);
                             }}
                             placeholder="Category name"
@@ -68,7 +72,7 @@ const CategoryAccordian = () => {
                             name="newSubCategory"
                             value={subCategoryName}
                             onChange={({ target: { value } }) => {
-                                handleChange({ newSubCategory: "newSubCategory", value: value });
+                                handleChange({ newSubCategory:  value });
                                 setSubCategoryName(value);
                             }}
                             placeholder="Sub Category name"

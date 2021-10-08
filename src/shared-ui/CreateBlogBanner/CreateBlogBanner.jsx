@@ -1,24 +1,29 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Upload, message } from "antd";
-import { InboxOutlined, PlusOutlined, PlusCircleOutlined } from "@ant-design/icons";
 import { showSuccessMessage, showErrorMessage } from "./../../utils/message";
-import { getBase64 } from "../CreateBlogGalleryUpload/CreateBlogGalleryUpload";
+
 import "./_CreateBlogBanner.scss";
 import { showTempImgFromBaseURL } from "../../utils/helper";
+import { BlogContext } from "../../BlogContext/BlogContext";
 
 const CreateBlogBanner = () => {
+    const { blogState, blogActions } = useContext(BlogContext); //ye as a connect function kaam krrha he
     const { Dragger } = Upload;
 
     const blogBannerBeforeUpload = (file, className) => {
         if (file) {
             //send this file to redux
+            blogActions.updateBlogDetails({ blogBanner: file });
             showTempImgFromBaseURL(file, className);
-        } 
+        }
     };
 
     const onRemove = (file) => {
-        if (file) document.querySelector(".upload-blog-banner").src = "";
-        else return null;
+        if (file) {
+            blogActions.updateBlogDetails({ blogBanner: {} });
+
+            document.querySelector(".upload-blog-banner").src = "";
+        } else return null;
     };
 
     return (

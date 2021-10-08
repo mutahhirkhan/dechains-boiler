@@ -1,45 +1,66 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Input, Button } from "antd";
 import { Form } from "antd";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import "./_CreateBlogDetailsForm.scss";
 import CreateBlogGalleryUpload from "../CreateBlogGalleryUpload/CreateBlogGalleryUpload";
+import { BlogContext } from "../../BlogContext/BlogContext";
 
-const CreateBlogDetailsForm = () => {
+const CreateBlogDetailsForm = ({ setIsCreateVisible }) => {
     const [title, setTitle] = useState("");
+    const { blogState, blogActions } = useContext(BlogContext); //ye as a connect function kaam krrha he
     const [subTitle, setSubTitle] = useState("");
     const [errorFlag, setErrorFlag] = useState(false);
 
     const containsForbiddenCharacters = (text) => {
         let isDirty = false;
-        console.log("changed", text);
-        // const forbiddenText = ["www", "http://", "https://", "@"];
-        // forbiddenText.forEach((element) => {
-        //   if (text.indexOf(element) > -1) isDirty = true;
-        // });
         const pattern = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/;
         if (pattern.test(text)) return (isDirty = true);
     };
 
+    function handleChange(value) {
+        // console.log("component", value);
+        blogActions.updateBlogDetails(value);
+        // dispatch(addStatus(value));
+    }
+    // const onPhotoChange = (file, className) => {
+    //     // const { file } = info;
+    //     // const { originFileObj } = file;
+    //     // authorImage
+    //     blogActions.updateBlogDetails({ authorImage: file });
+
+    //     console.log(file, className);
+    //     //send this to redux
+    //     // showTempImgFromBaseURL(file, className);
+    //     // getBase64(originFileObj, (imageUrl) => setAuthorPhoto(imageUrl));
+    // };
+
     return (
         <div className="create-blog-details-form">
             <Form className="create-blog-form">
-                <Form.Item name="title">
+                <Form.Item label="Title" name="title">
                     <Input
+                        name="blogTitle"
                         className="create-blog-title"
                         type="text"
                         value={title}
-                        onChange={(e) => setTitle(e.target.value)}
+                        onChange={({ target: { value } }) => {
+                            handleChange({ blogTitle: value });
+                            setTitle(value);
+                        }}
                         // placeholder="Blog "
                     />
                 </Form.Item>
-                <Form.Item name="sub-title">
+                <Form.Item name="blogSubTitle" label="Sub Title">
                     <Input
                         className="create-blog-sub-title"
                         type="text"
                         value={subTitle}
-                        onChange={(e) => setSubTitle(e.target.value)}
+                        onChange={({ target: { value } }) => {
+                            handleChange({ blogSubTitle: value });
+                            setSubTitle(value);
+                        }}
                         // placeholder="Blog "
                     />
                 </Form.Item>
@@ -57,7 +78,7 @@ const CreateBlogDetailsForm = () => {
                     }}>
                     <CKEditor
                         id="ck-content"
-                        name="description"
+                        name="blogDescription"
                         editor={ClassicEditor}
                         config={{
                             toolbar: ["bold", "italic", "numberedList", "bulletedList"],
@@ -65,7 +86,8 @@ const CreateBlogDetailsForm = () => {
                         onReady={(editor) => {}}
                         onChange={(event, editor) => {
                             const data = editor.getData();
-                            // console.log({ event, editor, data });
+                            handleChange({ blogDescription: data });
+                            // console.log(event + "\n", editor + "\n", data);
                         }}
                     />
                 </Form.Item>
@@ -73,7 +95,9 @@ const CreateBlogDetailsForm = () => {
                     <CreateBlogGalleryUpload />
                 </Form.Item>
                 <Form.Item name="preview">
-                    <Button type="primary">Preview</Button>
+                    <Button onClick={() => setIsCreateVisible(false)} type="primary">
+                        Preview
+                    </Button>
                 </Form.Item>
             </Form>
         </div>

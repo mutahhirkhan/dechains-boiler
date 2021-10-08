@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Collapse, Select, Input, Button, Upload } from "antd";
 import { showSuccessMessage } from "./.././../utils/message";
-import { useAppDispatch } from "../../store/hooks";
-import { addStatus } from "../../features/createBlog/slice";
 import Modal from "../Modal/Modal";
-import { getBase64, UploadButton } from "../CreateBlogGalleryUpload/CreateBlogGalleryUpload";
 import { showTempImgFromBaseURL } from "../../utils/helper";
 import "./_StatusAccordian.scss";
 import { PlusOutlined } from "@ant-design/icons";
+import { BlogContext } from "./../../BlogContext/BlogContext";
 
 function CopiedIcon({ link }) {
     return (
@@ -24,36 +22,37 @@ function CopiedIcon({ link }) {
 
 const StatusAccordian = () => {
     const [addAuthorModalShow, setAddAuthorModalShow] = useState(false);
-    const [authorPhoto, setAuthorPhoto] = useState("");
+    const { blogState, blogActions } = useContext(BlogContext); //ye as a connect function kaam krrha he
+
     const [link, setLink] = useState("");
+    const [newAuthorName, setNewAuthorName] = useState("");
+    const [newAuthorBio, setNewAuthorBio] = useState("");
     const { Panel } = Collapse;
     const { Option } = Select;
-    const dispatch = useAppDispatch();
+    const { TextArea } = Input;
 
     function handleChange(value) {
-        dispatch(addStatus(value));
+        blogActions.updateBlogDetails(value);
     }
     const onPhotoChange = (file, className) => {
-        // const { file } = info;
-        // const { originFileObj } = file;
-        console.log(file, className);
         //send this to redux
+        blogActions.updateBlogDetails({ authorImage: file });
         showTempImgFromBaseURL(file, className);
-        // getBase64(originFileObj, (imageUrl) => setAuthorPhoto(imageUrl));
     };
 
     return (
-        <Collapse defaultActiveKey={["1"]} expandIconPosition={"right"}>
+        <Collapse defaultActiveKey={["3"]} expandIconPosition={"right"}>
             <Panel className="status" header="Status & Visibility" key="1">
                 <label>Visibility</label>
                 <br />
 
                 <Select
+                    showSearch
                     getPopupContainer={(trigger) => trigger.parentNode}
                     className="visibility"
                     name="visibility"
                     defaultValue="Public"
-                    onChange={(value) => handleChange({ visibility: "visibility", value: value })}>
+                    onChange={(value) => handleChange({ visibility: value })}>
                     <Option value="Public">Public</Option>
                     <Option value="Private">Private</Option>
                 </Select>
@@ -62,11 +61,12 @@ const StatusAccordian = () => {
                 <label>Publish</label>
                 <br />
                 <Select
+                    showSearch
                     getPopupContainer={(trigger) => trigger.parentNode}
                     className="publish"
                     name="publish"
                     defaultValue="Immediately1"
-                    onChange={(value) => handleChange({ publish: "publish", value: value })}>
+                    onChange={(value) => handleChange({ publish: value })}>
                     <Option value="Immediately1">Immediately1</Option>
                     <Option value="Immediately2">Immediately2</Option>
                 </Select>
@@ -81,7 +81,7 @@ const StatusAccordian = () => {
                     name="link"
                     value={link}
                     onChange={({ target: { value } }) => {
-                        handleChange({ link: "link", value: value });
+                        handleChange({ link: value });
                         setLink(value);
                     }}
                     placeholder="Share link"
@@ -97,17 +97,27 @@ const StatusAccordian = () => {
                 </div>
                 <br />
                 <Select
+                    showSearch
                     getPopupContainer={(trigger) => trigger.parentNode}
                     className="author"
-                    name="authors"
+                    name="authorName"
                     defaultValue="Jobsmideast"
-                    onChange={(value) => handleChange({ authors: "authors", value: value })}>
+                    onChange={(value) => handleChange({ authorName: value })}>
                     <Option value="Jobsmideast">Jobsmideast</Option>
                     <Option value="Paz Tafrishi">Paz Tafrishi</Option>
                 </Select>
             </Panel>
-            <Modal backdropClassName="connect-modal-backdrop" className="center connect-modal" show={addAuthorModalShow}>
-                <img className="author-img" src={require("./../../assets/img/user.png")} width={"100px"} height={"100px"} />
+            <Modal
+                backdropClassName="connect-modal-backdrop"
+                className="center connect-modal"
+                show={addAuthorModalShow}
+                onHide={() => setAddAuthorModalShow(false)}>
+                <img
+                    className="author-img"
+                    src={blogState.authorImage || require("./../../assets/img/user.png")}
+                    width={"100px"}
+                    height={"100px"}
+                />
                 <Upload
                     accept="image/*"
                     listType="picture-card"
@@ -121,21 +131,39 @@ const StatusAccordian = () => {
                     multiple={false}>
                     <PlusOutlined />
                 </Upload>
-                <div className="btn-row">
-                    <Button
-                        onClick={() => setAddAuthorModalShow(false)}
-                        // className="grey"
-                        type="primary">
-                        {" "}
-                        Cancel
-                    </Button>
+                <div className="">
+                    <label htmlFor="newAuthorName">Name</label>
+                    <br />
+                    <Input
+                        className="new-author-name"
+                        type="text"
+                        name="newAuthorName"
+                        value={newAuthorName}
+                        onChange={({ target: { value } }) => {
+                            handleChange({ authorName: value });
+                            setNewAuthorName(value);
+                        }}
+                        placeholder="Author name"
+                        addonAfter={<CopiedIcon link={link} />}
+                    />
+                    <label htmlFor="newAuthorBio">About me</label>
+                    <br />
+                    <TextArea
+                        name="authorBio"
+                        value={newAuthorBio}
+                        onChange={({ target: { value } }) => {
+                            handleChange({ authorBio: value });
+                            setNewAuthorBio(value);
+                        }}
+                        rows={4}
+                    />
                     <Button
                         // onClick={handleConnectByEmployer}
                         // loading={isLoading}
                         // className="light"
                         type="primary">
                         {" "}
-                        Confirm
+                        Save
                     </Button>
                 </div>
             </Modal>

@@ -1,0 +1,7 @@
+
+export const ADD_STATUS = "ADD_STATUS"
+export const ADD_CATEGORY = "ADD_CATEGORY"
+export const ADD_TAG = "ADD_TAG"
+export const BLOG_DETAILS = "BLOG_DETAILS"
+export const UPDATE_BLOG_DETAILS = "UPDATE_BLOG_DETAILS"
+export const PREVIEW_BLOG = "PREVIEW_BLOG"
