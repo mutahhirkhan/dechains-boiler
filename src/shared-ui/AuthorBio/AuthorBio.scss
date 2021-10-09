@@ -1,0 +1,29 @@
+.author-bio {
+    display: grid;
+    grid-template-columns: minmax(5px, 2fr) minmax(min-content, 8fr) minmax(5px, 2fr);
+    grid-template-areas: ". content .";
+    padding: 30px 5px;
+    margin: 70px 30px;
+    box-shadow: 1px 1px 6px 1px #00000036;
+    border-radius: 10px;
+    // column-gap: 20px;
+}
+.bio-image {
+    
+    .preview-author-img {
+        height: 120px;
+        width: 120px ;
+        object-fit: cover;
+        border-radius: 120px;
+    }
+}
+.bio-center {
+    grid-area: content;
+    // background: lightcoral;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    .bio-content {
+        text-align: left;
+    }
+}

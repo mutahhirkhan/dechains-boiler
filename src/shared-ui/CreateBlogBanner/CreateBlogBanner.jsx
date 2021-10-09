@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { Upload, message } from "antd";
 import { showSuccessMessage, showErrorMessage } from "./../../utils/message";
 
-import "./_CreateBlogBanner.scss";
+// import "./_CreateBlogBanner.scss";
 import { showTempImgFromBaseURL } from "../../utils/helper";
 import { BlogContext } from "../../BlogContext/BlogContext";
 
