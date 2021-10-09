@@ -21,7 +21,7 @@ const Header = ({ logoutHandler }) => {
           <span className="inner-container">
             <img
               className="logo"
-              src={require("../../assets/img/logo/logo-md-original.png").default}
+              src={require("../../assets/img/logo/logo-md-original.png")}
               alt=""
             />
             <div className="">
@@ -39,8 +39,7 @@ const Header = ({ logoutHandler }) => {
               <Dropdown trigger={["click"]} overlay={menu}>
                 <a
                   className="ant-dropdown-link"
-                  onClick={(e) => e.preventDefault()}
-                >
+                  onClick={(e) => e.preventDefault()}>
                   <DownOutlined />
                 </a>
               </Dropdown>

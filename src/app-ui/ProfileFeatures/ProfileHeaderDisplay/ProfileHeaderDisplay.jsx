@@ -1,8 +1,7 @@
 import React from 'react'
-import { Row, Button, Col } from "antd";
+import { Row, Button, Col,Select } from "antd";
 import defaultImage from "../../../assets/img/user.png"
 import RateCount from './RateCount';
-import Select from 'react-select'
 
 const ProfileHeaderDisplay = () => {
     console.log("COMPONENT RENDER");
@@ -49,7 +48,7 @@ const ProfileHeaderDisplay = () => {
                         <p>Job title : Examiner</p>
                         <p>Location</p>
                     </div>
-                    <Select placeholder="Add selected items" options={options} />
+                    {/* <Select placeholder="Add selected items" options={options} /> */}
                 </Col>
             </Row>
         </div>

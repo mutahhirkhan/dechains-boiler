@@ -1,0 +1,21 @@
+@import "./../../assets/scss/variable";
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 5px 0;
+    margin: -10px 0 0 0;
+
+    .tag {
+        margin: 10px 10px 0 0;
+        background-color: $white;
+        color: $black;
+        padding: 2px 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 5px;
+        border: 1px solid $black;
+        font-size: $font-size-sm;
+    }
+}

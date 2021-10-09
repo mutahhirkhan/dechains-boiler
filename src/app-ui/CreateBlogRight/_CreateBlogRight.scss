@@ -1,0 +1,7 @@
+.create-blog-right-contianer {
+    // height: 90vh;
+    display: grid;
+    grid-template-rows: 30fr 70fr;
+    background: rgb(221, 221, 221);
+    gap: 50px;
+}
