@@ -59,15 +59,16 @@ export const jsonToQueryString = (data) => {
     return "?" + new URLSearchParams(params).toString();
 };
 
-export const showTempImgFromBaseURL = (file, className) => {
+export const showTempImgFromBaseURL = (file, Fn) => {
     if (file) {
         var reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onloadend = function () {
             let blobUrl = reader.result;
-            document.querySelector(className).src = blobUrl;
+            Fn(blobUrl)
+            // if (document.querySelector(className)) document.querySelector(className).src = blobUrl;
         };
     }
 };
 
-export const filterOption = (input, option) => option.children?.[1]?.toLowerCase().indexOf(input.toLowerCase()) >= 0 
+export const filterOption = (input, option) => option.children?.[1]?.toLowerCase().indexOf(input.toLowerCase()) >= 0;

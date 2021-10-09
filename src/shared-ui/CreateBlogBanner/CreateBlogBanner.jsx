@@ -10,6 +10,9 @@ const CreateBlogBanner = () => {
     const { blogState, blogActions } = useContext(BlogContext); //ye as a connect function kaam krrha he
     const { Dragger } = Upload;
 
+    useEffect(() => {
+        Object.keys(blogState.blogBanner).length && showTempImgFromBaseURL(blogState.blogBanner, ".upload-blog-banner");
+    }, []);
     const blogBannerBeforeUpload = (file, className) => {
         if (file) {
             //send this file to redux
@@ -29,6 +32,7 @@ const CreateBlogBanner = () => {
     return (
         <>
             <Dragger
+                className="upload-blog-container"
                 accept=".jpg, .jpeg, .png"
                 tooltipVisible={false}
                 maxCount={1}

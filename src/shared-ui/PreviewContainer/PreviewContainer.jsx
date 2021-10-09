@@ -1,41 +1,53 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { BlogContext } from "../../BlogContext/BlogContext";
-import ImageCarousel from '../ImageCarousel/ImageCarousel';
-import AuthorBio from '../AuthorBio/AuthorBio';
-import { Button } from 'antd';
+import ImageCarousel from "../ImageCarousel/ImageCarousel";
+import AuthorBio from "../AuthorBio/AuthorBio";
+import { Button } from "antd";
+import { showTempImgFromBaseURL } from "../../utils/helper";
+import { createMarkup } from "../../utils/powerFunctions";
 
-const PreviewContainer = ({setIsCreateVisible}) => {
+const PreviewContainer = ({ setIsCreateVisible }) => {
     const { blogState, blogActions } = useContext(BlogContext); //ye as a connect function kaam krrha he
+    // cont [tempBanner, setTempBanner] = useState(null)
     console.log(blogState);
+    useEffect(() => {
+        // console.log(blogState.blogBanner);
+        Object.keys(blogState.blogBanner).length && showTempImgFromBaseURL(blogState.blogBanner, ".preview-banner");
+    }, []);
     return (
         <div className="container">
             <div className="banner">
-                <img src={require("./../../assets/img/job-banner.png")} alt="" width={"100%"} height={"70%"}/>
+                <img className="preview-banner" src={require("./../../assets/img/job-banner.png")} alt="" width={"100%"} height={"70%"} />
             </div>
-            <div className="time">June 21, 2021</div>
+            <div className="time">{new Date().toLocaleDateString("default", { month: "long", day: "numeric", year: "numeric" })}</div>
             <div className="content-wrapper">
-                <div className="heading title"><h1> Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo, architecto?</h1></div>
-                <div className="heading sub-title"><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores molestias recusandae commodi minima error sit voluptatem dolore. Repellendus nemo, suscipit tempora dolor cumque at aliquid ipsum non praesentium, autem natus libero quos. Blanditiis voluptas aspernatur rerum beatae ea corporis ex magni inventore neque impedit, nulla mollitia perferendis cum, culpa deserunt?</p></div>
+                <div className="heading title">
+                    <h1> {blogState?.blogTitle ?? "Blog title here"}</h1>
+                </div>
+                <div className="heading sub-title">
+                    <p>{blogState?.blogSubTitle ?? "Blog subtitle here"}</p>
+                </div>
                 <br />
                 <br />
-                <div className="heading description">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus hic earum commodi obcaecati laborum nostrum inventore non odio delectus neque ipsum explicabo suscipit, architecto recusandae. Distinctio deleniti minus, quasi corrupti totam voluptatem impedit fuga repellendus obcaecati ex expedita vero maxime omnis ab dolorem pariatur sit sunt deserunt recusandae. Placeat eligendi repellendus harum doloribus reiciendis commodi sapiente consequatur iure explicabo nostrum distinctio velit impedit architecto, adipisci ea. Voluptatum expedita doloremque inventore corporis necessitatibus corrupti doloribus consequatur ducimus temporibus sapiente architecto illum facere dicta tenetur quisquam nemo laborum possimus facilis maxime libero atque, quod quia. Placeat recusandae aperiam esse provident illum, doloremque ut dolorem debitis animi deserunt, et iste hic ad facilis. Tenetur harum reiciendis voluptates officiis sapiente saepe tempora voluptate inventore modi, expedita ut impedit alias ab magni nobis maiores corporis dicta beatae. Corporis excepturi iure voluptas similique, nihil, nesciunt eaque facere quasi, natus dicta commodi possimus sed asperiores saepe? Minus similique esse blanditiis repudiandae tempore impedit facilis adipisci? Temporibus reprehenderit maxime id quasi iusto, reiciendis voluptatum quod repudiandae, consequuntur, totam libero sed. Quisquam quia consectetur doloribus obcaecati odio cumque veniam repellendus esse dolorum quos repudiandae illo voluptatum, cupiditate dolor accusantium ducimus excepturi, sapiente nisi? Odio animi recusandae qui veniam sed! Esse mollitia eos corrupti sed provident illum incidunt, sapiente nulla quo a. Quas quaerat accusantium dolore fugit facere, dolorum obcaecati inventore vel, esse perferendis fugiat possimus quam. Quia quae, aperiam architecto iure tempore pariatur deleniti, assumenda blanditiis sunt voluptatibus maxime ducimus deserunt officiis neque, magnam odit veritatis dicta? Excepturi non, beatae animi a vel molestias, deleniti eius odio magni adipisci consequatur eligendi voluptas, reprehenderit maxime harum doloremque perspiciatis dolorem! Officia ad sequi aperiam ducimus rem. Eveniet qui ratione quod quibusdam dolorem perferendis autem quisquam consequatur! Maxime unde veniam perferendis aperiam obcaecati? At quisquam nobis quidem adipisci nam sint, ut quo.</p>
-                    <br />
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus hic earum commodi obcaecati laborum nostrum inventore non odio delectus neque ipsum explicabo suscipit, architecto recusandae. Distinctio deleniti minus, quasi corrupti totam voluptatem impedit fuga repellendus obcaecati ex expedita vero maxime omnis ab dolorem pariatur sit sunt deserunt recusandae. Placeat eligendi repellendus harum doloribus reiciendis commodi sapiente consequatur iure explicabo nostrum distinctio velit impedit architecto, adipisci ea. Voluptatum expedita doloremque inventore corporis necessitatibus corrupti doloribus consequatur ducimus temporibus sapiente architecto illum facere dicta tenetur quisquam nemo laborum possimus facilis maxime libero atque, quod quia. Placeat recusandae aperiam esse provident illum, doloremque ut dolorem debitis animi deserunt, et iste hic ad facilis. Tenetur harum reiciendis voluptates officiis sapiente saepe tempora voluptate inventore modi, expedita ut impedit alias ab magni nobis maiores corporis dicta beatae. Corporis excepturi iure voluptas similique, nihil, nesciunt eaque facere quasi, natus dicta commodi possimus sed asperiores saepe? Minus similique esse blanditiis repudiandae tempore impedit facilis adipisci? Temporibus reprehenderit maxime id quasi iusto, reiciendis voluptatum quod repudiandae, consequuntur, totam libero sed. Quisquam quia consectetur doloribus obcaecati odio cumque veniam repellendus esse dolorum quos repudiandae illo voluptatum, cupiditate dolor accusantium ducimus excepturi, sapiente nisi? Odio animi recusandae qui veniam sed! Esse mollitia eos corrupti sed provident illum incidunt, sapiente nulla quo a. Quas quaerat accusantium dolore fugit facere, dolorum obcaecati inventore vel, esse perferendis fugiat possimus quam. Quia quae, aperiam architecto iure tempore pariatur deleniti, assumenda blanditiis sunt voluptatibus maxime ducimus deserunt officiis neque, magnam odit veritatis dicta? Excepturi non, beatae animi a vel molestias, deleniti eius odio magni adipisci consequatur eligendi voluptas, reprehenderit maxime harum doloremque perspiciatis dolorem! Officia ad sequi aperiam ducimus rem. Eveniet qui ratione quod quibusdam dolorem perferendis autem quisquam consequatur! Maxime unde veniam perferendis aperiam obcaecati? At quisquam nobis quidem adipisci nam sint, ut quo.</p>
-                    <br />
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus hic earum commodi obcaecati laborum nostrum inventore non odio delectus neque ipsum explicabo suscipit, architecto recusandae. Distinctio deleniti minus, quasi corrupti totam voluptatem impedit fuga repellendus obcaecati ex expedita vero maxime omnis ab dolorem pariatur sit sunt deserunt recusandae. Placeat eligendi repellendus harum doloribus reiciendis commodi sapiente consequatur iure explicabo nostrum distinctio velit impedit architecto, adipisci ea. Voluptatum expedita doloremque inventore corporis necessitatibus corrupti doloribus consequatur ducimus temporibus sapiente architecto illum facere dicta tenetur quisquam nemo laborum possimus facilis maxime libero atque, quod quia. Placeat recusandae aperiam esse provident illum, doloremque ut dolorem debitis animi deserunt, et iste hic ad facilis. Tenetur harum reiciendis voluptates officiis sapiente saepe tempora voluptate inventore modi, expedita ut impedit alias ab magni nobis maiores corporis dicta beatae. Corporis excepturi iure voluptas similique, nihil, nesciunt eaque facere quasi, natus dicta commodi possimus sed asperiores saepe? Minus similique esse blanditiis repudiandae tempore impedit facilis adipisci? Temporibus reprehenderit maxime id quasi iusto, reiciendis voluptatum quod repudiandae, consequuntur, totam libero sed. Quisquam quia consectetur doloribus obcaecati odio cumque veniam repellendus esse dolorum quos repudiandae illo voluptatum, cupiditate dolor accusantium ducimus excepturi, sapiente nisi? Odio animi recusandae qui veniam sed! Esse mollitia eos corrupti sed provident illum incidunt, sapiente nulla quo a. Quas quaerat accusantium dolore fugit facere, dolorum obcaecati inventore vel, esse perferendis fugiat possimus quam. Quia quae, aperiam architecto iure tempore pariatur deleniti, assumenda blanditiis sunt voluptatibus maxime ducimus deserunt officiis neque, magnam odit veritatis dicta? Excepturi non, beatae animi a vel molestias, deleniti eius odio magni adipisci consequatur eligendi voluptas, reprehenderit maxime harum doloremque perspiciatis dolorem! Officia ad sequi aperiam ducimus rem. Eveniet qui ratione quod quibusdam dolorem perferendis autem quisquam consequatur! Maxime unde veniam perferendis aperiam obcaecati? At quisquam nobis quidem adipisci nam sint, ut quo.</p>
-                </div>                
+                {!blogState?.blogDescription ? (
+                    <div className="heading description">
+                        "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptate, nihil expedita quis excepturi eum sit facere
+                        porro error officiis deleniti mollitia adipisci illum iste eos provident hic harum atque temporibus quaerat nobis ea
+                        ex enim? Ab fugiat ex saepe a iusto aut, ducimus adipisci facere ipsa similique. Itaque, eius dolorem.
+                    </div>
+                ) : (
+                    <div className="heading description" dangerouslySetInnerHTML={createMarkup(blogState?.blogDescription)}></div>
+                )}
             </div>
             <div className="carousel">
-            <ImageCarousel/>
-            <AuthorBio/>
-            <div className="edit-post-blog-btns">
-                <Button
-                className="edit-blog-btn" 
-                    onClick={() => setIsCreateVisible(true)} 
-                    type="default">Edit</Button>
-                <Button type="primary">Post</Button>
-            </div>
+                <ImageCarousel />
+                <AuthorBio />
+                <div className="edit-post-blog-btns">
+                    <Button className="edit-blog-btn" onClick={() => setIsCreateVisible(true)} type="default">
+                        Edit
+                    </Button>
+                    <Button type="primary">Post</Button>
+                </div>
             </div>
         </div>
     );

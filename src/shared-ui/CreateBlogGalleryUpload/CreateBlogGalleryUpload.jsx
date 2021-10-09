@@ -39,6 +39,10 @@ const CreateBlogGalleryUpload = () => {
 
     const handleChange = (files) => {
         let { fileList, file } = files;
+        let { originFileObj } = fileList;
+        fileList.map((img) => delete img.status)
+        
+        // delete fileList.response;
         blogActions.updateBlogDetails({ blogImgaes: fileList });
     };
 
@@ -50,7 +54,7 @@ const CreateBlogGalleryUpload = () => {
                 fileList={blogState.blogImgaes}
                 onPreview={handlePreview}
                 onChange={handleChange}>
-                {blogState.blogImgaes.length >= 5 ? null : UploadButton}
+                {blogState?.blogImgaes?.length >= 5 ? null : UploadButton}
             </Upload>
             <Modal visible={previewVisible} title={previewTitle} footer={null} onCancel={handleCancel}>
                 <img alt="gallery" style={{ width: "100%" }} src={previewImage} />

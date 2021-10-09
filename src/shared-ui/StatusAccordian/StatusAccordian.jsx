@@ -23,6 +23,7 @@ function CopiedIcon({ link }) {
 const StatusAccordian = () => {
     const [addAuthorModalShow, setAddAuthorModalShow] = useState(false);
     const { blogState, blogActions } = useContext(BlogContext); //ye as a connect function kaam krrha he
+    const [authorImage, setAuthorImage] = useState("")
 
     const [link, setLink] = useState("");
     const [newAuthorName, setNewAuthorName] = useState("");
@@ -37,12 +38,12 @@ const StatusAccordian = () => {
     const onPhotoChange = (file, className) => {
         //send this to redux
         blogActions.updateBlogDetails({ authorImage: file });
-        showTempImgFromBaseURL(file, className);
+        showTempImgFromBaseURL(file, setAuthorImage);
     };
 
-    useEffect(() => {
-        console.log(blogState);
-    }, [blogState]);
+    // useEffect(() => {
+    //     console.log(blogState);
+    // }, [blogState]);
 
     return (
         <Collapse defaultActiveKey={["3"]} expandIconPosition={"right"}>
@@ -119,12 +120,30 @@ const StatusAccordian = () => {
                 className="center connect-modal"
                 show={addAuthorModalShow}
                 onHide={() => setAddAuthorModalShow(false)}>
+                {/* {console.log(blogState.authorImage)}
+                {console.log(blogState.authorImage ? true : false)} */}
                 <img
                     className="author-img"
-                    src={blogState.authorImage || require("./../../assets/img/user.png")}
+                    src={
+                        authorImage ||     
+                        
+                            showTempImgFromBaseURL(blogState.authorImage, setAuthorImage)
+                            
+                    }
                     width={"100px"}
                     height={"100px"}
                 />
+                {/* <img
+                    className="author-img"
+                    src={
+                        
+                        blogState.authorImage
+                            ? showTempImgFromBaseURL(blogState.authorImage, ".author-img")
+                            : require("./../../assets/img/user.png")
+                    }
+                    width={"100px"}
+                    height={"100px"}
+                /> */}
                 <Upload
                     accept="image/*"
                     listType="picture-card"
