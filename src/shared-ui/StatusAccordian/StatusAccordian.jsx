@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { Collapse, Select, Input, Button, Upload } from "antd";
 import { showSuccessMessage } from "./.././../utils/message";
 import Modal from "../Modal/Modal";
-import { showTempImgFromBaseURL } from "../../utils/helper";
+import { showTempImgFromBaseURL, filterOption } from "../../utils/helper";
 import "./_StatusAccordian.scss";
 import { PlusOutlined } from "@ant-design/icons";
 import { BlogContext } from "./../../BlogContext/BlogContext";
@@ -40,6 +40,10 @@ const StatusAccordian = () => {
         showTempImgFromBaseURL(file, className);
     };
 
+    useEffect(() => {
+        console.log(blogState);
+    }, [blogState]);
+
     return (
         <Collapse defaultActiveKey={["3"]} expandIconPosition={"right"}>
             <Panel className="status" header="Status & Visibility" key="1">
@@ -52,9 +56,10 @@ const StatusAccordian = () => {
                     className="visibility"
                     name="visibility"
                     defaultValue="Public"
+                    filterOption={(input, option) => filterOption(input, option)}
                     onChange={(value) => handleChange({ visibility: value })}>
-                    <Option value="Public">Public</Option>
-                    <Option value="Private">Private</Option>
+                    <Option value={1}>Public</Option>
+                    <Option value={2}>Private</Option>
                 </Select>
                 <br />
                 <br />
@@ -65,10 +70,11 @@ const StatusAccordian = () => {
                     getPopupContainer={(trigger) => trigger.parentNode}
                     className="publish"
                     name="publish"
+                    filterOption={(input, option) => filterOption(input, option)}
                     defaultValue="Immediately1"
                     onChange={(value) => handleChange({ publish: value })}>
-                    <Option value="Immediately1">Immediately1</Option>
-                    <Option value="Immediately2">Immediately2</Option>
+                    <Option value={1}>Immediately1</Option>
+                    <Option value={2}>Immediately2</Option>
                 </Select>
                 <br />
                 <br />
@@ -101,10 +107,11 @@ const StatusAccordian = () => {
                     getPopupContainer={(trigger) => trigger.parentNode}
                     className="author"
                     name="authorName"
+                    filterOption={(input, option) => filterOption(input, option)}
                     defaultValue="Jobsmideast"
                     onChange={(value) => handleChange({ authorName: value })}>
-                    <Option value="Jobsmideast">Jobsmideast</Option>
-                    <Option value="Paz Tafrishi">Paz Tafrishi</Option>
+                    <Option value={1}>Jobsmideast</Option>
+                    <Option value={2}>Paz Tafrishi</Option>
                 </Select>
             </Panel>
             <Modal

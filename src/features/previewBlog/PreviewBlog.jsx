@@ -1,11 +1,8 @@
 import React from "react";
+import PreviewContainer from "../../shared-ui/PreviewContainer/PreviewContainer";
 
-const PreviewBlog = () => {
-    return (
-        <div>
-            <h1>i'm preview</h1>
-        </div>
-    );
+const PreviewBlog = ({setIsCreateVisible}) => {
+    return <PreviewContainer setIsCreateVisible={setIsCreateVisible}/>;
 };
 
 export default PreviewBlog;

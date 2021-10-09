@@ -3,7 +3,7 @@ import { Input, Button } from "antd";
 import { Form } from "antd";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import "./_CreateBlogDetailsForm.scss";
+// import "./_CreateBlogDetailsForm.scss";
 import CreateBlogGalleryUpload from "../CreateBlogGalleryUpload/CreateBlogGalleryUpload";
 import { BlogContext } from "../../BlogContext/BlogContext";
 
