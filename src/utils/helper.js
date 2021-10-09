@@ -69,3 +69,5 @@ export const showTempImgFromBaseURL = (file, className) => {
         };
     }
 };
+
+export const filterOption = (input, option) => option.children?.[1]?.toLowerCase().indexOf(input.toLowerCase()) >= 0 
