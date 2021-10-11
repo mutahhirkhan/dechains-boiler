@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Collapse, Select, Input, Button, Upload } from "antd";
 import { showSuccessMessage } from "./.././../utils/message";
+import defaultAuthorImg from "./../../assets/img/user.png";
+
 import Modal from "../Modal/Modal";
 import { showTempImgFromBaseURL, filterOption } from "../../utils/helper";
 import "./_StatusAccordian.scss";
@@ -23,7 +25,7 @@ function CopiedIcon({ link }) {
 const StatusAccordian = () => {
     const [addAuthorModalShow, setAddAuthorModalShow] = useState(false);
     const { blogState, blogActions } = useContext(BlogContext); //ye as a connect function kaam krrha he
-    const [authorImage, setAuthorImage] = useState("")
+    const [authorImage, setAuthorImage] = useState(null)
 
     const [link, setLink] = useState("");
     const [newAuthorName, setNewAuthorName] = useState("");
@@ -41,9 +43,11 @@ const StatusAccordian = () => {
         showTempImgFromBaseURL(file, setAuthorImage);
     };
 
-    // useEffect(() => {
-    //     console.log(blogState);
-    // }, [blogState]);
+    useEffect(() => {
+        if(blogState.authorImage) {
+            showTempImgFromBaseURL(blogState.authorImage, setAuthorImage)
+        }
+    }, []);
 
     return (
         <Collapse defaultActiveKey={["3"]} expandIconPosition={"right"}>
@@ -125,9 +129,10 @@ const StatusAccordian = () => {
                 <img
                     className="author-img"
                     src={
-                        authorImage ||     
                         
-                            showTempImgFromBaseURL(blogState.authorImage, setAuthorImage)
+                        authorImage ?? defaultAuthorImg
+                        
+                            
                             
                     }
                     width={"100px"}

@@ -7,17 +7,19 @@ import { showTempImgFromBaseURL } from "../../utils/helper";
 import { createMarkup } from "../../utils/powerFunctions";
 
 const PreviewContainer = ({ setIsCreateVisible }) => {
+    const [tempBanner, setTempBanner] = useState(null);
+
     const { blogState, blogActions } = useContext(BlogContext); //ye as a connect function kaam krrha he
     // cont [tempBanner, setTempBanner] = useState(null)
     console.log(blogState);
     useEffect(() => {
         // console.log(blogState.blogBanner);
-        Object.keys(blogState.blogBanner).length && showTempImgFromBaseURL(blogState.blogBanner, ".preview-banner");
+        Object.keys(blogState.blogBanner).length && showTempImgFromBaseURL(blogState.blogBanner, setTempBanner);
     }, []);
     return (
         <div className="container">
             <div className="banner">
-                <img className="preview-banner" src={require("./../../assets/img/job-banner.png")} alt="" width={"100%"} height={"70%"} />
+                <img className="preview-banner" src={tempBanner ?? require("./../../assets/img/job-banner.png")} alt="" width={"100%"} height={"70%"} />
             </div>
             <div className="time">{new Date().toLocaleDateString("default", { month: "long", day: "numeric", year: "numeric" })}</div>
             <div className="content-wrapper">
