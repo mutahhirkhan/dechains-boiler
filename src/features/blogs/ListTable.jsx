@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Table, Tag, Space } from 'antd';
 import defaultImage from "../../assets/img/user.png"
 const columns = [
@@ -95,12 +95,20 @@ const data = [
         tags: ['cool', 'teacher'],
     },
 ];
-const ListTable = () => {
+const ListTable = ({selectedBlogs, handleSelectedBlogs}) => {
     return (
         <div className="list-table-main">
             <Table
                 rowSelection={{
                     type: "checkbox",
+                    selectedRowKeys: selectedBlogs,
+                    onChange: (selectedRowKeys) => {
+                        handleSelectedBlogs(selectedRowKeys);
+                    },
+                    onSelectNone: () => {
+                        console.log("onSelectNone")
+                        handleSelectedBlogs(null);
+                    },
                 }}
                 pagination={false}
                 columns={columns}

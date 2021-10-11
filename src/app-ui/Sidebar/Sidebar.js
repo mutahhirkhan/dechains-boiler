@@ -19,6 +19,12 @@ const Sidebar = () => {
               <div>Blogs</div>
             </Link>
           </div>
+          <div className="box">
+            <Link to="/test">
+              <AppstoreOutlined style={{ fontSize: "35px", color: "white" }} />
+              <div>Jobseeker</div>
+            </Link>
+          </div>
           {/* <div className="box">
             <Link to={"/chat"}>
               <InboxOutlined style={{ fontSize: "35px", color: "white" }} />

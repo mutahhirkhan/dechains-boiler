@@ -1,0 +1,57 @@
+@import "./../../../assets/scss/variable";
+.content-second-row {
+    margin-top: 40px;
+}
+.content-col-main {
+    .content-heading {
+        font-size: $font-size-md;
+        font-family: $font-medium;
+        padding-bottom: 10px;
+    }
+
+    .content-options {
+        width: 100%;
+        display: flex;
+        border-bottom: 1px solid #dadde2;
+        .content-options-name {
+            font-family: $font-light;
+            font-size: $font-size-sm;
+            flex-grow: 1;
+            padding-bottom: 6px;
+            padding-top: 6px;
+            width: 50%;
+        }
+        .content-options-value {
+            font-family: $font-medium;
+            font-size: $font-size-sm;
+            padding-bottom: 6px;
+            padding-top: 6px;
+            flex-grow: 1;
+            width: 50%;
+        }
+    }
+    .statistics {
+        border-bottom: unset;
+    }
+}
+
+// ANT DRAWER
+.ant-drawer-content {
+    .ant-drawer-header {
+        border-bottom: unset;
+        padding-bottom: 0px;
+    }
+    .ant-drawer-body {
+        padding-top: 0px;
+        .ant-tabs {
+            .ant-tabs-nav-list {
+                .ant-tabs-tab {
+                    .ant-tabs-tab-btn {
+                        font-family: $font-light;
+                        font-size: $font-size-sm;
+                    }
+                }
+            }
+        }
+    }
+}

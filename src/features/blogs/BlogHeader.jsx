@@ -3,7 +3,7 @@ import { Row, Col, Form, Select } from "antd";
 import CreateBlogButton from "./CreateBlogButton";
 import ActionsButton from "./ActionsButton";
 
-const BlogHeader = () => {
+const BlogHeader = ({ selectedBlogs }) => {
   return (
     <>
       <Row className="blog-header" justify="space-between">
@@ -23,12 +23,14 @@ const BlogHeader = () => {
                   <Option value={d?.id}>{d?.title}</Option>
                 ))} */}
               </Select>
-              {"$ SELECTED"}
+              <p className="selected-user-length">
+                {selectedBlogs?.length > 0 && `${selectedBlogs.length} Selected`}
+              </p>
             </Form.Item>
           </Form>
         </Col>
         <Col className="action-btn-main" span={4}>
-          <ActionsButton/>
+          <ActionsButton selectedBlogs={selectedBlogs} />
         </Col>
       </Row>
     </>

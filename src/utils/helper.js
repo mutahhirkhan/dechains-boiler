@@ -27,6 +27,20 @@ export function useWindowSize() {
     return windowSize;
 }
 
+export const getLat = (location) => {
+    if (!location) {
+        return 25.3430485;
+    }
+    return location[0];
+};
+
+export const getLng = (location) => {
+    if (!location) {
+        return 50.6572839;
+    }
+    return location[1];
+};
+
 export const getFullName = (data) => {
     if (!data) {
         return " ";
@@ -71,4 +85,4 @@ export const showTempImgFromBaseURL = (file, Fn) => {
     }
 };
 
-export const filterOption = (input, option) => option.children?.[1]?.toLowerCase().indexOf(input.toLowerCase()) >= 0;
+export const filterOption = (input, option) => option.children?.[1]?.toLowerCase().indexOf(input.toLowerCase()) >= 0 

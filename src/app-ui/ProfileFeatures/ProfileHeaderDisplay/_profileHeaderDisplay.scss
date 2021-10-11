@@ -1,0 +1,117 @@
+@import "./../../../assets/scss/variable";
+.profile-main {
+    height: 20vh;
+    width: 100%;
+    min-height: fit-content;
+    // background-color: rgb(255, 128, 0);
+    .profile-display-section {
+        height: 100%;
+        width: 100%;
+        // background-color: red;
+
+        .profile-description {
+            display: flex;
+            height: 100%;
+            width: 100%;
+            // background-color: rosybrown;
+            .profile-image {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100%;
+                width: 100%;
+                // background-color: saddlebrown;
+                .image {
+                    img {
+                        height: 160px;
+                        width: 160px;
+                        border-radius: 10px;
+                    }
+                }
+            }
+            .profile-options-main {
+                display: flex;
+                align-items: center;
+                .profile-options {
+                    margin-left: 10px;
+                    .profile-name-heading {
+                        font-family: $font-bold;
+                        margin-bottom: 0.1em;
+                    }
+                    p {
+                        font-family: $font-subtitle;
+                        font-size: $font-size-x-sm;
+                        margin-bottom: 0px;
+                    }
+                    .rate-count-section {
+                        font-family: $font-light;
+                        margin-top: 8px;
+                        ul {
+                            margin-left: 10px;
+                        }
+                    }
+                    .option-btns {
+                        margin-top: 6px;
+                        .ant-btn {
+                            border-radius: 4px !important;
+                        }
+                        button {
+                            height: 30px;
+                            margin-right: 16px;
+                            padding: 0 26px !important;
+                            span {
+                                font-family: $font-medium;
+                                font-size: $font-size-sm;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .profile-stats {
+            height: 100%;
+            // background-color: rgb(100, 112, 128);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            margin-top: 8px;
+            .stats-points {
+                text-align: end;
+                p {
+                    margin: 0px;
+                }
+            }
+            .css-b62m3t-container {
+                width: 100%;
+                border: 1px solid $text-color;
+                border-radius: 4px;
+                .css-1s2u09g-control,
+                .css-1pahdxg-control {
+                    min-height: unset;
+                    height: 30px;
+                    .css-319lph-ValueContainer {
+                        .css-14el2xx-placeholder,
+                        .css-qc6sy-singleValue {
+                            color: hsl(0, 0%, 50%);
+                            font-size: 12px;
+                            margin-bottom: 6px;
+                        }
+                    }
+                }
+                .css-1hb7zxy-IndicatorsContainer {
+                    .css-1okebmr-indicatorSeparator {
+                        width: 0px;
+                        
+                    }
+                    .css-tlfecz-indicatorContainer {
+                        padding-top: 2px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.ant-rate {
+    font-size: 16px;
+}
