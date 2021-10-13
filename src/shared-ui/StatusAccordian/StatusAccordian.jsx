@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Collapse, Select, Input, Button, Upload } from "antd";
 import { showSuccessMessage } from "./.././../utils/message";
+import defaultAuthorImg from "./../../assets/img/user.png";
+
 import Modal from "../Modal/Modal";
 import { showTempImgFromBaseURL, filterOption } from "../../utils/helper";
 import "./_StatusAccordian.scss";
@@ -23,6 +25,7 @@ function CopiedIcon({ link }) {
 const StatusAccordian = () => {
     const [addAuthorModalShow, setAddAuthorModalShow] = useState(false);
     const { blogState, blogActions } = useContext(BlogContext); //ye as a connect function kaam krrha he
+    const [authorImage, setAuthorImage] = useState(null)
 
     const [link, setLink] = useState("");
     const [newAuthorName, setNewAuthorName] = useState("");
@@ -37,12 +40,18 @@ const StatusAccordian = () => {
     const onPhotoChange = (file, className) => {
         //send this to redux
         blogActions.updateBlogDetails({ authorImage: file });
-        showTempImgFromBaseURL(file, className);
+        showTempImgFromBaseURL(file, setAuthorImage);
     };
 
     useEffect(() => {
-        console.log(blogState);
-    }, [blogState]);
+        if (blogState.authorImage) {
+            showTempImgFromBaseURL(blogState.authorImage, setAuthorImage)
+        }
+    }, []);
+
+    const handleAddAuthor =  () => {
+      console.log("handleAddAuthor")
+    }
 
     return (
         <Collapse defaultActiveKey={["3"]} expandIconPosition={"right"}>
@@ -119,12 +128,25 @@ const StatusAccordian = () => {
                 className="center connect-modal"
                 show={addAuthorModalShow}
                 onHide={() => setAddAuthorModalShow(false)}>
+                {/* {console.log(blogState.authorImage)}
+                {console.log(blogState.authorImage ? true : false)} */}
                 <img
                     className="author-img"
-                    src={blogState.authorImage || require("./../../assets/img/user.png")}
+                    src={authorImage ?? defaultAuthorImg}
                     width={"100px"}
                     height={"100px"}
                 />
+                {/* <img
+                    className="author-img"
+                    src={
+                        
+                        blogState.authorImage
+                            ? showTempImgFromBaseURL(blogState.authorImage, ".author-img")
+                            : require("./../../assets/img/user.png")
+                    }
+                    width={"100px"}
+                    height={"100px"}
+                /> */}
                 <Upload
                     accept="image/*"
                     listType="picture-card"
@@ -151,7 +173,7 @@ const StatusAccordian = () => {
                             setNewAuthorName(value);
                         }}
                         placeholder="Author name"
-                        // addonAfter={<CopiedIcon link={link} />}
+                    // addonAfter={<CopiedIcon link={link} />}
                     />
                     <label htmlFor="newAuthorBio">About me</label>
                     <br />
@@ -165,7 +187,7 @@ const StatusAccordian = () => {
                         rows={4}
                     />
                     <Button
-                        // onClick={handleConnectByEmployer}
+                        onClick={handleAddAuthor}
                         // loading={isLoading}
                         // className="light"
                         type="primary">

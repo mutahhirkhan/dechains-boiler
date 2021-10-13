@@ -1,5 +1,12 @@
 @import "./../../assets/scss/variable";
 .container {
+    .banner {
+        height: 400px;
+        img {
+            height: 100%;
+            object-fit: cover;
+        }
+    }
     .time {
         padding: 20px 35px;
 
