@@ -20,9 +20,9 @@ const CategoryAccordian = () => {
         console.log("sub- > ", sub);
         // console.log(value);
         blogActions.updateBlogDetails(value);
-        if (!sub && value.defaultCategory) {
-            categoryAccordianForm.resetFields(["defaultSubCategory"]);
-            blogActions.getSubCategories(value.defaultCategory);
+        if (!sub && value.blogsCategoryId) {
+            categoryAccordianForm.resetFields(["blogsSubCategoryId"]);
+            blogActions.getSubCategories(value.blogsCategoryId);
         }
     }
     useEffect(() => {
@@ -38,25 +38,25 @@ const CategoryAccordian = () => {
                     <Form.Item
                         // rules={Rules.requiredRule}
                         label="Existing Category"
-                        name="defaultCategory"
+                        name="blogsCategoryId"
                         className="defaultCategory"
                         // valuePropName="data"
                     >
                         <Select
                             showSearch
                             getPopupContainer={(trigger) => trigger.parentNode}
-                            name="defaultCategory"
+                            name="blogsCategoryId"
                             allowClear={true}
                             className="defaultCategory"
                             placeholder="Select"
                             allowClear={true}
                             onClear={() => {
-                                categoryAccordianForm.resetFields(["defaultSubCategory"]);
-                                categoryAccordianForm.resetFields(["defaultCategory"]);
+                                categoryAccordianForm.resetFields(["blogsSubCategoryId"]);
+                                categoryAccordianForm.resetFields(["blogsCategoryId"]);
                             }}
                             // onSearch={(value) => blogActions.getCategories(value)}
                             filterOption={(input, option) => filterOption(input, option)}
-                            onChange={(value) => handleChange({ defaultCategory: value })}>
+                            onChange={(value) => handleChange({ blogsCategoryId: value }, false)}>
                             {blogState?.categories?.map((category, index) => (
                                 <Option key={index} value={category?.id}>
                                     {category?.title}
@@ -73,19 +73,19 @@ const CategoryAccordian = () => {
                     <br />
                     <Form.Item
                         label="Sub Category"
-                        name="defaultSubCategory"
+                        name="blogsSubCategoryId"
                         className="defaultSubCategory"
                         // rules={Rules.requiredRule}
                     >
                         <Select
                             showSearch
                             getPopupContainer={(trigger) => trigger.parentNode}
-                            name="defaultSubCategory"
+                            name="blogsSubCategoryId"
                             className="defaultSubCategory"
                             placeholder="Select"
                             filterOption={(input, option) => filterOption(input, option)}
                             onChange={(value) => {
-                                handleChange({ defaultSubCategory: value }, true);
+                                handleChange({ blogsSubCategoryId: value }, true);
                             }}>
                             {blogState?.subCategories?.map((sub, index) => (
                                 <Option key={index} value={sub?.id}>

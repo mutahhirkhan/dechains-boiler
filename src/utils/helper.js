@@ -79,10 +79,11 @@ export const showTempImgFromBaseURL = (file, Fn) => {
         reader.readAsDataURL(file);
         reader.onloadend = function () {
             let blobUrl = reader.result;
-            Fn(blobUrl)
+            Fn(blobUrl);
             // if (document.querySelector(className)) document.querySelector(className).src = blobUrl;
         };
     }
 };
 
-export const filterOption = (input, option) => option.children?.[1]?.toLowerCase().indexOf(input.toLowerCase()) >= 0 
+// export const filterOption = (input, option) => option.children?.[1]?.toLowerCase().indexOf(input.toLowerCase()) >= 0
+export const filterOption = (input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0;

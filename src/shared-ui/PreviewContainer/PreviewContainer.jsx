@@ -13,32 +13,38 @@ const PreviewContainer = ({ setIsCreateVisible }) => {
     // cont [tempBanner, setTempBanner] = useState(null)
     console.log(blogState);
     useEffect(() => {
-        // console.log(blogState.blogBanner);
-        Object.keys(blogState.blogBanner).length && showTempImgFromBaseURL(blogState.blogBanner, setTempBanner);
+       
+        Object.keys(blogState.bannerPhoto).length && showTempImgFromBaseURL(blogState.bannerPhoto, setTempBanner);
     }, []);
     return (
         <div className="container">
             <div className="banner">
-                <img className="preview-banner" src={tempBanner ?? require("./../../assets/img/job-banner.png")} alt="" width={"100%"} height={"70%"} />
+                <img
+                    className="preview-banner"
+                    src={tempBanner ?? require("./../../assets/img/job-banner.png")}
+                    alt=""
+                    width={"100%"}
+                    height={"70%"}
+                />
             </div>
             <div className="time">{new Date().toLocaleDateString("default", { month: "long", day: "numeric", year: "numeric" })}</div>
             <div className="content-wrapper">
                 <div className="heading title">
-                    <h1> {blogState?.blogTitle ?? "Blog title here"}</h1>
+                    <h1> {blogState?.title ?? "Blog title here"}</h1>
                 </div>
                 <div className="heading sub-title">
-                    <p>{blogState?.blogSubTitle ?? "Blog subtitle here"}</p>
+                    <p>{blogState?.content ?? "Blog subtitle here"}</p>
                 </div>
                 <br />
                 <br />
-                {!blogState?.blogDescription ? (
+                {!blogState?.description ? (
                     <div className="heading description">
                         "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptate, nihil expedita quis excepturi eum sit facere
                         porro error officiis deleniti mollitia adipisci illum iste eos provident hic harum atque temporibus quaerat nobis ea
                         ex enim? Ab fugiat ex saepe a iusto aut, ducimus adipisci facere ipsa similique. Itaque, eius dolorem.
                     </div>
                 ) : (
-                    <div className="heading description" dangerouslySetInnerHTML={createMarkup(blogState?.blogDescription)}></div>
+                    <div className="heading description" dangerouslySetInnerHTML={createMarkup(blogState?.description)}></div>
                 )}
             </div>
             <div className="carousel">

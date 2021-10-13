@@ -13,19 +13,19 @@ const CreateBlogBanner = () => {
     const { Dragger } = Upload;
 
     useEffect(() => {
-        Object.keys(blogState.blogBanner).length && showTempImgFromBaseURL(blogState.blogBanner, setTempBanner);
+        Object.keys(blogState.bannerPhoto).length && showTempImgFromBaseURL(blogState.bannerPhoto, setTempBanner);
     }, []);
     const blogBannerBeforeUpload = (file, setTempBanner) => {
         if (file) {
             //send this file to redux
-            blogActions.updateBlogDetails({ blogBanner: file });
+            blogActions.updateBlogDetails({ bannerPhoto: file });
             showTempImgFromBaseURL(file, setTempBanner);
         }
     };
 
     const onRemove = (file) => {
         if (file) {
-            blogActions.updateBlogDetails({ blogBanner: {} });
+            blogActions.updateBlogDetails({ bannerPhoto: {} });
 
             setTempBanner(null);
         } else return null;

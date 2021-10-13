@@ -41,24 +41,25 @@ const CreateBlogDetailsForm = ({ setIsCreateVisible }) => {
             <Form className="create-blog-form">
                 <Form.Item label="Title" name="title">
                     <Input
-                        name="blogTitle"
+                        name="title"
                         className="create-blog-title"
                         type="text"
                         value={title}
                         onChange={({ target: { value } }) => {
-                            handleChange({ blogTitle: value });
+                            handleChange({ title: value });
                             setTitle(value);
                         }}
                         // placeholder="Blog "
                     />
                 </Form.Item>
-                <Form.Item name="blogSubTitle" label="Sub Title">
+                <Form.Item name="content" label="Sub Title">
                     <Input
                         className="create-blog-sub-title"
                         type="text"
+                        name="content"
                         value={subTitle}
                         onChange={({ target: { value } }) => {
-                            handleChange({ blogSubTitle: value });
+                            handleChange({ content: value });
                             setSubTitle(value);
                         }}
                         // placeholder="Blog "
@@ -86,12 +87,12 @@ const CreateBlogDetailsForm = ({ setIsCreateVisible }) => {
                         onReady={(editor) => {}}
                         onChange={(event, editor) => {
                             const data = editor.getData();
-                            handleChange({ blogDescription: data });
+                            handleChange({ description: data });
                             // console.log(event + "\n", editor + "\n", data);
                         }}
                     />
                 </Form.Item>
-                <Form.Item name="images" label="Images">
+                <Form.Item name="photo" label="Images">
                     <CreateBlogGalleryUpload />
                 </Form.Item>
                 <Form.Item name="preview">

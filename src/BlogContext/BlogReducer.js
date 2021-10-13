@@ -7,6 +7,7 @@ import {
     PREVIEW_BLOG,
     SET_ALL_CATEGORIES,
     SET_ALL_SUB_CATEGORIES,
+    SET_ALL_AUTHORS,
 } from "./BlogConstants";
 
 var blogReducer = (state, actions) => {
@@ -21,6 +22,11 @@ var blogReducer = (state, actions) => {
             return {
                 ...state,
                 categories: [...payload],
+            };
+        case SET_ALL_AUTHORS:
+            return {
+                ...state,
+                authors: [...payload],
             };
         case SET_ALL_SUB_CATEGORIES:
             return {

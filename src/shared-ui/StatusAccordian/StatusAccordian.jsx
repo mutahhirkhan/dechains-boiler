@@ -8,6 +8,7 @@ import { showTempImgFromBaseURL, filterOption } from "../../utils/helper";
 import "./_StatusAccordian.scss";
 import { PlusOutlined } from "@ant-design/icons";
 import { BlogContext } from "./../../BlogContext/BlogContext";
+import { showWarningMessage } from "../../utils/message";
 
 function CopiedIcon({ link }) {
     return (
@@ -23,9 +24,9 @@ function CopiedIcon({ link }) {
 }
 
 const StatusAccordian = () => {
-    const [addAuthorModalShow, setAddAuthorModalShow] = useState(false);
     const { blogState, blogActions } = useContext(BlogContext); //ye as a connect function kaam krrha he
-    const [authorImage, setAuthorImage] = useState(null)
+    const [addAuthorModalShow, setAddAuthorModalShow] = useState(false);
+    const [authorImage, setAuthorImage] = useState(null);
 
     const [link, setLink] = useState("");
     const [newAuthorName, setNewAuthorName] = useState("");
@@ -35,6 +36,7 @@ const StatusAccordian = () => {
     const { TextArea } = Input;
 
     function handleChange(value) {
+        // console.log(value);
         blogActions.updateBlogDetails(value);
     }
     const onPhotoChange = (file, className) => {
@@ -42,12 +44,28 @@ const StatusAccordian = () => {
         blogActions.updateBlogDetails({ authorImage: file });
         showTempImgFromBaseURL(file, setAuthorImage);
     };
+    const handleAuthorPost = async () => {
+        if (!newAuthorBio || !blogState.authorImage || !newAuthorName) {
+            showWarningMessage("Please fill out every field");
+        } else {
+            const authorImage = blogState.authorImage;
+            const payload = { newAuthorBio, authorImage, newAuthorName };
+            const res = await blogActions.postAuthor(payload);
+            if (res === true) {
+                setAddAuthorModalShow(false);
+                blogActions.getAuthors();
+            }
+        }
+    };
 
     useEffect(() => {
-        if(blogState.authorImage) {
-            showTempImgFromBaseURL(blogState.authorImage, setAuthorImage)
+        if (blogState.authorImage) {
+            showTempImgFromBaseURL(blogState.authorImage, setAuthorImage);
         }
     }, []);
+    useEffect(() => {
+        console.log(blogState);
+    }, [blogState]);
 
     return (
         <Collapse defaultActiveKey={["3"]} expandIconPosition={"right"}>
@@ -59,12 +77,12 @@ const StatusAccordian = () => {
                     showSearch
                     getPopupContainer={(trigger) => trigger.parentNode}
                     className="visibility"
-                    name="visibility"
-                    defaultValue="Public"
+                    name="isPublic"
+                    placeholder="select publication type"
                     filterOption={(input, option) => filterOption(input, option)}
-                    onChange={(value) => handleChange({ visibility: value })}>
-                    <Option value={1}>Public</Option>
-                    <Option value={2}>Private</Option>
+                    onChange={(value) => handleChange({ isPublic: value })}>
+                    <Option value={true}>Public</Option>
+                    <Option value={false}>Private</Option>
                 </Select>
                 <br />
                 <br />
@@ -74,17 +92,17 @@ const StatusAccordian = () => {
                     showSearch
                     getPopupContainer={(trigger) => trigger.parentNode}
                     className="publish"
-                    name="publish"
+                    name="status"
+                    placeholder={"Select publish type"}
                     filterOption={(input, option) => filterOption(input, option)}
-                    defaultValue="Immediately1"
-                    onChange={(value) => handleChange({ publish: value })}>
-                    <Option value={1}>Immediately1</Option>
-                    <Option value={2}>Immediately2</Option>
+                    onChange={(value) => handleChange({ status: value })}>
+                    <Option value={"PUBLISHED"}>PUBLISHED</Option>
+                    <Option value={"DRAFT"}>DRAFT</Option>
                 </Select>
                 <br />
                 <br />
 
-                <label>Share Link</label>
+                {/* <label>Share Link</label>
                 <br />
                 <Input
                     className="share-link"
@@ -97,7 +115,7 @@ const StatusAccordian = () => {
                     }}
                     placeholder="Share link"
                     addonAfter={<CopiedIcon link={link} />}
-                />
+                /> */}
                 <br />
                 <br />
                 <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -111,12 +129,17 @@ const StatusAccordian = () => {
                     showSearch
                     getPopupContainer={(trigger) => trigger.parentNode}
                     className="author"
-                    name="authorName"
+                    name="blogAuthorId"
                     filterOption={(input, option) => filterOption(input, option)}
                     defaultValue="Jobsmideast"
-                    onChange={(value) => handleChange({ authorName: value })}>
-                    <Option value={1}>Jobsmideast</Option>
-                    <Option value={2}>Paz Tafrishi</Option>
+                    onChange={(value) => handleChange({ blogAuthorId: value })}>
+                    {blogState?.authors?.map((author, index) => (
+                        <Option key={index} value={author.id}>
+                            {author.name}
+                        </Option>
+                    ))}
+                    {/* <Option value={1}>Jobsmideast</Option>
+                    <Option value={2}>Paz Tafrishi</Option> */}
                 </Select>
             </Panel>
             <Modal
@@ -126,18 +149,7 @@ const StatusAccordian = () => {
                 onHide={() => setAddAuthorModalShow(false)}>
                 {/* {console.log(blogState.authorImage)}
                 {console.log(blogState.authorImage ? true : false)} */}
-                <img
-                    className="author-img"
-                    src={
-                        
-                        authorImage ?? defaultAuthorImg
-                        
-                            
-                            
-                    }
-                    width={"100px"}
-                    height={"100px"}
-                />
+                <img className="author-img" src={authorImage ?? defaultAuthorImg} width={"100px"} height={"100px"} />
                 {/* <img
                     className="author-img"
                     src={
@@ -189,7 +201,7 @@ const StatusAccordian = () => {
                         rows={4}
                     />
                     <Button
-                        // onClick={handleConnectByEmployer}
+                        onClick={handleAuthorPost}
                         // loading={isLoading}
                         // className="light"
                         type="primary">

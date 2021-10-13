@@ -31,7 +31,7 @@ const TagsAccordian = () => {
                         // listHeight={128}
                         className="education"
                         placeholder="Eduaction"
-                        onChange={(value) => handleChange({ tags: value })}></Select>
+                        onChange={(value) => handleChange({ blogsTag: value })}></Select>
                 </div>
                 <div className="tags">
                     {tags?.map((tag) => (

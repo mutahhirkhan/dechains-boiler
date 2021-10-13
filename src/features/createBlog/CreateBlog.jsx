@@ -8,6 +8,7 @@ const CreateBlog = ({setIsCreateVisible}) => {
   
   useEffect(() => {
     blogActions.getCategories()
+    blogActions.getAuthors()
   },[])
 
     return (

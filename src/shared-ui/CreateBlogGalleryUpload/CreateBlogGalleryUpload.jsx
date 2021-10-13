@@ -43,7 +43,7 @@ const CreateBlogGalleryUpload = () => {
         fileList.map((img) => delete img.status)
         
         // delete fileList.response;
-        blogActions.updateBlogDetails({ blogImgaes: fileList });
+        blogActions.updateBlogDetails({ photo: fileList });
     };
 
     return (
@@ -51,10 +51,10 @@ const CreateBlogGalleryUpload = () => {
             <Upload
                 // action={"https://www.mocky.io/v2/5cc8019d300000980a055e76"}
                 listType="picture-card"
-                fileList={blogState.blogImgaes}
+                fileList={blogState.photo}
                 onPreview={handlePreview}
                 onChange={handleChange}>
-                {blogState?.blogImgaes?.length >= 5 ? null : UploadButton}
+                {blogState?.photo?.length >= 5 ? null : UploadButton}
             </Upload>
             <Modal visible={previewVisible} title={previewTitle} footer={null} onCancel={handleCancel}>
                 <img alt="gallery" style={{ width: "100%" }} src={previewImage} />

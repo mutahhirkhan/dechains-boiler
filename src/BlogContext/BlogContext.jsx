@@ -9,9 +9,10 @@ import {
     PREVIEW_BLOG,
     SET_ALL_CATEGORIES,
     SET_ALL_SUB_CATEGORIES,
+    SET_ALL_AUTHORS,
 } from "./BlogConstants";
 import axios from "axios";
-import { getCategories, getSubCategories } from "../features/createBlog/service";
+import { getCategories, getSubCategories, uploadFile, uploadProfileImage, postAuthorAPI, getAuthors, getAuthorById } from "../features/createBlog/service";
 
 export const BlogContext = createContext(); //ye themeContext chezen provide karega, idhar se hoti vi aengi
 
@@ -19,23 +20,25 @@ const initialState = {
     categories: [],
     subCategories: [],
     isCreateVisible: true,
-    visibility: null,
-    publish: null,
+    isPublic: null,
+    status: null,
     link: "",
     authors: [],
-    authorName: null,
+    blogAuthorId: null,
     authorBio: null,
     authorImage: null,
-    defaultCategory: null,
-    defaultSubCategory: null,
+    blogsCategoryId: null,
+    blogsSubCategoryId: null,
     newCategory: null,
     newSubCategory: null,
-    tags: [],
-    blogBanner: {},
-    blogTitle: "",
-    blogSubTitle: "",
-    blogDescription: "",
-    blogImgaes: [],
+    blogsTag: [],
+    bannerPhoto: {},
+    title: "",
+    content: "",
+    description: "",
+    photo: [],
+    postAuthorSuccess: false,
+    authorSuccessFalse: true,
 };
 
 const BlogProvider = ({ children }) => {
@@ -63,11 +66,48 @@ const BlogProvider = ({ children }) => {
                 console.log(error);
             }
         },
+        getAuthors: async (payload) => {
+            try {
+                const { data } = await getAuthors(payload);
+                console.log(data);
+                dispatch({ type: SET_ALL_AUTHORS, payload: data });
+            } catch (error) {
+                console.log(error);
+            }
+        },
         updateBlogDetails: (data) => {
             // admin/superman/v1/blogs-category/list?page=1&limit=100
-            console.log(data);
+            // console.log(data);
             return dispatch({ type: UPDATE_BLOG_DETAILS, payload: { ...data } });
         },
+        postAuthor: async (data) => {
+            try {
+                const payload = new FormData();
+                payload.append("file", data.authorImage, data.authorImage.name);
+                const params = {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    },
+                };
+                const {
+                    data: { url },
+                } = await uploadProfileImage(payload, params);
+
+                const authorPayload = { name: data.newAuthorName, aboutMe: data.newAuthorBio, displayPhoto: url };
+                let authorRes;
+                if (url) authorRes = await postAuthorAPI(authorPayload);
+                return authorRes.status;
+            } catch (error) {
+                console.log(error);
+            }
+        },
+        getAuthorById: async (id) => {
+            try {
+                return await getAuthorById(id)
+            } catch (error) {
+                console.log(error);
+            }
+        }
 
         // setCustomTheme: (theme) =>
         //   dispatch({ type: CUSTOM_THEME, payload: { theme } }),

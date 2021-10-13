@@ -12,7 +12,7 @@ const ImageCarousel = () => {
     const org1 = images?.[1];
     console.log(org, org1);
     useEffect(() => {
-        blogState.blogImgaes.length && setImages(blogState.blogImgaes);
+        blogState.photo.length && setImages(blogState.photo);
     }, []);
     return (
         <div>
