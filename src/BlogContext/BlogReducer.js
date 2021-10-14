@@ -8,6 +8,7 @@ import {
     SET_ALL_CATEGORIES,
     SET_ALL_SUB_CATEGORIES,
     SET_ALL_AUTHORS,
+    BLOG_POST_LOADING,
 } from "./BlogConstants";
 
 var blogReducer = (state, actions) => {
@@ -32,6 +33,11 @@ var blogReducer = (state, actions) => {
             return {
                 ...state,
                 subCategories: [...payload],
+            };
+        case BLOG_POST_LOADING:
+            return {
+                ...state,
+                ...payload,
             };
         default:
             return state;

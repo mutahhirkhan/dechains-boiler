@@ -10,9 +10,22 @@ import {
     SET_ALL_CATEGORIES,
     SET_ALL_SUB_CATEGORIES,
     SET_ALL_AUTHORS,
+    BLOG_POST_LOADING,
 } from "./BlogConstants";
 import axios from "axios";
-import { getCategories, getSubCategories, uploadFile, uploadProfileImage, postAuthorAPI, getAuthors, getAuthorById } from "../features/createBlog/service";
+import {
+    getCategories,
+    getSubCategories,
+    uploadFile,
+    uploadProfileImage,
+    postAuthorAPI,
+    getAuthors,
+    getAuthorById,
+    uploadMultiPics,
+    postBlog,
+} from "../features/createBlog/service";
+import { isObjectFilled } from "../utils/helper";
+import { useHistory } from 'react-router';
 
 export const BlogContext = createContext(); //ye themeContext chezen provide karega, idhar se hoti vi aengi
 
@@ -37,11 +50,12 @@ const initialState = {
     content: "",
     description: "",
     photo: [],
+    postAuthorLoading:false,
     postAuthorSuccess: false,
-    authorSuccessFalse: true,
 };
 
 const BlogProvider = ({ children }) => {
+    const history = useHistory()
     const [blogState, dispatch] = useReducer(blogReducer, initialState);
 
     const actions = {
@@ -103,11 +117,60 @@ const BlogProvider = ({ children }) => {
         },
         getAuthorById: async (id) => {
             try {
-                return await getAuthorById(id)
+                return await getAuthorById(id);
             } catch (error) {
                 console.log(error);
             }
-        }
+        },
+        uploadBannerAndImages: async () => {
+            try {
+                dispatch({type:BLOG_POST_LOADING, payload:{postAuthorLoading:true}})
+                if (isObjectFilled(blogState.bannerPhoto) && blogState.photo.length > 0) {
+                    let bannerPayload = new FormData();
+                    bannerPayload.append("file", blogState.bannerPhoto);
+
+                    var payload = new FormData();
+                    blogState.photo.forEach((element) => {
+                        payload.append("files", element.originFileObj);
+                    });
+
+                    const {url} = await uploadProfileImage(bannerPayload);
+                    const { data } = await uploadMultiPics(payload);
+                    console.log("multi image res");
+                    console.log(data);
+
+                    let photo = [];
+                    data.forEach((el) => photo.push(el?.url));
+
+                    const postBlogPayload = {
+                        title: blogState.title,
+                        photo: photo,
+                        BlogsTag: blogState.blogsTag,
+                        description: blogState.description,
+                        bannerPhoto: url,
+                        isPublic: blogState.isPublic,
+                        status: blogState.status,
+                        content: blogState.content,
+                        blogsCategoryId: blogState.blogsCategoryId,
+                        blogsSubCategoryId: blogState.blogsSubCategoryId,
+                        blogAuthorId: blogState.blogAuthorId,
+                    };
+                    console.log("postBlogPayload");
+                    console.log(postBlogPayload);
+                    const res = await postBlog(postBlogPayload);
+                    console.log("blog posted");
+                    console.log(res);
+                    dispatch({type:BLOG_POST_LOADING, payload:{postAuthorLoading:false, postAuthorSuccess:true}})
+                    history.push("/blogs")
+                }
+                else{
+                    console.log(isObjectFilled(blogState.bannerPhoto) , blogState.photo.length)
+                }
+            } catch (error) {
+                dispatch({type:BLOG_POST_LOADING, payload:{postAuthorLoading:false, postAuthorSuccess:false}})
+                console.log(error);
+            }
+        },
 
         // setCustomTheme: (theme) =>
         //   dispatch({ type: CUSTOM_THEME, payload: { theme } }),

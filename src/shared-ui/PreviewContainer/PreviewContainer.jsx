@@ -7,13 +7,13 @@ import { showTempImgFromBaseURL } from "../../utils/helper";
 import { createMarkup } from "../../utils/powerFunctions";
 
 const PreviewContainer = ({ setIsCreateVisible }) => {
-    const [tempBanner, setTempBanner] = useState(null);
-
     const { blogState, blogActions } = useContext(BlogContext); //ye as a connect function kaam krrha he
+    const [tempBanner, setTempBanner] = useState(null);
+    console.log(blogActions);
+
     // cont [tempBanner, setTempBanner] = useState(null)
     console.log(blogState);
     useEffect(() => {
-       
         Object.keys(blogState.bannerPhoto).length && showTempImgFromBaseURL(blogState.bannerPhoto, setTempBanner);
     }, []);
     return (
@@ -54,7 +54,9 @@ const PreviewContainer = ({ setIsCreateVisible }) => {
                     <Button className="edit-blog-btn" onClick={() => setIsCreateVisible(true)} type="default">
                         Edit
                     </Button>
-                    <Button type="primary">Post</Button>
+                    <Button loading={blogState.postAuthorLoading} type="primary" onClick={() => blogActions.uploadBannerAndImages()}>
+                        Post
+                    </Button>
                 </div>
             </div>
         </div>
@@ -62,3 +64,5 @@ const PreviewContainer = ({ setIsCreateVisible }) => {
 };
 
 export default PreviewContainer;
+
+
