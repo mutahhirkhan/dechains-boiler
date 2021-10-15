@@ -1,35 +1,30 @@
 
 import React, { useState, useEffect } from 'react'
-import { Table, Tag, Space, Modal } from 'antd';
+import { Table, Tag, Space, Modal, Spin } from 'antd';
 import defaultImage from "../../assets/img/user.png"
 import { getBlogLists } from './thunk';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { selectBlogsList } from './slice';
+import { selectBlogsList, selectStatus } from './slice';
 import moment from "moment";
 import PreviewStaticContent from '../../shared-ui/PreviewContainer/PreviewStaticContent';
-
-
-
 
 
 const ListTable = ({ selectedBlogs, handleSelectedBlogs }) => {
     const dispatch = useAppDispatch();
     const blogList = useAppSelector(selectBlogsList)
+    const isLoading = useAppSelector(selectStatus)
     const [visible, setVisible] = useState(false);
-    console.log("blogList", blogList)
+    const [blogData, setBlogData] = useState(null);
 
-    const handlePreviewBlog = () => {
-        console.log("handlePreviewBlog")
+    const handlePreviewBlog = (blogData) => {
+        console.log("blogData", blogData)
+        setBlogData(blogData)
         setVisible(true)
     }
 
     useEffect(() => {
         dispatch(getBlogLists());
     }, [])
-    useEffect(() => {
-        console.log("selectedRowKeys", selectedBlogs)
-
-    }, [selectedBlogs])
 
     const columns = [
         {
@@ -42,7 +37,7 @@ const ListTable = ({ selectedBlogs, handleSelectedBlogs }) => {
                         <span className="username">
                             <img
                                 className="user-image"
-                                src={data?.photo || defaultImage}
+                                src={data?.displayPhoto || defaultImage}
                             />
                             <p
                                 className="pointer"
@@ -91,7 +86,7 @@ const ListTable = ({ selectedBlogs, handleSelectedBlogs }) => {
                     <p>{moment(text).format("DD/MM/YYYY")}</p>
                     <img
                         src={require("../../assets/img/icons/eye.svg")}
-                        onClick={() => handlePreviewBlog()}
+                        onClick={() => handlePreviewBlog(record)}
                         fontSize="20px"
                     />
                 </Space>
@@ -101,24 +96,24 @@ const ListTable = ({ selectedBlogs, handleSelectedBlogs }) => {
     return (
         <>
             <div className="list-table-main">
-                <Table
-                    rowKey="id"
-                    rowSelection={{
-                        type: "checkbox",
-                        selectedRowKeys: selectedBlogs,
-                        onChange: (selectedRowKeys) => {
-                            console.log(selectedRowKeys)
-                            handleSelectedBlogs(selectedRowKeys);
-                        },
-                        onSelectNone: () => {
-                            console.log("onSelectNone")
-                            handleSelectedBlogs(null);
-                        },
-                    }}
-                    pagination={false}
-                    columns={columns}
-                    dataSource={blogList}
-                />
+                <Spin spinning={isLoading}>
+                    <Table
+                        rowKey="id"
+                        rowSelection={{
+                            type: "checkbox",
+                            selectedRowKeys: selectedBlogs,
+                            onChange: (selectedRowKeys) => {
+                                handleSelectedBlogs(selectedRowKeys);
+                            },
+                            onSelectNone: () => {
+                                handleSelectedBlogs(null);
+                            },
+                        }}
+                        pagination={false}
+                        columns={columns}
+                        dataSource={blogList}
+                    />
+                </Spin>
             </div>
             <Modal
                 title="Modal 1000px width"
@@ -128,7 +123,7 @@ const ListTable = ({ selectedBlogs, handleSelectedBlogs }) => {
                 onCancel={() => setVisible(false)}
                 width={1000}
             >
-                {/* <PreviewStaticContent /> */}
+                <PreviewStaticContent blogData={blogData} modalView={true} />
             </Modal>
         </>
     )

@@ -50,7 +50,7 @@ const StatusAccordian = () => {
     }, []);
 
     const handleAddAuthor =  () => {
-      console.log("handleAddAuthor")
+    //   console.log("handleAddAuthor")
     }
 
     return (

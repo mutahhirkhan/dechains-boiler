@@ -9,7 +9,7 @@ const TagsAccordian = () => {
 
 
     const callback = (key) => {
-        console.log(key);
+        // console.log(key);
     };
     const handleChange = (value) => {
         setTags(value.tags);

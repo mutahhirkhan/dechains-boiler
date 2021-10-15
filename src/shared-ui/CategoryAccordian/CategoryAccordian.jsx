@@ -12,10 +12,10 @@ const CategoryAccordian = () => {
     const { Option } = Select;
     const [categoryAccordianForm] = Form.useForm();
     const callback = (key) => {
-        console.log(key);
+        // console.log(key);
     };
     function handleChange(value, sub) {
-        console.log("sub- > ", sub);
+        // console.log("sub- > ", sub);
         // console.log(value);
         blogActions.updateBlogDetails(value);
         if (!sub && value.defaultCategory) {

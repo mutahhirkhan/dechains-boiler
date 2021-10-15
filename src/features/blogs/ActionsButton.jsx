@@ -1,22 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { EditButton } from "../../shared-ui/EditButton/EditButton";
 import { BsTrash } from "react-icons/bs";
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { selectDeleteBlogSuccess } from "./slice";
-import { deleteBlog } from "./thunk";
+import { deleteBlog, getBlogLists } from "./thunk";
 const queryString = require("query-string");
 
 const ActionsButton = ({ selectedBlogs }) => {
   const dispatch = useAppDispatch()
-  const deleteBLogSuccess = useAppSelector(selectDeleteBlogSuccess)
-  const handleOnDeleteCLick = () => {
-    const tempId = {id : null}
-    tempId.id =  selectedBlogs
-    const idParams = queryString.stringify(tempId);
-    dispatch(deleteBlog(idParams))
+  const deleteBlogSuccess = useAppSelector(selectDeleteBlogSuccess)
+
+  const handleOnDeleteCLick = () => {       //  Handle single and multiple blogs delete actions
+    if (selectedBlogs.length > 1) {         //  Check for multiple deletion of blogs and make params for id's
+      const tempId = { id: null }
+      tempId.id = selectedBlogs
+      const idParams = queryString.stringify(tempId);
+      dispatch(deleteBlog(idParams))
+    } else if (selectedBlogs.length === 1) {    //Single blog will deleted directly
+      dispatch(deleteBlog(selectedBlogs[0]))
+    }
   };
+
+  useEffect(() => {     //WATCHER FOR DELETE BLOG SUCCESS IF TRUE THEN DISPATCH GET BLOGS AGAIN 
+    if(deleteBlogSuccess) dispatch(getBlogLists())
+  }, [deleteBlogSuccess])
+
   const handleOnEditCLick = () => {
-    console.log("handleOnEditCLick");
+    // console.log("handleOnEditCLick");
   };
   return (
     <>

@@ -56,7 +56,7 @@ const BlogProvider = ({ children }) => {
             try {
                 // console.log("sub categories");
                 const { data } = await getSubCategories(id);
-                console.log(data);
+                // console.log(data);
                 dispatch({ type: SET_ALL_SUB_CATEGORIES, payload: data });
                 // SET_ALL_SUB_CATEGORIES
             } catch (error) {
@@ -65,7 +65,7 @@ const BlogProvider = ({ children }) => {
         },
         updateBlogDetails: (data) => {
             // admin/superman/v1/blogs-category/list?page=1&limit=100
-            console.log(data);
+            // console.log(data);
             return dispatch({ type: UPDATE_BLOG_DETAILS, payload: { ...data } });
         },
 

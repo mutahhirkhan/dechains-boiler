@@ -11,7 +11,7 @@ const PreviewContainer = ({ setIsCreateVisible }) => {
 
     const { blogState, blogActions } = useContext(BlogContext); //ye as a connect function kaam krrha he
     // cont [tempBanner, setTempBanner] = useState(null)
-    console.log(blogState);
+    // console.log(blogState);
     useEffect(() => {
         // console.log(blogState.blogBanner);
         Object.keys(blogState.blogBanner).length && showTempImgFromBaseURL(blogState.blogBanner, setTempBanner);
