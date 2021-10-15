@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useContext } from "react";
 import { Collapse, Select, Input, Form } from "antd";
 import { BlogContext } from "../../BlogContext/BlogContext";
-import { filterOption } from "../../utils/helper";
-const CategoryAccordian = () => {
+import { filterOption, isObjectFilled } from "../../utils/helper";
+const CategoryAccordian = ({selectedBlog}) => {
     const { blogState, blogActions } = useContext(BlogContext); //ye as a connect function kaam krrha he
     const [addCategory, setCategory] = useState(false);
     const [categoryName, setCategoryName] = useState("");
@@ -15,8 +15,6 @@ const CategoryAccordian = () => {
         // console.log(key);
     };
     function handleChange(value, sub) {
-        // console.log("sub- > ", sub);
-        // console.log(value);
         blogActions.updateBlogDetails(value);
         if (!sub && value.blogsCategoryId) {
             categoryAccordianForm.resetFields(["blogsSubCategoryId"]);
@@ -45,7 +43,7 @@ const CategoryAccordian = () => {
                             getPopupContainer={(trigger) => trigger.parentNode}
                             name="blogsCategoryId"
                             allowClear={true}
-                            defaultValue={blogState.blogsCategoryId ? blogState.blogsCategoryId : null}
+                            defaultValue={isObjectFilled(selectedBlog?.blogsCategory) ? selectedBlog?.blogsCategory?.id :  blogState.blogsCategoryId ? blogState.blogsCategoryId : null}
                             className="defaultCategory"
                             placeholder="Select"
                             allowClear={true}
@@ -77,7 +75,7 @@ const CategoryAccordian = () => {
                             name="blogsSubCategoryId"
                             className="defaultSubCategory"
                             placeholder="Select"
-                            defaultValue={blogState.blogsSubCategoryId ? blogState.blogsSubCategoryId : null}
+                            defaultValue={isObjectFilled(selectedBlog?.blogsSubCategory) ? selectedBlog?.blogsSubCategory?.id :  blogState.blogsSubCategoryId ? blogState.blogsSubCategoryId : null}
                             filterOption={(input, option) => filterOption(input, option)}
                             onChange={(value) => {
                                 handleChange({ blogsSubCategoryId: value }, true);

@@ -3,8 +3,14 @@ import CreateBlog from "../createBlog/CreateBlog";
 import PreviewBlog from "../previewBlog/PreviewBlog";
 import BlogProvider from "../../BlogContext/BlogContext";
 
-const NewBlog = () => {
+const NewBlog = (props) => {
     const [isCreateVisible, setIsCreateVisible] = useState(true);
+
+    // useEffect(() => {
+    //     if(props?.location?.state) {
+
+    //     }
+    // },[])
 
     return (
         <>

@@ -88,4 +88,9 @@ export const showTempImgFromBaseURL = (file, Fn) => {
 // export const filterOption = (input, option) => option.children?.[1]?.toLowerCase().indexOf(input.toLowerCase()) >= 0
 export const filterOption = (input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0;
 
-export const isObjectFilled = (obj) => Object.keys(obj).length >= 1 ? true : false
+export const isObjectFilled = (obj) => {
+    if (obj)
+        if (Object.keys(obj).length >= 1) return true;
+        else return false;
+    else return false;
+};

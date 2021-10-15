@@ -6,8 +6,9 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 // import "./_CreateBlogDetailsForm.scss";
 import CreateBlogGalleryUpload from "../CreateBlogGalleryUpload/CreateBlogGalleryUpload";
 import { BlogContext } from "../../BlogContext/BlogContext";
+import { withRouter } from "react-router";
 
-const CreateBlogDetailsForm = ({ setIsCreateVisible }) => {
+const CreateBlogDetailsForm = ({setIsCreateVisible, location}) => {
     const [title, setTitle] = useState("");
     const { blogState, blogActions } = useContext(BlogContext); //ye as a connect function kaam krrha he
     const [subTitle, setSubTitle] = useState("");
@@ -103,10 +104,13 @@ const CreateBlogDetailsForm = ({ setIsCreateVisible }) => {
                     <Button onClick={() => setIsCreateVisible(false)} type="primary">
                         Preview
                     </Button>
+                    {false && <Button loading={blogState.postAuthorLoading} type="primary" onClick={() => blogActions.uploadBannerAndImages()}>
+                        Post
+                    </Button>}
                 </Form.Item>
             </Form>
         </div>
     );
 };
 
-export default CreateBlogDetailsForm;
+export default withRouter(CreateBlogDetailsForm);

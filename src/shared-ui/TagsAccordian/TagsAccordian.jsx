@@ -2,18 +2,37 @@ import React, { useState, useEffect, useContext } from "react";
 import { Collapse, Select } from "antd";
 import { BlogContext } from "./../../BlogContext/BlogContext";
 
-const TagsAccordian = () => {
+const TagsAccordian = ({ selectedBlog }) => {
     const { blogState, blogActions } = useContext(BlogContext); //ye as a connect function kaam krrha he
     const [tags, setTags] = useState(null);
+    const [editTags, setEditTags] = useState([]);
     const { Panel } = Collapse;
     const { Options } = Select;
+
+    useEffect(() => {
+        let tempTags = [];
+        if (selectedBlog?.blogsTag?.length > 0) {
+            selectedBlog.blogsTag.forEach((tag, index) => tempTags.push(tag.title));
+        }
+        blogActions.updateBlogDetails({ blogsTag: tempTags });
+    }, [selectedBlog?.blogsTag]);
 
     const callback = (key) => {
         // console.log(key);
     };
     const handleChange = (value) => {
+        console.log(value);
         setTags(value.tags);
         blogActions.updateBlogDetails(value);
+    };
+    const forEditTags = () => {
+        let tempTags = [];
+        if (selectedBlog?.blogsTag?.length > 0) {
+            selectedBlog.blogsTag.forEach((tag, index) => tempTags.push(tag.title));
+        }
+        return tempTags;
+
+        // setEditTags([...tempTags])
     };
 
     return (
@@ -36,8 +55,16 @@ const TagsAccordian = () => {
                 </div>
                 <div className="tags">
                     {blogState.blogsTag.length
-                        ? blogState.blogsTag?.map((tag) => <span className="tag">{tag}</span>)
-                        : tags?.map((tag) => <span className="tag">{tag}</span>)}
+                        ? blogState.blogsTag?.map((tag, index) => (
+                              <span key={index} className="tag">
+                                  {tag}
+                              </span>
+                          ))
+                        : tags?.map((tag, index) => (
+                              <span key={index} className="tag">
+                                  {tag}
+                              </span>
+                          ))}
                 </div>
             </Panel>
         </Collapse>
