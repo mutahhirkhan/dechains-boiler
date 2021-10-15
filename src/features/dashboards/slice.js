@@ -28,10 +28,10 @@ export const slice = createSlice({
                 state.dashboardCount = action.payload;
             })
             .addCase(getDashboardCountAdmin.rejected, (state, action) => {
-                console.log("REJECTED", action);
+                // console.log("REJECTED", action);
                 state.status = "failed";
                 if (action.error.message === "") {
-                    console.log("Network failed");
+                    // console.log("Network failed");
                     state.networkError = false;
                 }
                 if (action.error.message === "Unauthorized") {

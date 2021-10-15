@@ -16,10 +16,7 @@ function Jobseeker() {
     const showLargeDrawer = () => {
         setVisible(true);
     };
-    
-    useEffect(() => {
-        console.log("visible", visible);
-    }, [visible]);
+
     const onClose = () => {
         setVisible(false);
     };
@@ -44,7 +41,7 @@ function Jobseeker() {
                 <Tabs
                     defaultActiveKey="1"
                     onChange={() => {
-                        console.log("ON CHANGED ");
+                        // console.log("ON CHANGED ");
                     }}
                 >
                     <TabPane tab="Info" key="1">

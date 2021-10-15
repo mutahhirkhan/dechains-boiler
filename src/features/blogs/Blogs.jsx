@@ -5,11 +5,6 @@ import BlogHeader from './BlogHeader';
 
 const Blogs = () => {
   const [selectedBlogs, setSelectedBlogs] = useState(null);
-
-  useEffect(() => {
-    console.log("selectedBlogs", selectedBlogs)
-  }, [selectedBlogs])
-
   return (
     <div>
       <BlogHeader selectedBlogs={selectedBlogs} />

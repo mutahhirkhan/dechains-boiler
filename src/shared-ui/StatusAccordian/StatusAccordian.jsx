@@ -68,7 +68,7 @@ const StatusAccordian = () => {
     }, [blogState]);
 
     const handleAddAuthor =  () => {
-      console.log("handleAddAuthor")
+    //   console.log("handleAddAuthor")
     }
 
     return (

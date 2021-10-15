@@ -73,7 +73,7 @@ const BlogProvider = ({ children }) => {
             try {
                 // console.log("sub categories");
                 const { data } = await getSubCategories(id);
-                console.log(data);
+                // console.log(data);
                 dispatch({ type: SET_ALL_SUB_CATEGORIES, payload: data });
                 // SET_ALL_SUB_CATEGORIES
             } catch (error) {

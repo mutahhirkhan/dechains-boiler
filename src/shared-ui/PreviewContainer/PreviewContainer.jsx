@@ -12,7 +12,7 @@ const PreviewContainer = ({ setIsCreateVisible }) => {
     console.log(blogActions);
 
     // cont [tempBanner, setTempBanner] = useState(null)
-    console.log(blogState);
+    // console.log(blogState);
     useEffect(() => {
         Object.keys(blogState.bannerPhoto).length && showTempImgFromBaseURL(blogState.bannerPhoto, setTempBanner);
     }, []);
