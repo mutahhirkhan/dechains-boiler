@@ -9,6 +9,16 @@
 
 }
 
+.visibility {
+    z-index: 200 !important;
+}
+.publish {
+    z-index: 180 !important;
+}
+.author {
+    z-index: 160 !important;
+}
+
 .author-image-upload {
     position: fixed;
     bottom: 37%;

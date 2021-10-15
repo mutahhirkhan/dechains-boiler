@@ -12,24 +12,16 @@ const ActionsButton = ({ selectedBlogs }) => {
     const deleteBlogSuccess = useAppSelector(selectDeleteBlogSuccess);
     const history = useHistory();
 
-    const handleOnDeleteCLick = () => {
-        //  Handle single and multiple blogs delete actions
-        if (selectedBlogs.length > 1) {
-            //  Check for multiple deletion of blogs and make params for id's
-            const tempId = { id: null };
-            tempId.id = selectedBlogs;
-            const idParams = queryString.stringify(tempId);
-            dispatch(deleteBlog(idParams));
-        } else if (selectedBlogs.length === 1) {
-            //Single blog will deleted directly
-            dispatch(deleteBlog(selectedBlogs[0]));
-        }
-    };
+  const handleOnDeleteCLick = () => {       //  Handle single and multiple blogs delete actions
+    const body = {
+      id: selectedBlogs
+    }
+    dispatch(deleteBlog(body))
+  };
 
-    useEffect(() => {
-        //WATCHER FOR DELETE BLOG SUCCESS IF TRUE THEN DISPATCH GET BLOGS AGAIN
-        if (deleteBlogSuccess) dispatch(getBlogLists());
-    }, [deleteBlogSuccess]);
+  useEffect(() => {     //WATCHER FOR DELETE BLOG SUCCESS IF TRUE THEN DISPATCH GET BLOGS AGAIN 
+    if (deleteBlogSuccess) dispatch(getBlogLists())
+  }, [deleteBlogSuccess])
 
     const handleOnEditCLick = () => {
         console.log("edit button clicked");

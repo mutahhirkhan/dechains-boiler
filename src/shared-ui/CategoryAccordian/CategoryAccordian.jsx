@@ -32,11 +32,12 @@ const CategoryAccordian = ({selectedBlog}) => {
                 <br />
                 <Form form={categoryAccordianForm}>
                     <Form.Item
+                        style={{ zIndex: 200 }}
                         // rules={Rules.requiredRule}
                         label="Existing Category"
                         name="blogsCategoryId"
                         className="defaultCategory"
-                        // valuePropName="data"
+                    // valuePropName="data"
                     >
                         <Select
                             showSearch
@@ -67,7 +68,7 @@ const CategoryAccordian = ({selectedBlog}) => {
                         label="Sub Category"
                         name="blogsSubCategoryId"
                         className="defaultSubCategory"
-                        // rules={Rules.requiredRule}
+                    // rules={Rules.requiredRule}
                     >
                         <Select
                             showSearch
