@@ -15,6 +15,12 @@ const CreateBlogBanner = () => {
     useEffect(() => {
         Object.keys(blogState.bannerPhoto).length && showTempImgFromBaseURL(blogState.bannerPhoto, setTempBanner);
     }, []);
+    
+    useEffect(() => {
+        if(typeof blogState.bannerPhoto === "string")
+            setTempBanner(blogState.bannerPhoto)
+    },[blogState.bannerPhoto])
+
     const blogBannerBeforeUpload = (file, setTempBanner) => {
         if (file) {
             //send this file to redux

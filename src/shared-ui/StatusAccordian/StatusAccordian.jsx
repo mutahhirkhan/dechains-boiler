@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from "react";
 import { Collapse, Select, Input, Button, Upload } from "antd";
 import { showSuccessMessage } from "./.././../utils/message";
 import defaultAuthorImg from "./../../assets/img/user.png";
-import { isObjectFilled } from "../../utils/helper";
 
 import Modal from "../Modal/Modal";
 import { showTempImgFromBaseURL, filterOption } from "../../utils/helper";
@@ -24,9 +23,7 @@ function CopiedIcon({ link }) {
     );
 }
 
-const StatusAccordian = ({ selectedBlog }) => {
-    // console.log("props from left");
-    // console.log(selectedBlog);
+const StatusAccordian = () => {
     const { blogState, blogActions } = useContext(BlogContext); //ye as a connect function kaam krrha he
     const [addAuthorModalShow, setAddAuthorModalShow] = useState(false);
     const [authorImage, setAuthorImage] = useState(null);
@@ -70,38 +67,27 @@ const StatusAccordian = ({ selectedBlog }) => {
         console.log(blogState);
     }, [blogState]);
 
-    const selectStatus = () => {
-        if (selectedBlog?.isPublic) return "Public";
-        else if (selectedBlog?.isPublic === false) return "Private";
-        else if (blogState?.isPublic) return "Public";
-        else if (blogState?.isPublic === false)return "Private";
-        else  return null
-    };
+    const handleAddAuthor =  () => {
+    //   console.log("handleAddAuthor")
+    }
 
     return (
         <Collapse defaultActiveKey={["3"]} expandIconPosition={"right"}>
             <Panel className="status" header="Status & Visibility" key="1">
                 <label>Visibility</label>
                 <br />
+
                 <Select
                     showSearch
                     getPopupContainer={(trigger) => trigger.parentNode}
                     className="visibility"
                     name="isPublic"
-                    defaultValue={selectStatus()}
+                    value={blogState.isPublic ? blogState.isPublic : null}
                     placeholder="select publication type"
                     filterOption={(input, option) => filterOption(input, option)}
-                    onChange={(value) => {
-                        if (value == "Public") {
-                            console.log(value);
-                            handleChange({ isPublic: true });
-                        } else if (value == "Private") {
-                            console.log(value);
-                            handleChange({ isPublic: false });
-                        }
-                    }}>
-                    <Option value={"Public"}>Public</Option>
-                    <Option value={"Private"}>Private</Option>
+                    onChange={(value) => handleChange({ isPublic: value })}>
+                    <Option value={true}>Public</Option>
+                    <Option value={false}>Private</Option>
                 </Select>
                 <br />
                 <br />
@@ -112,7 +98,7 @@ const StatusAccordian = ({ selectedBlog }) => {
                     getPopupContainer={(trigger) => trigger.parentNode}
                     className="publish"
                     name="status"
-                    value={selectedBlog?.status ? selectedBlog?.status : blogState.status ? blogState.status : null}
+                    value={blogState.status ? blogState.status : null}
                     placeholder={"Select publish type"}
                     filterOption={(input, option) => filterOption(input, option)}
                     onChange={(value) => handleChange({ status: value })}>
@@ -152,7 +138,7 @@ const StatusAccordian = ({ selectedBlog }) => {
                     name="blogAuthorId"
                     placeholder={"Select author"}
                     filterOption={(input, option) => filterOption(input, option)}
-                    defaultValue={isObjectFilled(selectedBlog?.blogAuthor) ? selectedBlog?.blogAuthor?.id :  blogState.blogAuthorId ? blogState.blogAuthorId : null}
+                    defaultValue={blogState.blogAuthorId ? blogState.blogAuthorId : null}
                     onChange={(value) => handleChange({ blogAuthorId: value })}>
                     {blogState?.authors?.map((author, index) => (
                         <Option key={index} value={author.id}>
@@ -170,7 +156,12 @@ const StatusAccordian = ({ selectedBlog }) => {
                 onHide={() => setAddAuthorModalShow(false)}>
                 {/* {console.log(blogState.authorImage)}
                 {console.log(blogState.authorImage ? true : false)} */}
-                <img className="author-img" src={authorImage ?? defaultAuthorImg} width={"100px"} height={"100px"} />
+                <img
+                    className="author-img"
+                    src={authorImage ?? defaultAuthorImg}
+                    width={"100px"}
+                    height={"100px"}
+                />
                 {/* <img
                     className="author-img"
                     src={
@@ -208,7 +199,7 @@ const StatusAccordian = ({ selectedBlog }) => {
                             setNewAuthorName(value);
                         }}
                         placeholder="Author name"
-                        // addonAfter={<CopiedIcon link={link} />}
+                    // addonAfter={<CopiedIcon link={link} />}
                     />
                     <label htmlFor="newAuthorBio">About me</label>
                     <br />

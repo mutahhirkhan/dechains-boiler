@@ -8,9 +8,11 @@ import CreateBlogGalleryUpload from "../CreateBlogGalleryUpload/CreateBlogGaller
 import { BlogContext } from "../../BlogContext/BlogContext";
 import { withRouter } from "react-router";
 
-const CreateBlogDetailsForm = ({setIsCreateVisible, location}) => {
+const CreateBlogDetailsForm = ({ setIsCreateVisible, location }) => {
     const [title, setTitle] = useState("");
     const { blogState, blogActions } = useContext(BlogContext); //ye as a connect function kaam krrha he
+    console.log("blogState.title");
+    console.log(blogState.title);
     const [subTitle, setSubTitle] = useState("");
     const [errorFlag, setErrorFlag] = useState(false);
 
@@ -45,28 +47,32 @@ const CreateBlogDetailsForm = ({setIsCreateVisible, location}) => {
                         name="title"
                         className="create-blog-title"
                         type="text"
-                        // value={title}
-                        defaultValue={blogState.title ? blogState.title : title}
+                        value={blogState.title ? blogState.title : title}
+                        // defaultValue={blogState.title ? blogState.title : title}
                         onChange={({ target: { value } }) => {
                             handleChange({ title: value });
                             setTitle(value);
                         }}
                         // placeholder="Blog "
                     />
+                    {blogState.title && true}
+                    {/* {console.log("blogState.title")} */}
+                    {/* {console.log(blogState.title)} */}
                 </Form.Item>
                 <Form.Item name="content" label="Sub Title">
                     <Input
                         className="create-blog-sub-title"
                         type="text"
                         name="content"
-                        // value={subTitle}
-                        defaultValue={blogState.content ? blogState.content : subTitle}
+                        value={blogState.content ? blogState.content : subTitle}
+                        // defaultValue={blogState.content ? blogState.content : subTitle}
                         onChange={({ target: { value } }) => {
                             handleChange({ content: value });
                             setSubTitle(value);
                         }}
                         // placeholder="Blog "
                     />
+                    {blogState.content && true}
                 </Form.Item>
                 <Form.Item
                     // rules={Rules.requiredRule}
@@ -96,17 +102,21 @@ const CreateBlogDetailsForm = ({setIsCreateVisible, location}) => {
                             // console.log(event + "\n", editor + "\n", data);
                         }}
                     />
+                    {blogState.description && true}
                 </Form.Item>
                 <Form.Item name="photo" label="Images">
                     <CreateBlogGalleryUpload />
                 </Form.Item>
                 <Form.Item name="preview">
-                    <Button onClick={() => setIsCreateVisible(false)} type="primary">
-                        Preview
-                    </Button>
-                    {false && <Button loading={blogState.postAuthorLoading} type="primary" onClick={() => blogActions.uploadBannerAndImages()}>
-                        Post
-                    </Button>}
+                    {location.state ? (
+                        <Button loading={blogState.postAuthorLoading} type="primary" onClick={() => blogActions.UpdateBlog(location.state)}>
+                            Update
+                        </Button>
+                    ) : (
+                        <Button onClick={() => setIsCreateVisible(false)} type="primary">
+                            Preview
+                        </Button>
+                    )}
                 </Form.Item>
             </Form>
         </div>
