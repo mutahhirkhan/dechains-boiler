@@ -45,6 +45,7 @@ const CategoryAccordian = () => {
                             getPopupContainer={(trigger) => trigger.parentNode}
                             name="blogsCategoryId"
                             allowClear={true}
+                            defaultValue={blogState.blogsCategoryId ? blogState.blogsCategoryId : null}
                             className="defaultCategory"
                             placeholder="Select"
                             allowClear={true}
@@ -76,6 +77,7 @@ const CategoryAccordian = () => {
                             name="blogsSubCategoryId"
                             className="defaultSubCategory"
                             placeholder="Select"
+                            defaultValue={blogState.blogsSubCategoryId ? blogState.blogsSubCategoryId : null}
                             filterOption={(input, option) => filterOption(input, option)}
                             onChange={(value) => {
                                 handleChange({ blogsSubCategoryId: value }, true);

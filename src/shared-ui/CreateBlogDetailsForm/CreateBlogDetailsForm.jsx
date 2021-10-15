@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Input, Button } from "antd";
 import { Form } from "antd";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
@@ -44,7 +44,8 @@ const CreateBlogDetailsForm = ({ setIsCreateVisible }) => {
                         name="title"
                         className="create-blog-title"
                         type="text"
-                        value={title}
+                        // value={title}
+                        defaultValue={blogState.title ? blogState.title : title}
                         onChange={({ target: { value } }) => {
                             handleChange({ title: value });
                             setTitle(value);
@@ -57,7 +58,8 @@ const CreateBlogDetailsForm = ({ setIsCreateVisible }) => {
                         className="create-blog-sub-title"
                         type="text"
                         name="content"
-                        value={subTitle}
+                        // value={subTitle}
+                        defaultValue={blogState.content ? blogState.content : subTitle}
                         onChange={({ target: { value } }) => {
                             handleChange({ content: value });
                             setSubTitle(value);
@@ -78,8 +80,10 @@ const CreateBlogDetailsForm = ({ setIsCreateVisible }) => {
                         return data;
                     }}>
                     <CKEditor
+                        activeClass="editor"
                         id="ck-content"
                         name="blogDescription"
+                        data={blogState.description ? blogState.description : "<p>Remove this and add your description"}
                         editor={ClassicEditor}
                         config={{
                             toolbar: ["bold", "italic", "numberedList", "bulletedList"],

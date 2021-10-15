@@ -6,7 +6,7 @@ const TagsAccordian = () => {
     const { blogState, blogActions } = useContext(BlogContext); //ye as a connect function kaam krrha he
     const [tags, setTags] = useState(null);
     const { Panel } = Collapse;
-
+    const { Options } = Select;
 
     const callback = (key) => {
         // console.log(key);
@@ -23,20 +23,21 @@ const TagsAccordian = () => {
                     <label htmlFor="education">Add tags +</label>
                     <br />
                     <Select
-                        //getPopupContainer={(trigger) => trigger.parentNode}
-                        name="education"
+                        getPopupContainer={(trigger) => trigger.parentNode}
+                        name="blogsTag"
                         open={false}
                         maxTagCount={"responsive"}
                         mode="tags"
-                        // listHeight={128}
+                        value={blogState.blogsTag ? blogState.blogsTag : null}
+                        listHeight={128}
                         className="education"
-                        placeholder="Eduaction"
+                        placeholder="Add the tags that rank your blog"
                         onChange={(value) => handleChange({ blogsTag: value })}></Select>
                 </div>
                 <div className="tags">
-                    {tags?.map((tag) => (
-                        <span className="tag">{tag}</span>
-                    ))}
+                    {blogState.blogsTag.length
+                        ? blogState.blogsTag?.map((tag) => <span className="tag">{tag}</span>)
+                        : tags?.map((tag) => <span className="tag">{tag}</span>)}
                 </div>
             </Panel>
         </Collapse>

@@ -3,7 +3,7 @@ import { BlogContext } from "../../BlogContext/BlogContext";
 import ImageCarousel from "../ImageCarousel/ImageCarousel";
 import AuthorBio from "../AuthorBio/AuthorBio";
 import { Button } from "antd";
-import { showTempImgFromBaseURL } from "../../utils/helper";
+import { showTempImgFromBaseURL, isObjectFilled } from "../../utils/helper";
 import { createMarkup } from "../../utils/powerFunctions";
 
 const PreviewContainer = ({ setIsCreateVisible }) => {
@@ -14,7 +14,7 @@ const PreviewContainer = ({ setIsCreateVisible }) => {
     // cont [tempBanner, setTempBanner] = useState(null)
     // console.log(blogState);
     useEffect(() => {
-        Object.keys(blogState.bannerPhoto).length && showTempImgFromBaseURL(blogState.bannerPhoto, setTempBanner);
+        isObjectFilled(blogState.bannerPhoto) && showTempImgFromBaseURL(blogState.bannerPhoto, setTempBanner);
     }, []);
     return (
         <div className="container">

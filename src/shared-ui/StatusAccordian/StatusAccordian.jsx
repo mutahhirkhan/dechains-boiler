@@ -82,6 +82,7 @@ const StatusAccordian = () => {
                     getPopupContainer={(trigger) => trigger.parentNode}
                     className="visibility"
                     name="isPublic"
+                    value={blogState.isPublic ? blogState.isPublic : null}
                     placeholder="select publication type"
                     filterOption={(input, option) => filterOption(input, option)}
                     onChange={(value) => handleChange({ isPublic: value })}>
@@ -97,6 +98,7 @@ const StatusAccordian = () => {
                     getPopupContainer={(trigger) => trigger.parentNode}
                     className="publish"
                     name="status"
+                    value={blogState.status ? blogState.status : null}
                     placeholder={"Select publish type"}
                     filterOption={(input, option) => filterOption(input, option)}
                     onChange={(value) => handleChange({ status: value })}>
@@ -134,8 +136,9 @@ const StatusAccordian = () => {
                     getPopupContainer={(trigger) => trigger.parentNode}
                     className="author"
                     name="blogAuthorId"
+                    placeholder={"Select author"}
                     filterOption={(input, option) => filterOption(input, option)}
-                    defaultValue="Jobsmideast"
+                    defaultValue={blogState.blogAuthorId ? blogState.blogAuthorId : null}
                     onChange={(value) => handleChange({ blogAuthorId: value })}>
                     {blogState?.authors?.map((author, index) => (
                         <Option key={index} value={author.id}>
@@ -224,3 +227,12 @@ const StatusAccordian = () => {
 };
 
 export default StatusAccordian;
+/**
+ * 
+ *
+    if : value ? novalue 
+    : value ? novalue 
+    : value ? novalue
+    : value ? novalue
+
+*/
