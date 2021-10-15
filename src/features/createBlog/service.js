@@ -9,9 +9,8 @@ const SERVICE_URLS = {
     getAuthors: (payload) => `/admin/superman/blog-author/?page=1&limit=500&search=${payload}`,
     getAuthorById: (id) => `admin/superman/blog-author/${id}`,
     uploadMultiPics: () => `/admin/superman/blog-file-handle/multifile-upload`,
-    postBlog: () => `/admin/superman/blog`
+    postBlog: () => `/admin/superman/blog`,
 };
-
 
 export const getCategories = (payload = "") => get(SERVICE_URLS.getCategories(payload));
 export const getSubCategories = (id) => get(SERVICE_URLS.getSubCategories(id));

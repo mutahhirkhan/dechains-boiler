@@ -67,6 +67,10 @@ const StatusAccordian = () => {
         console.log(blogState);
     }, [blogState]);
 
+    const handleAddAuthor =  () => {
+      console.log("handleAddAuthor")
+    }
+
     return (
         <Collapse defaultActiveKey={["3"]} expandIconPosition={"right"}>
             <Panel className="status" header="Status & Visibility" key="1">
@@ -149,7 +153,12 @@ const StatusAccordian = () => {
                 onHide={() => setAddAuthorModalShow(false)}>
                 {/* {console.log(blogState.authorImage)}
                 {console.log(blogState.authorImage ? true : false)} */}
-                <img className="author-img" src={authorImage ?? defaultAuthorImg} width={"100px"} height={"100px"} />
+                <img
+                    className="author-img"
+                    src={authorImage ?? defaultAuthorImg}
+                    width={"100px"}
+                    height={"100px"}
+                />
                 {/* <img
                     className="author-img"
                     src={
@@ -187,7 +196,7 @@ const StatusAccordian = () => {
                             setNewAuthorName(value);
                         }}
                         placeholder="Author name"
-                        // addonAfter={<CopiedIcon link={link} />}
+                    // addonAfter={<CopiedIcon link={link} />}
                     />
                     <label htmlFor="newAuthorBio">About me</label>
                     <br />

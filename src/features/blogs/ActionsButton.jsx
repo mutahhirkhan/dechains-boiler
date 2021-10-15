@@ -1,10 +1,19 @@
 import React from "react";
 import { EditButton } from "../../shared-ui/EditButton/EditButton";
 import { BsTrash } from "react-icons/bs";
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { selectDeleteBlogSuccess } from "./slice";
+import { deleteBlog } from "./thunk";
+const queryString = require("query-string");
 
 const ActionsButton = ({ selectedBlogs }) => {
+  const dispatch = useAppDispatch()
+  const deleteBLogSuccess = useAppSelector(selectDeleteBlogSuccess)
   const handleOnDeleteCLick = () => {
-    console.log("handleOnDeleteCLick");
+    const tempId = {id : null}
+    tempId.id =  selectedBlogs
+    const idParams = queryString.stringify(tempId);
+    dispatch(deleteBlog(idParams))
   };
   const handleOnEditCLick = () => {
     console.log("handleOnEditCLick");
