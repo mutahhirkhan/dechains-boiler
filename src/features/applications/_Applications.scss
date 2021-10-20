@@ -1,0 +1,52 @@
+@import "./../../assets/scss/variable";
+
+.application-table-main {
+    box-shadow: 0 0 3px #c7c7c7;
+    .ant-table-thead > tr > th {
+        font-family: $font-subtitle;
+        color: $primary;
+        background: #fafbfc 0 0 no-repeat padding-box;
+    }
+    .ant-table-thead > tr > th:nth-child(2) {
+        text-align: center;
+    }
+    .user-name-cell {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .username {
+            display: flex;
+            align-items: center;
+            .user-image {
+                height: 40px;
+                width: 40px;
+                border-radius: 50%;
+                object-fit: cover;
+                margin: 0 0 0 10px;
+            }
+            p {
+                white-space: nowrap;
+                overflow: hidden;
+                width: 155px;
+                text-overflow: ellipsis;
+            }
+        }
+    }
+}
+
+// HEADER FORM
+
+.form {
+    .email-input {
+        justify-content: unset;
+    }
+    .apply-btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .ant-form-item {
+            margin: 0px;
+        }
+    }
+}
