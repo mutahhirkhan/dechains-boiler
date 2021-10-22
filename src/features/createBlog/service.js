@@ -1,4 +1,4 @@
-import { post, get } from "../../utils/httpService";
+import { post, get, put } from "../../utils/httpService";
 
 const SERVICE_URLS = {
     getCategories: (payload) => `/admin/superman/v1/blogs-category/list?page=1&limit=500&search=${payload}`,
@@ -10,7 +10,10 @@ const SERVICE_URLS = {
     getAuthorById: (id) => `admin/superman/blog-author/${id}`,
     uploadMultiPics: () => `/admin/superman/blog-file-handle/multifile-upload`,
     postBlog: () => `/admin/superman/blog`,
+    updateBlog: (id) => `/admin/superman/blog/update/${id}`
 };
+
+///admin/superman/blog/Update/{id}
 
 export const getCategories = (payload = "") => get(SERVICE_URLS.getCategories(payload));
 export const getSubCategories = (id) => get(SERVICE_URLS.getSubCategories(id));
@@ -21,3 +24,4 @@ export const getAuthors = (payload = "") => get(SERVICE_URLS.getAuthors(payload)
 export const getAuthorById = (id) => get(SERVICE_URLS.getAuthorById(id));
 export const uploadMultiPics = (body) => post(SERVICE_URLS.uploadMultiPics(), body);
 export const postBlog = (body) => post(SERVICE_URLS.postBlog(), body);
+export const updateBlog = (id) => put(SERVICE_URLS.updateBlog(id));

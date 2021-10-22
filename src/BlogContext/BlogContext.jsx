@@ -11,6 +11,7 @@ import {
     SET_ALL_SUB_CATEGORIES,
     SET_ALL_AUTHORS,
     BLOG_POST_LOADING,
+    POSTED_BLOG_EDIT,
 } from "./BlogConstants";
 import axios from "axios";
 import {
@@ -23,6 +24,7 @@ import {
     getAuthorById,
     uploadMultiPics,
     postBlog,
+    updateBlog,
 } from "../features/createBlog/service";
 import { isObjectFilled } from "../utils/helper";
 import { useHistory } from 'react-router';
@@ -83,7 +85,6 @@ const BlogProvider = ({ children }) => {
         getAuthors: async (payload) => {
             try {
                 const { data } = await getAuthors(payload);
-                console.log(data);
                 dispatch({ type: SET_ALL_AUTHORS, payload: data });
             } catch (error) {
                 console.log(error);
@@ -171,6 +172,54 @@ const BlogProvider = ({ children }) => {
                 console.log(error);
             }
         },
+        postedBlogEdit: (data) => {
+            console.log(data)
+            let tempTags = []
+            let tempPhotos = []
+            data.blogsTag.forEach(tag => tempTags.push(tag.title))
+            data.blogsPhoto.forEach(pt => tempPhotos.push(pt.photo))
+            const payload = {
+                isPublic: data.isPublic,
+                status: data.status,
+                blogAuthorId: data.blogAuthor?.id,
+                authorBio: data.blogAuthor?.aboutMe,
+                authorImage: data.blogAuthor?.displayPhoto,
+                blogsCategoryId: data.blogsCategory?.id,
+                blogsSubCategoryId: data.blogsSubCategory?.title,
+                blogsTag: tempTags,
+                bannerPhoto: data.bannerPhoto,
+                title: data.title,
+                content: data.content,
+                description: data.description,
+                photo: tempPhotos,
+            }
+            dispatch({type:UPDATE_BLOG_DETAILS, payload})
+        },
+        UpdateBlog: async (id) => {
+            try {
+                console.log(id)
+                // dispatch({type:BLOG_POST_LOADING, payload:{postAuthorLoading:true}})
+                // dispatch({type:BLOG_POST_LOADING, payload:{postAuthorLoading:false, postAuthorSuccess:true}})
+                const postBlogPayload = {
+                    title: blogState.title,
+                    photo: blogState.photo,
+                    BlogsTag: blogState.blogsTag,
+                    description: blogState.description,
+                    bannerPhoto: blogState.bannerPhoto,
+                    isPublic: blogState.isPublic,
+                    status: blogState.status,
+                    content: blogState.content,
+                    blogsCategoryId: blogState.blogsCategoryId,
+                    blogsSubCategoryId: blogState.blogsSubCategoryId,
+                    blogAuthorId: blogState.blogAuthorId,
+                };
+                console.log(postBlogPayload)
+                // const res = await updateBlog(id) 
+            } catch (error) {
+                dispatch({type:BLOG_POST_LOADING, payload:{postAuthorLoading:false, postAuthorSuccess:false}})
+                console.log(error);
+            }
+        }
 
         // setCustomTheme: (theme) =>
         //   dispatch({ type: CUSTOM_THEME, payload: { theme } }),
