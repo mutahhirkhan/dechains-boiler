@@ -4,15 +4,22 @@ import defaultImage from "../../assets/img/user.png";
 import moment from "moment";
 import { Upload, message, Button } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
-import { getApplicationsList } from "./service";
+import { getApplicationsList, putApplicantCVDocument, uploadFile } from "./service";
 import { jsonToQueryString } from "../../utils/helper";
+import SendEmailForm from "./SendEmailForm";
 
-const ApplicationsList = ({ isRequestedApplications, setSelectedApplications, selectedApplications }) => {
+const ApplicationsList = ({ queryParams, isRequestedApplications, applicationsList, setApplicationsList }) => {
     const [editCVModal, setEditCVModal] = useState(false);
     const [CVDocument, setCVDocument] = useState(null);
-    const [applicationsList, setApplicationsList] = useState([]);
-    const [queryParams, setqueryParams] = useState({ page: 1, limit: 10, Status: true });
+    const [statusId, setStatusId] = useState(null);
+    const [selectedApplications, setSelectedApplications] = useState([]);
 
+    const getFullName = (firstName, lastName) => {
+        if (!firstName) {
+            return " ";
+        }
+        return firstName + " " + lastName;
+    };
     const getApplications = async () => {
         try {
             const query = jsonToQueryString(queryParams);
@@ -30,7 +37,7 @@ const ApplicationsList = ({ isRequestedApplications, setSelectedApplications, se
         },
         onChange(info) {
             const { file } = info;
-            setCVDocument(file);
+            setCVDocument(info);
             console.log("INFO", info);
             if (info.file.status !== "uploading") {
                 console.log("UPLOADING", info.file, info.fileList);
@@ -42,14 +49,16 @@ const ApplicationsList = ({ isRequestedApplications, setSelectedApplications, se
         },
     };
 
-    useEffect(() => {
-        getApplications();
-    }, []);
-
     const handleEditCV = (id) => {
-        console.log("record", id);
+        // uploadFile
+        console.log("handleEditCV");
+        setStatusId(id);
         setEditCVModal(true);
     };
+
+    useEffect(() => {
+        console.log("CVDocument", CVDocument);
+    }, [CVDocument]);
 
     const checkRowSelection = (isRequestedApplications) => {
         if (isRequestedApplications) return false;
@@ -65,53 +74,26 @@ const ApplicationsList = ({ isRequestedApplications, setSelectedApplications, se
                 hideSelectAll: false,
             };
     };
-    const dummyData = [
-        {
-            id: "11",
-            applicantDetails: {
-                name: "anything",
-                displayPhoto: "https://jobsmideat-dev.s3.amazonaws.com/cb27b03d-ee80-4997-aacd-8967c9fb0949-image2.jpeg",
-            },
-            jotTitle: "TITLE",
-            location: {
-                title: "blogsCategoryTITLE",
-            },
-            CVDetails: {
-                title: "blogsSubCategory TITLE",
-            },
-            createdAt: "2021-10-14T10:13:29.603Z",
-        },
-        {
-            id: "22",
-            applicantDetails: {
-                name: "anything",
-                displayPhoto: "https://jobsmideat-dev.s3.amazonaws.com/cb27b03d-ee80-4997-aacd-8967c9fb0949-image2.jpeg",
-            },
-            jotTitle: "TITLE",
-            location: {
-                title: "blogsCategoryTITLE",
-            },
-            CVDetails: {
-                title: "blogsSubCategory TITLE",
-            },
-            createdAt: "2021-10-14T10:13:29.603Z",
-        },
-        {
-            id: "33",
-            applicantDetails: {
-                name: "anything",
-                displayPhoto: "https://jobsmideat-dev.s3.amazonaws.com/cb27b03d-ee80-4997-aacd-8967c9fb0949-image2.jpeg",
-            },
-            jotTitle: "TITLE",
-            location: {
-                title: "blogsCategoryTITLE",
-            },
-            CVDetails: {
-                title: "blogsSubCategory TITLE",
-            },
-            createdAt: "2021-10-14T10:13:29.603Z",
-        },
-    ];
+
+    const handleUploadCV = async () => {
+        try {
+            console.log("HANDLE CV UPLOAD");
+            const payload = new FormData();
+            payload.append("file", CVDocument.file.originFileObj, CVDocument.file.name);
+            const res = await uploadFile(payload);
+            const body = {
+                cvURL: res.data.url,
+            };
+            console.log("body", body);
+            console.log("ID", statusId);
+            const putSuccess = await putApplicantCVDocument({ id: statusId, body: body });
+            getApplications();
+            console.log("putSuccess", putSuccess);
+            setEditCVModal(false);
+        } catch (error) {
+            console.log("error", error);
+        }
+    };
     const columns = [
         {
             title: "Applicant name",
@@ -121,14 +103,14 @@ const ApplicationsList = ({ isRequestedApplications, setSelectedApplications, se
                 return (
                     <div className="user-name-cell">
                         <span className="username">
-                            <img className="user-image" src={data?.displayPhoto || defaultImage} />
+                            <img className="user-image" src={record?.dpURL || defaultImage} />
                             <p
                                 className="pointer"
                                 // onClick={() =>
                                 //   handleProfile(record)
                                 // }
                             >
-                                {data.name}
+                                {getFullName(record.firstName, record.lastName)}
                             </p>
                         </span>
                     </div>
@@ -136,39 +118,40 @@ const ApplicationsList = ({ isRequestedApplications, setSelectedApplications, se
             },
         },
         {
-            title: "Job-title",
-            dataIndex: "jotTitle",
-            key: "title",
-        },
-        {
             title: "Location",
             dataIndex: "location",
             key: "blogsCategory",
             render: (text, record) => (
                 <Space size="middle">
-                    <p>{text.title}</p>
-                </Space>
-            ),
-        },
-        {
-            title: "Download",
-            dataIndex: "createdAt",
-            key: "createdAt",
-            render: (text, record) => (
-                <Space size="middle">
-                    <p>{moment(text).format("DD/MM/YYYY")}</p>
-                    {/* <img src={require("../../assets/img/icons/eye.svg")} fontSize="20px" /> */}
+                    <p>{text?.title}</p>
                 </Space>
             ),
         },
         {
             title: "Application Posted At",
+            dataIndex: "createdAt",
+            key: "createdAt",
+            render: (text, record) => (
+                <Space size="middle">
+                    <p>{moment(record.updatedAt).format("DD/MM/YYYY")}</p>
+                    {/* <img src={require("../../assets/img/icons/eye.svg")} fontSize="20px" /> */}
+                </Space>
+            ),
+        },
+        {
+            title: "Download",
             dataIndex: "CVDetails",
             key: "tags",
             render: (text, record) => (
                 <Space size="middle">
-                    <p>Download</p>
-                    <p onClick={() => handleEditCV(record.id)}>Edit</p>
+                    <a href={record.cvURL} download>
+                        Download
+                    </a>
+                    {isRequestedApplications && (
+                        <p style={{ cursor: "pointer", margin: "0px" }} onClick={() => handleEditCV(record.id)}>
+                            Edit
+                        </p>
+                    )}
                 </Space>
             ),
         },
@@ -176,18 +159,25 @@ const ApplicationsList = ({ isRequestedApplications, setSelectedApplications, se
     return (
         <>
             <div className="application-table-main">
+                {selectedApplications.length > 0 && (
+                    <div className="send-email-div">
+                        <SendEmailForm selectedApplications={selectedApplications} />
+                    </div>
+                )}
                 <Table
                     rowKey="id"
                     rowSelection={checkRowSelection(isRequestedApplications)}
                     pagination={false}
                     columns={columns}
-                    dataSource={dummyData}
+                    dataSource={applicationsList}
                 ></Table>
                 <Modal
-                    title="Modal 1000px width"
+                    title="Upload CV"
                     centered
                     visible={editCVModal}
-                    onOk={() => setEditCVModal(false)}
+                    onOk={() => {
+                        handleUploadCV();
+                    }}
                     onCancel={() => setEditCVModal(false)}
                     width={500}
                 >

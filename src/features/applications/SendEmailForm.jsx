@@ -1,11 +1,40 @@
 import React from "react";
 import { Form, Button, Row, Col, Input } from "antd";
 import "query-string";
+import { forwardApplicantsViaEmails } from "./service";
+import { showSuccessMessage } from "../../utils/message";
 
-const SendEmailForm = () => {
+const SendEmailForm = ({ selectedApplications }) => {
+    const handleOnFinish = (v) => {
+        const payload = {
+            applicationIds: selectedApplications,
+            mailTo: v.email,
+        };
+        handleForwardsApplicants(payload);
+    };
+
+    const handleForwardsApplicants = async (payload) => {
+        try {
+            const res = await forwardApplicantsViaEmails(payload);
+            if (res.status) {
+                showSuccessMessage("Applicants successfully sended");
+            }
+        } catch (error) {
+            console.log("error", error);
+        }
+    };
+
     return (
         <div>
-            <Form className="form" name="basic" layout="horizontal" labelCol={{ span: 8 }} wrapperCol={{ span: 16 }} autoComplete="off">
+            <Form
+                onFinish={handleOnFinish}
+                className="form"
+                name="basic"
+                layout="horizontal"
+                labelCol={{ span: 8 }}
+                wrapperCol={{ span: 16 }}
+                autoComplete="off"
+            >
                 <Row justify="end" className="c-row">
                     <Col span={16} md={{ span: 16 }} sm={{ span: 24 }} xs={{ span: 24 }}>
                         {/* <div>Applicants</div> */}

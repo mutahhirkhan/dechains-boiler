@@ -5,14 +5,16 @@ import { jsonToQueryString } from "../../utils/helper";
 import { getApplicationsList } from "../applications/service";
 
 const ApprovApplications = () => {
-    const [selectedApplications, setSelectedApplications] = useState([]);
-    const [queryParams, setqueryParams] = useState({ page: 1, limit: 10, Status: false });
+    const [applicationsList, setApplicationsList] = useState([]);
+    const [queryParams, setqueryParams] = useState({ page: 1, limit: 10, Status: true });
     console.log(("QUERY STRING", jsonToQueryString(queryParams)));
 
     const getApplications = async () => {
         try {
             const query = jsonToQueryString(queryParams);
             const res = await getApplicationsList(query);
+            console.log("RESPONSE", res);
+            setApplicationsList(res.data);
         } catch (error) {
             console.log(error);
         }
@@ -23,16 +25,7 @@ const ApprovApplications = () => {
     }, []);
     return (
         <>
-            {selectedApplications.length > 0 && (
-                <div className="send-email-div">
-                    <SendEmailForm selectedApplications={selectedApplications} />
-                </div>
-            )}
-            <ApplicationsList
-                selectedApplications={selectedApplications}
-                setSelectedApplications={setSelectedApplications}
-                isRequestedApplications={false}
-            />
+            <ApplicationsList applicationsList={applicationsList} isRequestedApplications={false} />
         </>
     );
 };
