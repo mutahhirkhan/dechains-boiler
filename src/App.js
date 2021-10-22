@@ -1,3 +1,4 @@
+import React from "react";
 import "./assets/scss/index.scss";
 
 import Layout from "./layout/Layout";

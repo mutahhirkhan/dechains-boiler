@@ -1,0 +1,51 @@
+@import "./../../../assets/scss/variable";
+
+.content-col-main {
+    .main-heading {
+        font-size: $font-size-md;
+        font-family: $font-subtitle;
+        margin-bottom: 14px;
+    }
+    .content-heading {
+        font-size: $font-size-md;
+        font-family: $font-subtitle;
+        padding: 0px;
+    }
+
+    .content-options {
+        width: 100%;
+        display: flex;
+        border-bottom: 1px solid #dadde2;
+        &:last-child {
+            border-bottom: unset;
+        }
+        .content-options-name {
+            font-family: $font-light;
+            font-size: $font-size-sm;
+            flex-grow: 1;
+            padding-bottom: 6px;
+            padding-top: 6px;
+            width: 50%;
+        }
+        .content-options-value {
+            font-size: $font-size-sm;
+            font-family: $font-subtitle;
+            padding-bottom: 6px;
+            padding-top: 6px;
+            flex-grow: 1;
+            width: 50%;
+        }
+    }
+    .statistics {
+        border-bottom: unset;
+    }
+
+    .total-spent {
+        font-family: $font-subtitle;
+        text-align: end;
+        span {
+            font-family: $font-subtitle;
+            font-size: $font-size-sm;
+        }
+    }
+}

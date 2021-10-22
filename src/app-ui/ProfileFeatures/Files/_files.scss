@@ -1,0 +1,80 @@
+@import "./../../../assets/scss/variable";
+
+.files-main-wrapper {
+    border-bottom: 1px solid rgba($color: grey, $alpha: 0.3);
+    margin-bottom: 12px;
+    .files-details-col {
+        display: flex;
+        .files-checkbox-wrap {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .files-profile-details {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+            margin-left: 10px;
+            .files-cart-image {
+                height: 50px;
+                img {
+                    height: 50px;
+                    width: 50px;
+                    object-fit: cover;
+                    border-radius: 4px;
+                }
+            }
+            .files-cart-info {
+                margin-left: 10px;
+                .files-cart-info-name {
+                    font-family: $font-medium;
+                    font-size: $font-size-x-sm;
+                }
+                p {
+                    font-family: $font-light;
+                    font-size: $font-size-x-sm;
+                    margin: 0px;
+                }
+            }
+        }
+        .files-profile-desc {
+            p {
+                font-family: $font-light;
+                font-size: $font-size-x-sm;
+                margin-top: 6px;
+                margin-bottom: 10px;
+                margin-left: 10px;
+            }
+        }
+    }
+
+    .files-actions-col {
+        display: flex;
+        flex-direction: column;
+        align-items: end;
+        justify-content: space-between;
+        .files-actions-static {
+            margin-right: 10px;
+            margin-top: 6px;
+            .download-icon {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                img {
+                    height: 40px;
+                    width: 40px;
+                    object-fit: cover;
+                    border-radius: 4px;
+                }
+            }
+            .ticket-title {
+                font-family: $font-light;
+                font-size: $font-size-x-sm;
+            }
+            .ticket-id {
+                font-family: $font-medium;
+                font-size: $font-size-x-sm;
+            }
+        }
+    }
+}

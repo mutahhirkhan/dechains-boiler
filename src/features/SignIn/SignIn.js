@@ -32,14 +32,11 @@ const SignIn = () => {
 
   // *******  COMPONENT DID UPDATES WITH (DEPENDENCIES) *******
   useEffect(() => {
-    console.log("sign in success",signInSuccess)
     if (signInSuccess === true) {
       const token = signInResponse.token;
-      console.log("sign in token",token)
       // if (rememberMe) {
       localStorage.setItem("token", token);
       if (localStorage.getItem("token")) {
-        console.log("NAVIGATE TO HM TOKEN IS SET")
         history.push("/");
       }
       // localStorage.setItem("role", JSON.stringify(role));
@@ -51,9 +48,7 @@ const SignIn = () => {
     }
   }, [signInSuccess]);
 
-  
   useEffect(() => {
-    console.log("SIGN IN RESPONSE", signInErrorMessage, "STATUS", status);
     if (status === "failed" && signInErrorMessage === "Invalid credential")
       showErrorMessage(signInErrorMessage);
   }, [signInErrorMessage, status]);
@@ -64,9 +59,7 @@ const SignIn = () => {
       <div className="sign-in">
         <div className="intro">
           <img
-            src={
-              require("../../assets/img/logo/logo-white.76c077ca.png").default
-            }
+            src={require("../../assets/img/logo/logo-white.76c077ca.png")}
             alt="logo"
           />
         </div>
@@ -79,8 +72,7 @@ const SignIn = () => {
           wrapperCol={{ span: 16 }}
           initialValues={{ remember: true }}
           onFinish={(e) => signInHandler(e)}
-          autoComplete="off"
-        >
+          autoComplete="off">
           <Row className="c-row">
             <Col className="s-col" lg={14} md={16} sm={24} xs={24}>
               <Form.Item
@@ -89,8 +81,7 @@ const SignIn = () => {
                 name="email"
                 rules={[
                   { required: true, message: "Please input your username!" },
-                ]}
-              >
+                ]}>
                 <Input />
               </Form.Item>
             </Col>
@@ -101,8 +92,7 @@ const SignIn = () => {
                 name="password"
                 rules={[
                   { required: true, message: "Please input your password!" },
-                ]}
-              >
+                ]}>
                 <Input.Password />
               </Form.Item>
             </Col>
@@ -110,8 +100,7 @@ const SignIn = () => {
               <Form.Item
                 className="remember"
                 name="remember"
-                valuePropName="checked"
-              >
+                valuePropName="checked">
                 <Checkbox>Remember me</Checkbox>
               </Form.Item>
             </Col>

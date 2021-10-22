@@ -18,9 +18,6 @@ const DateApplyForm = () => {
             startDate: startAndEndDate(e.startDate),
             endDate: startAndEndDate(e.endDate)
         }
-        console.log("APPLY DATE HANDLER", e)
-        console.log("AFTER TO ISO", queryString.stringify(payload))
-        console.log("JSON TO QUERY", jsonToQueryString(payload))
         dispatch(getDashboardCountAdmin(jsonToQueryString(payload)))
         dispatch(getDashboardFinanceFiguresAdmin(jsonToQueryString(payload)))
     }
