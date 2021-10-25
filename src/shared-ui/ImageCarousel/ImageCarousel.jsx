@@ -3,7 +3,7 @@ import React, { useEffect, useContext, useState } from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
 import { BlogContext } from "../../BlogContext/BlogContext";
-import { showTempImgFromBaseURL } from "../../utils/helper";
+import { showTempImgFromBaseURL, toBase64 } from "../../utils/helper";
 
 const ImageCarousel = () => {
     const { blogState, blogActions } = useContext(BlogContext); //ye as a connect function kaam krrha he
@@ -12,14 +12,21 @@ const ImageCarousel = () => {
     const org1 = images?.[1];
     console.log(org, org1);
     useEffect(() => {
-        blogState.photo.length && setImages(blogState.photo);
-    }, []);
+        async function getBlobUrl() {
+            var temp = blogState?.photo.map((ph) => toBase64(ph));
+
+            const res = await Promise.all([...temp]);
+            setImages([...res]);
+        }
+        getBlobUrl();
+    }, [blogState?.photo]);
+
     return (
         <div>
             <Carousel infiniteLoop={true} className="main-slide">
-                {images.map((img, index) => (
+                {images?.map((img, index) => (
                     <div>
-                        <img className={`img${index}`} src={img?.thumbUrl} height="500px" width="200px" />
+                        <img className={`img${index}`} src={img} height="500px" width="200px" />
                     </div>
                 ))}
                 {/* <div>

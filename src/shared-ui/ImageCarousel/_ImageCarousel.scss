@@ -19,3 +19,16 @@
 .carousel .slider-wrapper {
     width: 60% !important;
 }
+
+.main-slide{
+    .carousel{
+
+        &:nth-child(2){
+            display: none;
+        }
+    }
+}
+
+.carousel.carousel-slider .control-arrow {
+    background: rgba(0,0,0,0.2) !important;
+}

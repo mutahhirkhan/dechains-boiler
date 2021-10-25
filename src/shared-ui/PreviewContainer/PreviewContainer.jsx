@@ -9,10 +9,6 @@ import { createMarkup } from "../../utils/powerFunctions";
 const PreviewContainer = ({ setIsCreateVisible }) => {
     const { blogState, blogActions } = useContext(BlogContext); //ye as a connect function kaam krrha he
     const [tempBanner, setTempBanner] = useState(null);
-    console.log(blogActions);
-
-    // cont [tempBanner, setTempBanner] = useState(null)
-    // console.log(blogState);
     useEffect(() => {
         isObjectFilled(blogState.bannerPhoto) && showTempImgFromBaseURL(blogState.bannerPhoto, setTempBanner);
     }, []);
