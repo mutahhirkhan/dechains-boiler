@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Collapse, Select, Input, Button, Upload } from "antd";
+import { Collapse, Select, Input, Button, Upload, Form } from "antd";
 import { showSuccessMessage } from "./.././../utils/message";
 import defaultAuthorImg from "./../../assets/img/user.png";
 
@@ -122,15 +122,12 @@ const StatusAccordian = () => {
                     placeholder="Share link"
                     addonAfter={<CopiedIcon link={link} />}
                 /> */}
-                <br />
-                <br />
                 <div style={{ display: "flex", justifyContent: "space-between" }}>
                     <label>Author</label>
                     <p onClick={() => setAddAuthorModalShow(true)} style={{ cursor: "pointer" }}>
                         Add new +
                     </p>
                 </div>
-                <br />
                 <Select
                     showSearch
                     getPopupContainer={(trigger) => trigger.parentNode}
@@ -228,10 +225,10 @@ const StatusAccordian = () => {
 
 export default StatusAccordian;
 /**
- * 
  *
-    if : value ? novalue 
-    : value ? novalue 
+ *
+    if : value ? novalue
+    : value ? novalue
     : value ? novalue
     : value ? novalue
 

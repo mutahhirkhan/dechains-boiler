@@ -25,6 +25,18 @@ const Sidebar = () => {
               <div>Jobseeker</div>
             </Link>
           </div>
+          <div className="box">
+            <Link to="/applications-request">
+              <AppstoreOutlined style={{ fontSize: "35px", color: "white" }} />
+              <div>Applications Request</div>
+            </Link>
+          </div>
+          <div className="box">
+            <Link to="/applications">
+              <AppstoreOutlined style={{ fontSize: "35px", color: "white" }} />
+              <div>Applicants</div>
+            </Link>
+          </div>
           {/* <div className="box">
             <Link to={"/chat"}>
               <InboxOutlined style={{ fontSize: "35px", color: "white" }} />
