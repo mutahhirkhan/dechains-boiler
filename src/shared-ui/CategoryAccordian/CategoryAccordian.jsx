@@ -47,7 +47,7 @@ const CategoryAccordian = () => {
                             name="blogsCategoryId"
                             allowClear={true}
                             defaultValue={blogState.blogsCategoryId ? blogState.blogsCategoryId : null}
-                            className="defaultCategory"
+                            className="defaultCategory scroll-unset-select"
                             placeholder="Select"
                             allowClear={true}
                             onClear={() => {
@@ -76,7 +76,7 @@ const CategoryAccordian = () => {
                             showSearch
                             getPopupContainer={(trigger) => trigger.parentNode}
                             name="blogsSubCategoryId"
-                            className="defaultSubCategory"
+                            className="defaultSubCategory scroll-unset-select"
                             placeholder="Select"
                             defaultValue={blogState.blogsSubCategoryId ? blogState.blogsSubCategoryId : null}
                             filterOption={(input, option) => filterOption(input, option)}
