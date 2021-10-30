@@ -132,10 +132,11 @@ const BlogProvider = ({ children }) => {
 
                     var payload = new FormData();
                     blogState.photo.forEach((element) => {
-                        payload.append("files", element.originFileObj);
+                        payload.append("files", element);
                     });
 
                     const {url} = await uploadProfileImage(bannerPayload);
+                    console.log(payload.get("file"))
                     const { data } = await uploadMultiPics(payload);
                     console.log("multi image res");
                     console.log(data);

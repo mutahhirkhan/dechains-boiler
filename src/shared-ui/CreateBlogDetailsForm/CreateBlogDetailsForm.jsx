@@ -11,8 +11,8 @@ import { withRouter } from "react-router";
 const CreateBlogDetailsForm = ({ setIsCreateVisible, location }) => {
     const [title, setTitle] = useState("");
     const { blogState, blogActions } = useContext(BlogContext); //ye as a connect function kaam krrha he
-    console.log("blogState.title");
-    console.log(blogState.title);
+    // console.log("blogState.title");
+    // console.log(blogState.title);
     const [subTitle, setSubTitle] = useState("");
     const [errorFlag, setErrorFlag] = useState(false);
 

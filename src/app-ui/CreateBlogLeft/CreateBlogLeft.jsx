@@ -2,15 +2,13 @@ import React,{useEffect, useState} from "react";
 import StatusAccordian from "../../shared-ui/StatusAccordian/StatusAccordian";
 import CategoryAccordian from "../../shared-ui/CategoryAccordian/CategoryAccordian";
 import TagsAccordian from "../../shared-ui/TagsAccordian/TagsAccordian";
-import { withRouter, useHistory } from 'react-router';
+import { withRouter,  } from 'react-router';
 import { useAppSelector } from "../../store/hooks";
 import { selectBlogsList } from '../../features/blogs/slice';
 
 const CreateBlogLeft = ({location}) => {
     const [selectedBlog, setSelectedBlog] = useState(null)
     const selectAllBlogs = useAppSelector(selectBlogsList)
-    const history = useHistory()
-    console.log(location);
 
     useEffect(() => {
         if(location.state && selectAllBlogs.length) {
@@ -18,9 +16,9 @@ const CreateBlogLeft = ({location}) => {
         }
         // else history.goBack()
     },[])
-    useEffect(() => {
-        console.log("selectedBlog", selectedBlog)
-    },[selectedBlog])
+    // useEffect(() => {
+    //     console.log("selectedBlog", selectedBlog)
+    // },[selectedBlog])
     return (
         <div>
             <StatusAccordian selectedBlog={selectedBlog}/>

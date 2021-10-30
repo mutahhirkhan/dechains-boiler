@@ -78,8 +78,10 @@ export const showTempImgFromBaseURL = (file, Fn) => {
         var reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onloadend = function () {
-            let blobUrl = reader.result;
+            const blobUrl = reader.result;
             Fn(blobUrl);
+            // console.log(blobUrl)
+            return blobUrl;
             // if (document.querySelector(className)) document.querySelector(className).src = blobUrl;
         };
     }
@@ -94,3 +96,11 @@ export const isObjectFilled = (obj) => {
         else return false;
     else return false;
 };
+
+
+export const toBase64 = file => new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+});

@@ -286,3 +286,10 @@ img {
         width: 100% !important;
     }
 }
+.scroll-unset-select{
+    scroll-behavior: unset !important;
+    & *{
+        scroll-behavior: unset !important;
+
+    }
+}

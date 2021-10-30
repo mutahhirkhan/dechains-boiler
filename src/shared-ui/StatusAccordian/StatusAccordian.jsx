@@ -80,7 +80,7 @@ const StatusAccordian = () => {
                 <Select
                     showSearch
                     getPopupContainer={(trigger) => trigger.parentNode}
-                    className="visibility"
+                    className="visibility scroll-unset-select"
                     name="isPublic"
                     value={blogState.isPublic ? blogState.isPublic : null}
                     placeholder="select publication type"
@@ -96,7 +96,7 @@ const StatusAccordian = () => {
                 <Select
                     showSearch
                     getPopupContainer={(trigger) => trigger.parentNode}
-                    className="publish"
+                    className="publish scroll-unset-select"
                     name="status"
                     value={blogState.status ? blogState.status : null}
                     placeholder={"Select publish type"}
@@ -131,7 +131,7 @@ const StatusAccordian = () => {
                 <Select
                     showSearch
                     getPopupContainer={(trigger) => trigger.parentNode}
-                    className="author"
+                    className="author scroll-unset-select"
                     name="blogAuthorId"
                     placeholder={"Select author"}
                     filterOption={(input, option) => filterOption(input, option)}

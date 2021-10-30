@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Upload, Modal } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
 import { BlogContext } from "../../BlogContext/BlogContext";
+import { CloseCircleOutlined, PlusOutlined } from "@ant-design/icons";
+import { showWarningMessage } from "../../utils/message";
+import { showTempImgFromBaseURL, toBase64 } from "./../../utils/helper";
 
 export function getBase64(file) {
     return new Promise((resolve, reject) => {
@@ -20,45 +22,60 @@ export const UploadButton = (
 );
 
 const CreateBlogGalleryUpload = () => {
-    const [previewVisible, setPreviewVisible] = useState(false);
     const { blogState, blogActions } = useContext(BlogContext); //ye as a connect function kaam krrha he
 
-    const [previewImage, setPreviewImage] = useState("");
-    const [previewTitle, setPreviewTitle] = useState("");
+    const [tempImgArray, setTempImgArray] = useState([]);
 
-    const handleCancel = () => setPreviewVisible(false);
+    useEffect(() => {
+        async function getBlobUrl() {
+            var temp = blogState?.photo.map((ph) => toBase64(ph));
 
-    const handlePreview = async (file) => {
-        if (!file.url && !file.preview) {
-            file.preview = await getBase64(file.originFileObj);
+            const res = await Promise.all([...temp]);
+            setTempImgArray([...res]);
         }
-        setPreviewImage(file.url || file.preview);
-        setPreviewVisible(true);
-        setPreviewTitle(file.name || file.url.substring(file.url.lastIndexOf("/") + 1));
+        getBlobUrl();
+    }, [blogState?.photo]);
+
+    const pictureListBeforeUploadV2 = (file) => {
+        const payload = [...blogState?.photo, file]
+        blogActions.updateBlogDetails({ photo: payload })
     };
 
-    const handleChange = (files) => {
-        let { fileList, file } = files;
-        let { originFileObj } = fileList;
-        fileList.map((img) => delete img.status)
-        
-        // delete fileList.response;
-        blogActions.updateBlogDetails({ photo: fileList });
+    const removeImage = (index) => {
+        if (index !== undefined) {
+            const updatedPhotos = blogState?.photo.filter((item, i) => i != index);
+            blogActions.updateBlogDetails({ photo: updatedPhotos })
+        }
     };
 
     return (
         <>
-            <Upload
-                // action={"https://www.mocky.io/v2/5cc8019d300000980a055e76"}
-                listType="picture-card"
-                fileList={blogState.photo}
-                onPreview={handlePreview}
-                onChange={handleChange}>
-                {blogState?.photo?.length >= 5 ? null : UploadButton}
-            </Upload>
-            <Modal visible={previewVisible} title={previewTitle} footer={null} onCancel={handleCancel}>
-                <img alt="gallery" style={{ width: "100%" }} src={previewImage} />
-            </Modal>
+            <div className="antd-col image-uploader-section">
+                {[0, 1, 2, 3, 4].map((el, i) => (
+                    <div className="upload-wrapper">
+                        {tempImgArray?.[i] ? (
+                            <div className="avatar-upload">
+                                <div className="photo-square">
+                                    {tempImgArray.length > 0 && <img src={tempImgArray[i]} alt="" />}
+                                    <CloseCircleOutlined className="button" onClick={() => removeImage(i)} />
+                                </div>
+                            </div>
+                        ) : (
+                            <Upload
+                                accept=".jpg, .jpeg, .png"
+                                multiple={false}
+                                beforeUpload={pictureListBeforeUploadV2}
+                                showUploadList={false}>
+                                <div className="avatar-upload">
+                                    <div className="photo-square">
+                                        <PlusOutlined className="button" />
+                                    </div>
+                                </div>
+                            </Upload>
+                        )}
+                    </div>
+                ))}
+            </div>
         </>
     );
 };
