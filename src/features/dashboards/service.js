@@ -1,9 +1,12 @@
-import { get } from "../../utils/httpService";
+import { get, post } from "../../utils/httpService";
 
 const SERVICE_URLS = {
-  getDashboardCount: (qs) => `admin/superman/v1/admin-dashboard${qs ? qs : ""}`,
-  getDashboardFinanceFigures: (qs) => `admin/superman/v1/admin-dashboard/finances${qs ? qs : ""}`,
+  // getDashboardFinanceFigures: (qs) => `admin/superman/v1/admin-dashboard/finances${qs ? qs : ""}`,
+  // postDashboardFinanceFigures: () => `admin/superman/v1/admin-dashboard/finances`,
+  // eduRankChange: (id) => `/education/rank-change/${id}`,
 };
 
-export const getDashboardCount = (qs) => get(SERVICE_URLS.getDashboardCount(qs));
-export const getDashboardFinanceFigures = (qs) => get(SERVICE_URLS.getDashboardFinanceFigures(qs));
+// export const getDashboardFinanceFigures = (qs) => get(SERVICE_URLS.getDashboardFinanceFigures(qs));
+// export const getDashboardFinanceFigures = (body) => post(SERVICE_URLS.postDashboardFinanceFigures(), body);
+
+// export const eduRankChange = (id, body) => put(SERVICE_URLS.eduRankChange(id), body);

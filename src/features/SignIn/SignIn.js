@@ -28,23 +28,17 @@ const SignIn = () => {
   const signInHandler = (values) => {
     dispatch(signInAdmin(values));
   };
-  // ******* ******* ******* ******* ******* *******
+  //_________________________________________________________________
 
-  // *******  COMPONENT DID UPDATES WITH (DEPENDENCIES) *******
+  // *******  COMPONENT DID UPDATE WITH (DEPENDENCIES) *******
   useEffect(() => {
     if (signInSuccess === true) {
       const token = signInResponse.token;
-      // if (rememberMe) {
       localStorage.setItem("token", token);
       if (localStorage.getItem("token")) {
         history.push("/");
       }
-      // localStorage.setItem("role", JSON.stringify(role));
-      // }
-      // const url = userTypes[role.title.toUpperCase()].url;
-      // if (url) {
-      //   window.location = `${url}/?token=${token}`;
-      // }
+
     }
   }, [signInSuccess]);
 
@@ -52,7 +46,9 @@ const SignIn = () => {
     if (status === "failed" && signInErrorMessage === "Invalid credential")
       showErrorMessage(signInErrorMessage);
   }, [signInErrorMessage, status]);
-  // ******* ******* ******* ******* ******* *******
+
+  //_________________________________________________________________
+
 
   return (
     <div className="login-wrapper">

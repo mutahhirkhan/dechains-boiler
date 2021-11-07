@@ -33,7 +33,7 @@ const request = async ({ method, url, data, headers, skipAuth }) => {
             msg = err.response.data.details.message;
         }
         console.log(new Error(msg));
-        throw new Error(msg);
+        // throw new Error(msg);
     }
 };
 

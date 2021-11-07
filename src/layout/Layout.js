@@ -7,7 +7,6 @@ import Sidebar from "../app-ui/Sidebar/Sidebar";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { Result, Button } from "antd";
 // ******* THUNK IMPORTS *******
-import { getDashboardCountAdmin } from "../features/dashboards/thunk";
 
 // ******* SLICE IMPORTS *******
 import { selectIsAuthorized, selectNetworkError } from "../features/dashboards/slice";
@@ -41,9 +40,7 @@ const Layout = () => {
     };
     // ******** ******** ******** ******** ******** ******** ********
 
-    useEffect(() => {
-        dispatch(getDashboardCountAdmin());
-    }, []);
+
 
     // ******** COMPONENT DID UPDATE WITH (DEPENDENCIES) ********
 

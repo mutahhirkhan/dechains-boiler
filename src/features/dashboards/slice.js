@@ -1,10 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { getDashboardCountAdmin, getDashboardFinanceFiguresAdmin } from "./thunk";
+import { getDashboardFinanceFiguresAdmin } from "./thunk";
 
 const initialState = {
     status: "idle",
-    dashboardCount: [],
     isAuthorized: null,
     dashboardFinanceFiguresCount: null,
     networkError: true,
@@ -13,32 +12,14 @@ const initialState = {
 export const slice = createSlice({
     name: "dashboard",
     initialState,
-    reducers: {},
+    reducers: {
+        // setSelectedChatInRedux(state, action) {
+        //     const { id } = action.payload;
+        //     state.selectedChat = id;
+        // },
+    },
     extraReducers: (builder) => {
         builder
-            .addCase(getDashboardCountAdmin.pending, (state) => {
-                state.status = "loading";
-            })
-            .addCase(getDashboardCountAdmin.fulfilled, (state, action) => {
-                state.status = "idle";
-                if (action.meta.requestStatus === "fulfilled") {
-                    state.isAuthorized = true;
-                    state.networkError = true;
-                }
-                state.dashboardCount = action.payload;
-            })
-            .addCase(getDashboardCountAdmin.rejected, (state, action) => {
-                // console.log("REJECTED", action);
-                state.status = "failed";
-                if (action.error.message === "") {
-                    // console.log("Network failed");
-                    state.networkError = false;
-                }
-                if (action.error.message === "Unauthorized") {
-                    state.isAuthorized = false;
-                }
-            })
-
             // ________________________________________________
 
             .addCase(getDashboardFinanceFiguresAdmin.pending, (state) => {
@@ -46,10 +27,19 @@ export const slice = createSlice({
             })
             .addCase(getDashboardFinanceFiguresAdmin.fulfilled, (state, action) => {
                 state.status = "idle";
+                state.isAuthorized = true;
+                state.networkError = true;
+
                 state.dashboardFinanceFiguresCount = action.payload;
             })
             .addCase(getDashboardFinanceFiguresAdmin.rejected, (state, action) => {
                 state.status = "failed";
+                if (action.error.message === "") 
+                    state.networkError = false;
+                
+                if (action.error.message === "Unauthorized") 
+                    state.isAuthorized = false;
+
             });
 
         // ________________________________________________
@@ -59,7 +49,6 @@ export const slice = createSlice({
 export const selectStatus = (state) => state.dashboard.status === "loading";
 export const selectIsAuthorized = (state) => state.dashboard.isAuthorized;
 export const selectNetworkError = (state) => state.dashboard.networkError;
-export const selectDashboardCount = (state) => state.dashboard.dashboardCount;
 export const selectDashboardFinanceCount = (state) => state.dashboard.dashboardFinanceFiguresCount;
 
 // export const { getSignup } = slice.actions;

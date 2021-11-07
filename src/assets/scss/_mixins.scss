@@ -1,42 +1,42 @@
 @mixin font-face($style-name, $file, $file-format: ".woff2", $category: "") {
     $filepath: "../fonts/" + $file;
     @font-face {
-      font-family: "#{$style-name}";
-      src: url($filepath + $file-format);
+        font-family: "#{$style-name}";
+        src: url($filepath + $file-format);
     }
-    %#{$style-name} {
-      font: {
-        @if $category != "" {
-          family: "#{$style-name}", #{$category};
-        } @else {
-          family: "#{$style-name}";
-          //weight: normal;
-        }
-      }
-    }
-  }
-  
-  @mixin scroll-y {
+    // %#{$style-name} {
+    //   font: {
+    //     @if $category != "" {
+    //       family: "#{$style-name}", #{$category};
+    //     } @else {
+    //       family: "#{$style-name}";
+    //       //weight: normal;
+    //     }
+    //   }
+    // }
+}
+
+@mixin scroll-y {
     overflow-y: auto;
     &::-webkit-scrollbar-thumb {
-      background-color: $wild-blue;
+        background-color: $wild-blue;
     }
     &::-webkit-scrollbar {
-      width: 5px;
+        width: 5px;
     }
     &::-webkit-scrollbar-track {
-      background: transparent;
+        background: transparent;
     }
-  }
-  @mixin scroll-x {
+}
+@mixin scroll-x {
     overflow-x: auto;
     &::-webkit-scrollbar-thumb {
-      background-color: transparent;
+        background-color: transparent;
     }
     &::-webkit-scrollbar {
-      height: 5px;
+        height: 5px;
     }
     &::-webkit-scrollbar-track {
-      background: transparent;
+        background: transparent;
     }
-  }
+}
